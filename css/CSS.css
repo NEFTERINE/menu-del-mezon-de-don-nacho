@@ -1,0 +1,445 @@
+/* estilos_menu.css */
+/* --- index ---*/
+
+/* Aplica esto SOLO si estás seguro de que todo tu contenido cabe. */
+html, body {
+    /* Mantenemos height: 100% y los estilos de fuente/fondo */
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    /* CLAVE: Solo ocultamos el DESPLAZAMIENTO HORIZONTAL (x) */
+    overflow-x: hidden; 
+    /* ¡ELIMINAR O COMENTAR: overflow-y: hidden; ! */
+}
+
+
+.navbar {
+    overflow: hidden; 
+    text-align: center;
+}
+
+.baner {
+    overflow: hidden; 
+    text-align: center;
+}
+
+#baner {
+    width: 95vw;
+    height: auto;
+    max-width: 2000px;
+    margin-left: 4%;
+    margin-right: auto;
+    display: block; /* Centrado horizontal */
+    margin-top: 3%;
+}
+
+.logo-container {
+    width: 95%; /* Aseguramos que el contenedor use el mismo ancho que el banner */
+    margin: 0 auto;
+    position: relative; 
+    height: 2vw; /* Damos altura al contenedor para que el logo posicionado quepa */
+    margin-bottom: 3%;
+}
+
+#logo {
+    width: 15vw; 
+    height: 15vw; 
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute; 
+    top: 50%;
+    left: 2%; 
+    transform: translateY(-90%); /* Centrado vertical correcto */
+}
+
+p.don {
+    font-size: 2lvw; 
+    color: #000000; 
+    text-align: left;
+    margin-left: 20%;
+    margin-bottom: 5px;
+    padding: 0;
+}
+
+.fa-circle-exclamation {
+    position: absolute; /* CLAVE: Ahora se mueve con el contenedor .logo-container */
+    /* Posiciona el ícono cerca del logo (ejemplo de reposicionamiento) */
+    top: 30%; 
+    left: 44%; /* 5% (logo) + 15vw (ancho logo) + un margen, ¡ajusta este valor! */
+    color: #000000;
+    font-size: 1.5vw; 
+}
+
+.bi-facebook {
+    position: absolute; 
+    top: 30%; 
+    left: 85%; /* Ajusta este valor para espaciar los íconos */
+    color: #000000;
+    font-size: 1.5vw; 
+}
+
+.bi-telephone-fill {
+    position: absolute; 
+    top: 30%; 
+    left: 88%; /* Ajusta este valor para espaciar los íconos */
+    color: #000000;
+    font-size: 1.5vw; 
+}
+
+.fa-map-location-dot {
+    position: absolute; 
+    left: 20%; /* Ajusta este valor para espaciar los íconos */
+    color: #000000;
+    font-size: 1.5vw; 
+}
+
+.barra {
+    background-color: #ffaf04; 
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+    text-align: center; /* Centra los enlaces horizontalmente */
+
+    margin-bottom: 1%;
+    margin-top: 1%;
+    width: 100%;
+}
+
+.barra a {
+    color: white;  
+    text-decoration: none; 
+    display: inline-block; /* Cambiado a inline-block para respetar padding/margin */
+    font-size: 1.5rem; 
+    padding: 1% 5%; 
+}
+
+.barra a:hover {
+    background-color: #f7c251; 
+    color: white; 
+    transition: 0.3s;
+}
+
+.card {
+    /* Estilos para Desktop / Tablet (lado a lado) */
+    width: 40%; /* Un poco más pequeño para dejar más espacio entre ellas */
+    max-width: 450px; 
+    margin: 30px; /* Margen para separar las tarjetas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+/* Media Query para Móviles (dispositivos pequeños/xs/sm) */
+@media (max-width: 768px) {
+    .card {
+        /* Fuerza a que cada tarjeta ocupe su propia fila */
+        width: 90%; 
+        max-width: none; /* Permite que ocupe el 90% real */
+        margin: 15px auto; /* Centra la tarjeta horizontalmente */
+    }
+}
+
+.footer {
+    background-color: #ffaf04; 
+    color: white; 
+    text-align: center; 
+    padding: 10px 0; /* Aumentamos el padding para mejor estética */
+    width: 100%; 
+    font-size: 1rem; /* Usamos REMs */
+    margin-top: 30px;
+    /* Eliminamos 'position: center;' ya que no es válido. text-align: center ya lo centra. */
+}
+
+.list-container {
+    width: 100%;
+    height: 11%; /* Podrías necesitar ajustar la altura */
+    margin: 20px auto; /* Centrado horizontal */
+    background-color: rgb(247, 194, 81);
+    /* **Ajuste:** Quité el 'height: 9%;' si no es estrictamente necesario, para que se ajuste al contenido. */
+}
+
+.list-group-item {
+    display: flex; /* Mantenemos flexbox para alinear contenido-botón */
+    justify-content: space-between; /* Espacio entre la información del producto y el botón */
+    align-items: center; /* Alinea verticalmente los elementos (info y botón) */
+    font-size: 1.2rem;
+    border: none;
+    padding: 10px; /* Agregamos padding para que no esté pegado a los bordes */
+}
+
+/* **Nuevo CSS para apilar el texto y el precio** */
+.product-info {
+    display: flex;
+    flex-direction: column; /* Esto apila los elementos (nombre y precio) */
+    align-items: flex-start; /* Alinea el texto y el precio a la izquierda */
+}
+
+.product-name {
+    font-size: 0.8rem; /* Tamaño de fuente para el nombre del producto */
+    color: rgb(0, 0, 0); /* Color del texto del producto */
+    /* Puedes agregar un margin-bottom si querés más espacio entre el nombre y el precio */
+}
+
+span.bidge {
+    color: rgb(0, 0, 0);
+    padding: 2px 5px; /* Ajustamos padding para que parezca más un precio */
+    border-radius: 12px;
+    font-size: 1.5rem;
+    margin-top: 5px; /* Espacio arriba del precio, si querés separarlo del nombre */
+}
+
+/* **Nuevo CSS para el botón** */
+.action-button {
+    background-color: #ffaf04; /* Un color para el botón */
+    color: rgb(0, 0, 0);
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    border: none; /* Quita el borde predeterminado */
+    margin-left: 65%; /* Espacio entre el botón y la información del producto */
+    width: 30%;
+    margin-top: -50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.action-button:hover {
+    color: white;
+}
+
+.section {
+    text-align: center;
+    margin: 1% 0;
+    background-color: #ffaf04;
+    border-radius: 8px;
+    width: 15%;
+    margin-left: 10%;
+}
+
+.section h2 {
+    color: white;
+    font-size: 1.3rem;
+    padding: 10px 0;
+}
+
+    /* MODAL / ventana emergente de información */
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1000; 
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4); 
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+
+    .modal-contenido {
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 100%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        position: relative;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cerrar-modal {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+
+    .cerrar-modal:hover,
+    .cerrar-modal:focus {
+        color: #333;
+    }
+
+    @media (max-width: 480px) {
+        .modal-contenido {
+            padding: 15px;
+            font-size: 0.9rem;
+            border-radius: 8px;
+        }
+        #tipo1, #tipo2 {
+            flex-basis: 100%;
+            margin-bottom: 10px;
+        }
+    }
+
+    #horarios {
+        max-width: 900px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f8f8f8;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    #horarios h3 {
+        color: #333;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 3px solid #ffaf04;
+    }
+
+    #direccion i {
+        font-size: 0.65em;
+        color: #555;
+        display: block;
+        margin-top: 8px;
+        left: auto;
+    }
+
+/* Estilos del contenedor padre */
+#servicio {
+    /* Eliminamos display: flex; de aquí */
+    margin-top: 5px; /* Reducimos el margen superior */
+    margin-bottom: 20px; /* Margen para separarlo de la siguiente sección */
+}
+
+/* Estilos para el Título H2 */
+#servicio h3 {
+    margin-top: 10%;
+    margin-bottom: 15px; /* Crea espacio entre el título y los botones */
+    text-align: left; /* Asegura que el título no esté centrado si no debe */
+}
+
+/* Estilos del NUEVO Contenedor (para alinear los botones) */
+/* 1. ESTILOS DEL CONTENEDOR DE BOTONES */
+.contenedor-tipos {
+    /* CLAVE: Cambiar 'display: contents' por 'display: flex' */
+    display: flex;
+    /* Espacio entre los botones */
+    gap: 20px; 
+    /* Distribuye el espacio entre los botones */
+    justify-content: space-between; 
+    /* Margen superior para separarlo del H2 */
+    margin-top: 15px; 
+}
+
+/* 2. ESTILOS DE LOS BOTONES INDIVIDUALES */
+#tipo1, #tipo2 {
+    /* Usamos 'flex: 1' en lugar de 'width: 40%' para que se adapten mejor al espacio */
+    flex: 1; 
+    /* Eliminar margin-bottom: 5% de #tipo1 si #tipo2 no lo tiene, o moverlo a #tipo1, #tipo2 */
+    margin-bottom: 0; 
+    
+    padding: 15px 10px; /* Un poco de padding */
+    border-radius: 8px; 
+    text-align: center;
+    background-color: #ffaf04;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+/* El resto de los estilos se mantienen */
+#tipo1:hover, #tipo2:hover {
+    transform: translateY(-5px);
+}
+
+#tipo1 i, #tipo2 i {
+    font-size: 1.5em;
+    margin-top: 8px;
+}
+
+    #horario-laboral {
+        margin-top: 10px;
+    }
+
+    .fila {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0;
+    }
+
+    .fila:last-child {
+        border-bottom: none;
+    }
+
+    .fila p {
+        margin: 0;
+        font-size: 0.95em;
+    }
+
+    .fila i {
+        margin: 0 10px;
+        color: #666;
+    }
+
+    @media (max-width: 600px) {
+        #servicio {
+            flex-direction: column;
+        }
+        .fila {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .fila p, .fila i {
+            margin: 3px 0;
+        }
+    }
+
+ /* Estilos del modal principal (ventanaoption) */
+#ventanaoption {
+    /* CLAVE: Oculto por defecto */
+    display: none; 
+    position: fixed; 
+    z-index: 2000; /* Asegura que esté por encima de todos los demás elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+    justify-content: center;
+    align-items: center;
+}
+
+#menu-option {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 550px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+
+#V-card {
+    /* Estilos para Desktop / Tablet (lado a lado) */
+    width: 100%; /* Un poco más pequeño para dejar más espacio entre ellas */
+    max-width: 450px; 
+    margin: 30px; /* Margen para separar las tarjetas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+/* Media Query para Móviles (dispositivos pequeños/xs/sm) */
+@media (max-width: 768px) {
+    .card {
+        /* Fuerza a que cada tarjeta ocupe su propia fila */
+        width: 90%; 
+        max-width: none; /* Permite que ocupe el 90% real */
+        margin: 15px auto; /* Centra la tarjeta horizontalmente */
+    }
+}
