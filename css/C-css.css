@@ -124,6 +124,11 @@ body {
     transition: background-color 0.2s;
 }
 
+i{
+    margin: 0;
+    padding: 0 5px 0 0;
+}
+
 .opciones-servicio button:hover {
     background-color: #e59d00;
 }
@@ -147,4 +152,139 @@ body {
     margin-left: 2%;
     font-size: 1rem;
     padding: 10px;
+}
+
+
+
+
+
+/* Nuevos estilos para el formulario dentro del modal */
+.modal {
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: none; 
+}
+
+.modal-contenido {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-contenido h2 {
+    color: #333;
+    border-bottom: 2px solid #ffaf04;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.cerrar-modal:hover,
+.cerrar-modal:focus {
+    color: #333;
+}
+
+@media (max-width: 480px) {
+    .modal-contenido {
+        padding: 15px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.form-grupo {
+    margin-bottom: 15px;
+}
+
+.form-grupo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-grupo input[type="text"],
+.form-grupo input[type="number"],
+.form-grupo textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Fundamental para que el padding no afecte el width */
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-grupo input:focus,
+.form-grupo textarea:focus {
+    border-color: #ffaf04;
+    outline: none;
+}
+
+.boton-confirmar {
+    background-color: #ffaf04;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.button-direccion {
+    background-color: #f7c251;
+    color: #2b2b2b;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transition: background-color 0.2s;
+}
+
+.button-direccion:hover {
+    background-color: #e59d00;
+}
+
+.boton-confirmar:hover {
+    background-color: #e59d00;
 }

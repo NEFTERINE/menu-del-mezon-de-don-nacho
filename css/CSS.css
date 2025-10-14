@@ -424,19 +424,18 @@ span.bidge {
     position: relative;
 }
 
-
 #V-card {
     /* Estilos para Desktop / Tablet (lado a lado) */
     width: 100%; /* Un poco más pequeño para dejar más espacio entre ellas */
-    max-width: 450px; 
-    margin: 30px; /* Margen para separar las tarjetas */
+    max-width: 450%; 
+    margin: 1%; /* Margen para separar las tarjetas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     
 }
 
 /* Media Query para Móviles (dispositivos pequeños/xs/sm) */
 @media (max-width: 768px) {
-    .card {
+    .car {
         /* Fuerza a que cada tarjeta ocupe su propia fila */
         width: 90%; 
         max-width: none; /* Permite que ocupe el 90% real */
