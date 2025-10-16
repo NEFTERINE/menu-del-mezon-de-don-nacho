@@ -1,40 +1,26 @@
-// ===============================================
-// 1. DEFINICIÓN DE ELEMENTOS DOM
-// ===============================================
 
-const modalCuenta = document.getElementById("modalP"); // Cambiado a "modalP" que es el ID real en tu HTML
-const btnAbrirCuenta = document.getElementById("BtnCuenta"); 
-const modalDireccion = document.getElementById("subServicio"); // Este es otro modal
-const btnCerrarCuenta = document.querySelector(".cerrar-modal"); // Para el modal de cuenta
+// Obtén los elementos que usaremos
+const modal = document.getElementById("modalP");
+const btnAbrir = document.getElementById("BtnCuenta");
+const btnCerrar = document.querySelector(".cerrar-modal");
 
-// ===============================================
-// 2. APERTURA AUTOMÁTICA DEL MODAL DE CUENTA
-// ===============================================
-
-// Esto hará que el modal de CUENTA esté abierto al cargar la página
-window.addEventListener('DOMContentLoaded', function() {
-    if (modalCuenta) {
-        modalCuenta.style.display = "flex";
-    }
+// 1. Abrir el modal al hacer clic en el ícono
+btnAbrir.addEventListener('click', function(e) {
+    // Previene el comportamiento por defecto del <a> (navegar a #)
+    e.preventDefault(); 
+    // Muestra la ventana. Usamos 'flex' porque así la centramos en CSS.
+    modal.style.display = "flex"; 
 });
 
-// ===============================================
-// 3. LÓGICA DE APERTURA MANUAL (Si hay otro botón para abrir cuenta)
-// ===============================================
+// 2. Cerrar el modal al hacer clic en la 'x'
+btnCerrar.addEventListener('click', function() {
+    modal.style.display = "none";
+});
 
-if (btnAbrirCuenta && modalCuenta) {
-    btnAbrirCuenta.addEventListener('click', function(e) {
-        e.preventDefault(); 
-        modalCuenta.style.display = "flex"; 
-    });
-}
-
-// ===============================================
-// 4. LÓGICA DE CIERRE MANUAL (Botón 'X' - Cuenta)
-// ===============================================
-
-if (btnCerrarCuenta && modalCuenta) {
-    btnCerrarCuenta.addEventListener('click', function() {
-        modalCuenta.style.display = "none";
-    });
-}
+// 3. Cerrar el modal si el usuario hace clic fuera del contenido
+window.addEventListener('click', function(event) {
+    // Si el clic ocurrió directamente sobre el fondo del modal (el elemento 'modal')
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});

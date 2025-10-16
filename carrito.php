@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="css/C-css.css">
+    <link rel="stylesheet" href="css/pedido.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
@@ -57,11 +58,33 @@
     <?php 
         // Puedes usar include, pero require_once es más seguro
         require_once('F-modal_C.php'); 
+        require_once('D-modal_C.php');
         require_once('P-modal_P.php');
+        require_once('P-modal_C.php');
+    ?>
+
+    <?php
+    // ==========================================================
+    // LÓGICA DE APERTURA AUTOMÁTICA DEL SEGUNDO MODAL CON PHP/JS
+    // ==========================================================
+    if (isset($_GET['modal_abrir']) && $_GET['modal_abrir'] === 'subServicio') {
+        $modal_id = 'subServicio';
+        
+        // Generar el script para abrir el modal
+        echo "<script>";
+        echo "document.addEventListener('DOMContentLoaded', function() {";
+        echo "  const modalToOpen = document.getElementById('$modal_id');";
+        echo "  if (modalToOpen) {";
+        echo "    modalToOpen.style.display = 'flex';"; // Abrir el modal
+        echo "  }";
+        echo "});";
+        echo "</script>";
+    }
     ?>
 
     <script src="js/cuenta_local.js"></script>
     <script src="js/formulario_carrito.js"></script>
+    <scrpt src="js/cuenta_carrito.js"></script>
 
 </body>
 

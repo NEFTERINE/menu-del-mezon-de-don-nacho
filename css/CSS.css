@@ -1,19 +1,10 @@
-/* estilos_menu.css */
-/* --- index ---*/
-
-/* Aplica esto SOLO si estás seguro de que todo tu contenido cabe. */
-html, body {
-    /* Mantenemos height: 100% y los estilos de fuente/fondo */
-    height: 100%;
-    font-family: Arial, sans-serif;
+/* ---------------------------------------------------- */
+/* Solución para Google Chrome, Edge y Safari (WebKit) */
+/* ---------------------------------------------------- */
+body::-webkit-scrollbar {
+    /* Oculta completamente la barra visual */
+    display: none; 
 }
-
-body {
-    /* CLAVE: Solo ocultamos el DESPLAZAMIENTO HORIZONTAL (x) */
-    overflow-x: hidden; 
-    /* ¡ELIMINAR O COMENTAR: overflow-y: hidden; ! */
-}
-
 
 .navbar {
     overflow: hidden; 
@@ -43,7 +34,7 @@ body {
     margin-bottom: 3%;
 }
 
-#logo {
+.logo {
     width: 15vw; 
     height: 15vw; 
     border-radius: 50%;
@@ -72,7 +63,7 @@ p.don {
     font-size: 1.5vw; 
 }
 
-.bi-facebook {
+#faceboock {
     position: absolute; 
     top: 30%; 
     left: 85%; /* Ajusta este valor para espaciar los íconos */
@@ -80,7 +71,7 @@ p.don {
     font-size: 1.5vw; 
 }
 
-.bi-telephone-fill {
+#cel {
     position: absolute; 
     top: 30%; 
     left: 88%; /* Ajusta este valor para espaciar los íconos */
@@ -88,7 +79,7 @@ p.don {
     font-size: 1.5vw; 
 }
 
-.fa-map-location-dot {
+#mapa {
     position: absolute; 
     left: 20%; /* Ajusta este valor para espaciar los íconos */
     color: #000000;
@@ -119,14 +110,36 @@ p.don {
     transition: 0.3s;
 }
 
+.img-platillo {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    cursor: pointer;
+}
+
 .card {
     /* Estilos para Desktop / Tablet (lado a lado) */
     width: 40%; /* Un poco más pequeño para dejar más espacio entre ellas */
     max-width: 450px; 
     margin: 30px; /* Margen para separar las tarjetas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
 }
+
+.card i {
+    font-size: 2rem; /* Tamaño del ícono */
+    color: #ffaf04; /* Color del ícono */
+    cursor: pointer;
+    margin-right: 20px; /* Espacio a la derecha del ícono */
+    float: right; /* Alinea el ícono a la derecha */
+    margin-bottom: 10px;
+}
+
+.card i:hover {
+    color: #f7c251; /* Color al pasar el ratón */
+    transition: 0.3s;
+}
+
 
 /* Media Query para Móviles (dispositivos pequeños/xs/sm) */
 @media (max-width: 768px) {
@@ -138,23 +151,11 @@ p.don {
     }
 }
 
-.footer {
-    background-color: #ffaf04; 
-    color: white; 
-    text-align: center; 
-    padding: 10px 0; /* Aumentamos el padding para mejor estética */
-    width: 100%; 
-    font-size: 1rem; /* Usamos REMs */
-    margin-top: 30px;
-    /* Eliminamos 'position: center;' ya que no es válido. text-align: center ya lo centra. */
-}
-
 .list-container {
     width: 100%;
-    height: 11%; /* Podrías necesitar ajustar la altura */
-    margin: 20px auto; /* Centrado horizontal */
     background-color: rgb(247, 194, 81);
-    /* **Ajuste:** Quité el 'height: 9%;' si no es estrictamente necesario, para que se ajuste al contenido. */
+    margin-bottom: 7px; /* Espacio inferior */
+    padding: 3px;
 }
 
 .list-group-item {
@@ -222,6 +223,12 @@ span.bidge {
     font-size: 1.3rem;
     padding: 10px 0;
 }
+
+
+
+
+
+
 
     /* MODAL / ventana emergente de información */
     .modal {
@@ -399,6 +406,10 @@ span.bidge {
         }
     }
 
+
+
+
+
  /* Estilos del modal principal (ventanaoption) */
 #ventanaoption {
     /* CLAVE: Oculto por defecto */
@@ -440,5 +451,121 @@ span.bidge {
         width: 90%; 
         max-width: none; /* Permite que ocupe el 90% real */
         margin: 15px auto; /* Centra la tarjeta horizontalmente */
+    }
+}
+
+
+
+/* ventana sesion */
+.form-grupo {
+    margin-bottom: 20px;
+}
+
+/* Etiqueta */
+.form-grupo label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Campos de entrada (Input) */
+.form-grupo input[type="email"],
+.form-grupo input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Crucial para que el padding no desborde el ancho */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-grupo input:focus {
+    border-color: #ffaf04; /* Borde de enfoque de color temático */
+    box-shadow: 0 0 5px rgba(255, 175, 4, 0.5);
+    outline: none;
+}
+
+/* Botón de Confirmar (Iniciar Sesión) */
+.boton-confirmar {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #ffaf04; /* Color temático fuerte */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.2s ease, transform 0.1s;
+}
+
+.boton-confirmar:hover {
+    background-color: #ff9800; /* Color ligeramente más oscuro al pasar el ratón */
+    transform: translateY(-1px);
+}
+
+
+
+
+
+
+
+#admin-grid-layout {
+    display: grid;
+    /* Define 3 columnas de igual ancho (1fr) */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 15px; /* Espacio entre las tarjetas */
+    /* Lo ideal es que el margen de 30px se mueva aquí para centrar la cuadrícula */
+    margin: 30px auto; 
+    margin-bottom: 50px; /* Espacio inferior */
+}
+
+#opcion-admin {
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.admin-card-style, .admin-container { 
+    max-width: none; /* Permitir que ocupe todo el espacio de la columna */
+    cursor: pointer;
+}
+
+.card-option {
+    background-color: #ffaf04; /* Cambiado a gris claro para coincidir con la imagen */
+    border-radius: 8px; /* Reducido para coincidir con la imagen */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none; 
+}
+
+.card-option:hover {
+    transform: translateY(-3px); /* Movimiento ligero */
+    background-color: #f7c251; /* Efecto de hover */
+}
+
+.card-option .card-text {
+    font-size: 1rem; /* Ajustado para un tamaño más estándar para un botón */
+    font-weight: bold;
+    color: #fff; /* Color del texto */
+}
+
+
+/* Media Query para responsividad (como en el ejemplo anterior) */
+@media (max-width: 768px) {
+    #admin-grid-layout {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+@media (max-width: 480px) {
+    #admin-grid-layout {
+        grid-template-columns: 1fr; 
     }
 }

@@ -1,3 +1,11 @@
+/* ---------------------------------------------------- */
+/* Solución para Google Chrome, Edge y Safari (WebKit) */
+/* ---------------------------------------------------- */
+body::-webkit-scrollbar {
+    /* Oculta completamente la barra visual */
+    display: none; 
+}
+
 
 .modal {
     /* IMPORTANTE: Cambia 'none' a 'flex' si quieres que abra por defecto */
@@ -186,3 +194,37 @@ p#alert {
 .total .button:hover {
     background-color: #e59d00;
 }
+
+
+/* 
+.detalle-productos {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.resumen-encabezado {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#iconoDetalle {
+    transition: transform 0.3s ease;
+}
+
+.producto-item, .subtotal-item, .total-final {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-final {
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+    padding-top: 5px;
+} */

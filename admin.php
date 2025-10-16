@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/style.css">
-    </head>
+    <link rel="stylesheet" href="css/footer.css">
+
+</head>
 
 <body>
-
     <header>
         <?php
         // Usar require_once es ideal para componentes críticos como el menú.
@@ -18,70 +18,59 @@
         ?>
     </header>
 
-    
-  <section id="desayunos" class="section">
-    <h2>Desayunos</h2>
-  </section>
-
-  <div class="d-flex justify-content-center flex-wrap">
-
-    <div class="card mb-3">
-      <div class="row g-0">
-        <div id="card-img" class="col-md-4">
-          <img class="img-platillo" id="abrirModalOption" src="https://th.bing.com/th/id/OIP.KYvrHQx6vlVPMHmoe-ENdAHaHa?w=206&h=206&c=7&r=0&o=7&pid=1.7&rm=3"
-            class="img-fluid rounded-start" alt="...">
-        </div>
-
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer.</p>
-              <p class="car-text"><small class="text-body-secondary">$30.00 MX</small></p>
-              <i id="editar" class="bi bi-pencil-square"></i>
-              <i id="" class="bi bi-plus-lg"></i>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-
-
-  <div class="list-container">
-    <ul class="list">
-      <li class="list-group-item">
-        <div class="product-info">
-          <div class="product-name">Producto 1</div>
-          <span class="bidge">$10.00</span>
-          <a href="carrito.php" class="action-button"> Ver pedido </a>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-
     <?php
     // Puedes usar include, pero require_once es más seguro
     require_once('I-modal_I.php');
+    require_once('options_admin.php');
     ?>
 
 
     <script src="js/info.js"></script>
     <script src="js/option.js"></script>
     <script src="js/sesion.js"></script>
-    <script src="js/editar_platillo.js"></script>
+    <script src="js/registro-usuario.js"></script>
+    <script src="js/registro_platillo.js"></script>
+    <script src="js/r_categoria.js"></script>
 
 
 
+    <div id="opcion-admin">
+
+        <div id="admin-grid-layout">
+
+            <div id="usuario" class="card-option">
+                <span class="card-text">Registrar Nuevo Usuario</span>
+            </div>
+
+            <div id="platillo" class="card-option">
+                <span class="card-text">Registrar Nuevo Platillo</span>
+            </div>
+
+            <div id="categoria" class="card-option">
+                <span class="card-text">Registrar Nueva Categoría</span>
+            </div>
+
+            <div id="lista-usuario" class="card-option">
+                <span class="card-text">Ver lista de usuarios</span>
+            </div>
+
+            <div id="lista-pedidos" class="card-option">
+                <span class="card-text">Ver lista de pedidos</span>
+            </div>
+
+            <div id="lista-categoria" class="card-option">
+                <span class="card-text">Ver lista de categorías</span>
+            </div>
+
+        </div>
+    </div>
 
     <footer>
         <div class="footer-contenido">
 
             <div class="footer-item">Contacto:
                 <a href="#">
-                    <i  class="bi bi-telephone-fill"> 695 114 5859</i>
+                    <i class="bi bi-telephone-fill"> 695 114 5859</i>
                 </a>
             </div>
 
@@ -102,7 +91,6 @@
             </div>
         </div>
     </footer>
-
 </body>
 
 </html>

@@ -264,6 +264,8 @@ i{
     width: 100%;
     margin-top: 20px;
     transition: background-color 0.2s;
+    text-decoration: none;
+    text-align: center;
 }
 
 .button-direccion {
@@ -287,4 +289,12 @@ i{
 
 .boton-confirmar:hover {
     background-color: #e59d00;
+}
+
+/* ---------------------------------------------------- */
+/* Solución para Google Chrome, Edge y Safari (WebKit) */
+/* ---------------------------------------------------- */
+body::-webkit-scrollbar {
+    /* Oculta completamente la barra visual */
+    display: none; 
 }

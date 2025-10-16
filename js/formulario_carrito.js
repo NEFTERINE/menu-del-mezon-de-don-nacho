@@ -1,23 +1,38 @@
-const modal = document.getElementById("subServicio");
-const btnAbrir = document.getElementById("BtnsubServicio"); 
-const btnCerrar = document.querySelector(".cerrarsubServicio");
-// 1. Abrir el modal al hacer clic en el botón de servicio
-if (btnAbrir) {
-    btnAbrir.addEventListener('click', function(e) {
-        // Previene el comportamiento por defecto del <a> (navegar a #)
+
+// // Esto hará que el modal de CUENTA esté abierto al cargar la página
+// window.addEventListener('DOMContentLoaded', function() {
+//     if (modalCuenta) {
+//         modalCuenta.style.display = "flex";
+//     }
+// });
+// js/formulario_carrito.js - SOLO CONTROL DE MODALS
+const modalServicio = document.getElementById("modalServicio");
+const btnAbrirCuenta = document.getElementById("abrirModalBtnServicio"); 
+const btnCerrarCuenta = document.querySelector(".cerrarModalServicio");
+
+// ===============================================
+// 1. ABRIR PRIMER MODAL
+// ===============================================
+if (btnAbrirCuenta) {
+    btnAbrirCuenta.addEventListener('click', function(e) {
         e.preventDefault(); 
-        // Muestra la ventana. Usamos 'flex' porque así la centramos en CSS.
-        modal.style.display = "flex"; 
+        modalServicio.style.display = "flex"; 
     });
 }
-// 2. Cerrar el modal al hacer clic en la 'x'
-btnCerrar.addEventListener('click', function() {
-    modal.style.display = "none";
-});
-// 3. Cerrar el modal si el usuario hace clic fuera del contenido
-window.addEventListener('click', function(event) {
-    // Si el clic ocurrió directamente sobre el fondo del modal (el elemento 'modal')
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-});
+
+// ===============================================
+// 2. CERRAR PRIMER MODAL
+// ===============================================
+if (btnCerrarCuenta) {
+    btnCerrarCuenta.addEventListener('click', function() {
+        modalServicio.style.display = "none";
+    });
+}
+
+if (modalServicio) {
+    window.addEventListener('click', function(event) {
+        if (event.target === modalServicio) {
+            modalServicio.style.display = "none";
+        }
+    });
+}
