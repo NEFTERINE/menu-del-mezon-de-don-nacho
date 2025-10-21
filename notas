@@ -1,3 +1,162 @@
+
+
+
+
+
+<!-- ver lista de pedidos -->
+<div class="lista-pedidos">
+    <h2>Lista de Pedidos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Pedido</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Conexión a la base de datos
+            $conn = new mysqli('localhost', 'root', '', 'restaurante');
+
+            // Verificar conexión
+            if ($conn->connect_error) {
+                die("Conexión fallida: " . $conn->connect_error);
+            }
+
+            // Consulta para obtener los pedidos
+            $sql = "SELECT id, cliente, fecha, total, estado FROM pedidos";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Mostrar datos de cada pedido
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td>" . $row["id"]. "</td>
+                            <td>" . $row["cliente"]. "</td>
+                            <td>" . $row["fecha"]. "</td>
+                            <td>" . $row["total"]. "</td>
+                            <td>" . $row["estado"]. "</td>
+                            <td><a href='ver_pedido.php?id=" . $row["id"] . "'>Ver</a> | 
+                                <a href='eliminar_pedido.php?id=" . $row["id"] . "' onclick='return confirm(\"¿Estás seguro de eliminar este pedido?\")'>Eliminar</a></td>
+                          </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='6'>No hay pedidos registrados</td></tr>";
+            }
+            $conn->close();
+            ?>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- ver lista de usuarios -->
+<div class="lista-usuarios">
+    <h2>Lista de Usuarios</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Conexión a la base de datos
+            $conn = new mysqli('localhost', 'root', '', 'restaurante');
+
+            // Verificar conexión
+            if ($conn->connect_error) {
+                die("Conexión fallida: " . $conn->connect_error);
+            }
+
+            // Consulta para obtener los usuarios
+            $sql = "SELECT id, nombre, email FROM usuarios";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Mostrar datos de cada usuario
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td>" . $row["id"]. "</td>
+                            <td>" . $row["nombre"]. "</td>
+                            <td>" . $row["email"]. "</td>
+                            <td><a href='editar_usuario.php?id=" . $row["id"] . "'>Editar</a> | 
+                                <a href='eliminar_usuario.php?id=" . $row["id"] . "' onclick='return confirm(\"¿Estás seguro de eliminar este usuario?\")'>Eliminar</a></td>
+                          </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='4'>No hay usuarios registrados</td></tr>";
+            }
+            $conn->close();
+            ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+<!-- ver lista de categorias -->
+<div class="lista-categorias">
+    <h2>Lista de Categorías</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre de la Categoría</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Conexión a la base de datos
+            $conn = new mysqli('localhost', 'root', '', 'restaurante');
+
+            // Verificar conexión
+            if ($conn->connect_error) {
+                die("Conexión fallida: " . $conn->connect_error);
+            }
+
+            // Consulta para obtener las categorías
+            $sql = "SELECT id, nombre FROM categorias";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Mostrar datos de cada categoría
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td>" . $row["id"]. "</td>
+                            <td>" . $row["nombre"]. "</td>
+                            <td><a href='editar_categoria.php?id=" . $row["id"] . "'>Editar</a> | 
+                                <a href='eliminar_categoria.php?id=" . $row["id"] . "' onclick='return confirm(\"¿Estás seguro de eliminar esta categoría?\")'>Eliminar</a></td>
+                          </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='3'>No hay categorías registradas</td></tr>";
+            }
+            $conn->close();
+            ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
 /* -- general -- */
 
 /* --- ESTILOS DEL MODAL DE INICIO DE SESIÓN --- */

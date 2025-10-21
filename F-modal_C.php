@@ -1,9 +1,7 @@
-
-
-    <!-- ventana de adomicilio -->
+    <!-- ventana de formulario -->
     <div id="modalServicio" class="modal">
         <div class="modal-contenido">
-            <span class="cerrarModalServicio">&times;</span>
+            <span class="cerrarModalServicio" id="cerrar-modal">&times;</span>
             <h2><i class="fa-solid fa-motorcycle"></i>Agrega Tu Domicilio</h2>
 
             <form id="formulario-domicilio" action="guardar_datos.php" method="post">
@@ -38,10 +36,10 @@
 
 
 
-<!-- sub ventana del modalservicio -->
+<!-- ventana de domicilio -->
 <div id="subServicio" class="modal">
     <div class="modal-contenido">
-        <span class="cerrarsubServicio">&times;</span>
+        <span class="cerrarsubServicio" id="cerrar-modal">&times;</span>
 
         <h2><i class="fa-solid fa-motorcycle"></i> Selecciona tu Dirección</h2>
 
@@ -87,11 +85,11 @@
 
 
 
-    <!-- ventana de confirmar pedido -->
+    <!-- ventana de confirmar pedido carrito -->
 
     <div class="modal" id="modalP">
         <div class="modal-contenido">
-            <span class="cerrar-modal">&times;</span>
+            <span class="cerrar-cuenta" id="cerrar-modal">&times;</span>
             <h2><i class="fa-solid fa-motorcycle"></i> Confirma Tu Pedido</h2>
 
             <div class="cuenta">
@@ -132,11 +130,11 @@
 
 
     
-    <!-- ventana de confirmar pedido -->
+    <!-- ventana de confirmar pedido local -->
 
     <div class="modal" id="LocalCuenta">
         <div class="modal-contenido">
-            <span class=".cerrar-modal">&times;</span>
+            <span class=".cerrar-local" id="cerrar-modal">&times;</span>
             <h2><i class="bi bi-fork-knife"></i> Confirma Tu Pedido</h2>
 
             <div class="cuenta">

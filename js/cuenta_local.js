@@ -1,7 +1,7 @@
 // En cuenta_local.js - usa nombres únicos
 const modalLocal = document.getElementById("LocalCuenta");
 const btnAbrirLocal = document.getElementById("BtnLocal");
-const btnCerrarLocal = document.querySelector(".cerrar-modal");
+const btnCerrarLocal = document.querySelector(".cerrar-local");
 
 // Luego usa estos nombres únicos en todo tu código...
 if (btnAbrirLocal && modalLocal) {

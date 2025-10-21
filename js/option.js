@@ -1,7 +1,6 @@
-// Referencias a los elementos
-const botonAbrirOption = document.getElementById('abrirModalOption'); // El div de la tarjeta del producto
-const modalOption = document.getElementById('ventanaoption'); // El modal
-const botonCerrarOption = modalOption ? modalOption.querySelector('.cerrar-modal') : null; // El botón 'x'
+const botonAbrirOption = document.getElementById('abrirModalOption'); 
+const modalOption = document.getElementById('ventanaoption');
+const botonCerrarOption = modalOption.querySelector('.cerrar-opcion'); 
 
 // 1. Abrir el modal
 if (botonAbrirOption) {

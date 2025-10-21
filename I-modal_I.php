@@ -4,7 +4,7 @@
 
     <div class="modal-contenido">
 
-      <span class="cerrar-modal">&times;</span>
+      <span class="cerrar-info" id="cerrar-modal">&times;</span>
 
       <div class="container" id="horarios">
         <h3>Dirección</h3>
@@ -62,11 +62,13 @@
   <script src="js/info.js"></script>
 
 
+
+
   <!-- ventana del menu -->
   <div id="ventanaoption" class="modal-option">
     <div class="container-option" id="menu-option">
 
-      <span class="cerrar-modal">&times;</span>
+      <span class="cerrar-opcion" id="cerrar-modal">&times;</span>
 
       <div class="card mb-3" id="V-card">
         <div class="row g-0">
@@ -90,15 +92,16 @@
     </div>
   </div>
 
-
   <script src="js/option.js"></script>
 
 
   
-<!-- MODAL -->
+
+
+<!-- modal iniciar sesion -->
 <div id="sesion-modal" class="modal">
     <div class="modal-contenido">
-        <span class="cerrar-modal" >&times;</span>
+        <span class="cerrar-sesion" id="cerrar-modal">&times;</span>
         <h2>Iniciar Sesión</h2>
         
         <form action="#" method="POST">
@@ -110,6 +113,8 @@
             <div class="form-grupo">
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
+                <p id="alert">*Este apartado es exclusivo para los administradores. 
+                  Favor de salir de esta ventana</p>
             </div>
 
             <button type="submit" class="boton-confirmar">Iniciar Sesión</button>
@@ -124,10 +129,11 @@
 
 
 
+
 <!-- editar platillo -->
 <div id="editar-platillo" class="modal">
     <div class="modal-contenido">
-        <span class="cerrar-modal">&times;</span>
+        <span class="cerrar-plato" id="cerrar-modal">&times;</span>
 
         <h2>Editar Platillo</h2>
 

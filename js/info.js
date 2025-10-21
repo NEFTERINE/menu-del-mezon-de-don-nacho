@@ -1,7 +1,6 @@
-// Obtén los elementos que usaremos
 const modal = document.getElementById("ventanaInfo");
 const btnAbrir = document.getElementById("abrirModalBtn");
-const btnCerrar = document.querySelector(".cerrar-modal");
+const btnCerrar = document.querySelector(".cerrar-info");
 
 // 1. Abrir el modal al hacer clic en el ícono
 btnAbrir.addEventListener('click', function(e) {

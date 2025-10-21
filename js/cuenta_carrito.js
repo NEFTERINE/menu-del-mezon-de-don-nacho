@@ -2,7 +2,7 @@
 // Obtén los elementos que usaremos
 const modal = document.getElementById("modalP");
 const btnAbrir = document.getElementById("BtnCuenta");
-const btnCerrar = document.querySelector(".cerrar-modal");
+const btnCerrar = document.querySelector(".cerrar-cuenta");
 
 // 1. Abrir el modal al hacer clic en el ícono
 btnAbrir.addEventListener('click', function(e) {

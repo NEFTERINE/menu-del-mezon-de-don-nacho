@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -30,7 +29,13 @@
     <script src="js/sesion.js"></script>
     <script src="js/registro-usuario.js"></script>
     <script src="js/registro_platillo.js"></script>
-    <script src="js/r_categoria.js"></script>
+    <script src="js/registro_categoria.js"></script>
+    <script src="js/lista_usuarios.js"></script>
+    <script src="js/lista_pedidos.js"></script>
+    <script src="js/lista_categorias.js"></script>
+
+
+
 
 
 
@@ -46,25 +51,27 @@
                 <span class="card-text">Registrar Nuevo Platillo</span>
             </div>
 
-            <div id="categoria" class="card-option">
+            <div id="cate" class="card-option">
                 <span class="card-text">Registrar Nueva Categoría</span>
             </div>
 
-            <div id="lista-usuario" class="card-option">
+            <div id="lista-usu" class="card-option">
                 <span class="card-text">Ver lista de usuarios</span>
             </div>
 
-            <div id="lista-pedidos" class="card-option">
+            <div id="lista-ped" class="card-option">
                 <span class="card-text">Ver lista de pedidos</span>
             </div>
 
-            <div id="lista-categoria" class="card-option">
+            <div id="lista-cate" class="card-option">
                 <span class="card-text">Ver lista de categorías</span>
             </div>
 
         </div>
     </div>
+    
 
+    
     <footer>
         <div class="footer-contenido">
 
@@ -74,7 +81,7 @@
                 </a>
             </div>
 
-            <div class="footer-item"> Rede Sociale:
+            <div class="footer-item"> Red Social:
                 <a href="https://www.facebook.com/RestauranteElMesonDeDonNacho/">
                     <i class="bi bi-facebook" style="cursor: pointer;"> Facebook</i>
                 </a>

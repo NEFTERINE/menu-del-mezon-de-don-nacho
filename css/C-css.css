@@ -72,6 +72,16 @@ body {
     font-size: 1.1rem;
 }
 
+
+
+
+
+
+
+
+
+
+
 /* 6. Panel de Servicio */
 #panel-servicio-decoracion h2 {
     font-size: 1.3rem;
@@ -85,7 +95,7 @@ body {
 #panel-servicio-decoracion {
     background-color: #f7c251;
     width: 100%;
-    height: 100%;
+    height: 40%;
 
 }
 
@@ -109,6 +119,11 @@ body {
     border-color: #ffaf04; /* Resaltar al pasar el ratón */
     box-shadow: 0 0 5px rgba(255, 175, 4, 0.5);
 }
+
+
+
+
+
 
 /* 8. Botones de Servicio */
 .opciones-servicio button {
@@ -154,6 +169,11 @@ i{
     padding: 10px;
 }
 
+#regreso button:hover{
+    background-color: #e59d00;
+    color: #333;
+}
+
 
 
 
@@ -194,8 +214,8 @@ i{
     text-align: left;
 }
 
-.cerrar-modal:hover,
-.cerrar-modal:focus {
+#cerrar-modal:hover,
+#cerrar-modal:focus {
     color: #333;
 }
 
@@ -212,7 +232,7 @@ i{
     to { opacity: 1; transform: translateY(0); }
 }
 
-.cerrar-modal {
+#cerrar-modal {
     position: absolute;
     top: 10px;
     right: 15px;
@@ -269,22 +289,22 @@ i{
 }
 
 .button-direccion {
-    background-color: #f7c251;
+    background-color: oklab(84.133% 0.01632 0.14012);
     color: #2b2b2b;
     padding: 12px 20px;
     border: none;
     border-radius: 5px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    width: 50%;
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 20px;
     transition: background-color 0.2s;
 }
 
 .button-direccion:hover {
-    background-color: #e59d00;
+    background-color: #ffaf04;
 }
 
 .boton-confirmar:hover {
@@ -298,3 +318,6 @@ body::-webkit-scrollbar {
     /* Oculta completamente la barra visual */
     display: none; 
 }
+
+
+

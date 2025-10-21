@@ -1,18 +1,115 @@
-/* ---------------------------------------------------- */
-/* Solución para Google Chrome, Edge y Safari (WebKit) */
-/* ---------------------------------------------------- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.modal-contenido {
+    background-color: #fff;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 500px; /* Default para todo */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: fadeIn 0.3s ease;
+    margin: auto;
+}
+
+/* Detecta automáticamente si hay tabla y hace el modal más ancho */
+.modal-contenido:has(table) {
+    max-width: max-content;
+    width: 95%;
+}
+
+/* Para modales con muchos campos de formulario */
+.modal-contenido:has(form) {
+    max-width: 500px;
+    width: 90%;
+}
+
+/* Estilos específicos para formularios dentro de modals */
+.modal-contenido form {
+    width: 100%;
+}
+
+.modal-contenido .form-grupo {
+    margin-bottom: 20px;
+}
+
+.modal-contenido label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.modal-contenido input,
+.modal-contenido textarea,
+.modal-contenido select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+#cerrar-modal:hover,
+#cerrar-modal:focus {
+    color: #333;
+}
+
+
+
+
+
+
+
+
 body::-webkit-scrollbar {
-    /* Oculta completamente la barra visual */
-    display: none; 
+    display: none;
 }
 
 .navbar {
-    overflow: hidden; 
+    overflow: hidden;
     text-align: center;
 }
 
 .baner {
-    overflow: hidden; 
+    overflow: hidden;
     text-align: center;
 }
 
@@ -22,32 +119,32 @@ body::-webkit-scrollbar {
     max-width: 2000px;
     margin-left: 4%;
     margin-right: auto;
-    display: block; /* Centrado horizontal */
+    display: block;
     margin-top: 3%;
 }
 
 .logo-container {
-    width: 95%; /* Aseguramos que el contenedor use el mismo ancho que el banner */
+    width: 95%;
     margin: 0 auto;
-    position: relative; 
-    height: 2vw; /* Damos altura al contenedor para que el logo posicionado quepa */
+    position: relative;
+    height: 2vw;
     margin-bottom: 3%;
 }
 
 .logo {
-    width: 15vw; 
-    height: 15vw; 
+    width: 15vw;
+    height: 15vw;
     border-radius: 50%;
     object-fit: cover;
-    position: absolute; 
+    position: absolute;
     top: 50%;
-    left: 2%; 
-    transform: translateY(-90%); /* Centrado vertical correcto */
+    left: 2%;
+    transform: translateY(-90%);
 }
 
 p.don {
-    font-size: 2lvw; 
-    color: #000000; 
+    font-size: 2lvw;
+    color: #000000;
     text-align: left;
     margin-left: 20%;
     margin-bottom: 5px;
@@ -55,58 +152,160 @@ p.don {
 }
 
 .fa-circle-exclamation {
-    position: absolute; /* CLAVE: Ahora se mueve con el contenedor .logo-container */
-    /* Posiciona el ícono cerca del logo (ejemplo de reposicionamiento) */
-    top: 30%; 
-    left: 44%; /* 5% (logo) + 15vw (ancho logo) + un margen, ¡ajusta este valor! */
+    position: absolute;
+    top: 30%;
+    left: 44%;
     color: #000000;
-    font-size: 1.5vw; 
+    font-size: 1.5vw;
 }
 
 #faceboock {
-    position: absolute; 
-    top: 30%; 
-    left: 85%; /* Ajusta este valor para espaciar los íconos */
+    position: absolute;
+    top: 30%;
+    left: 85%;
     color: #000000;
-    font-size: 1.5vw; 
+    font-size: 1.5vw;
 }
 
 #cel {
-    position: absolute; 
-    top: 30%; 
-    left: 88%; /* Ajusta este valor para espaciar los íconos */
+    position: absolute;
+    top: 30%;
+    left: 88%;
     color: #000000;
-    font-size: 1.5vw; 
+    font-size: 1.5vw;
 }
 
 #mapa {
-    position: absolute; 
-    left: 20%; /* Ajusta este valor para espaciar los íconos */
+    position: absolute;
+    left: 20%;
     color: #000000;
-    font-size: 1.5vw; 
+    font-size: 1.5vw;
 }
 
 .barra {
-    background-color: #ffaf04; 
-    overflow: hidden; /* Asegura que el contenido no se desborde */
-    text-align: center; /* Centra los enlaces horizontalmente */
-
+    background-color: #ffaf04;
+    overflow: hidden;
+    text-align: center;
     margin-bottom: 1%;
     margin-top: 1%;
     width: 100%;
 }
 
 .barra a {
-    color: white;  
-    text-decoration: none; 
-    display: inline-block; /* Cambiado a inline-block para respetar padding/margin */
-    font-size: 1.5rem; 
-    padding: 1% 5%; 
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
+    padding: 1% 5%;
 }
 
 .barra a:hover {
-    background-color: #f7c251; 
-    color: white; 
+    background-color: #f7c251;
+    color: white;
+    transition: 0.3s;
+}
+
+/* Media Query para Móviles - HEADER */
+@media (max-width: 400px) {
+    .logo-container {
+        height: 60px; /* Altura fija en móviles */
+        margin-bottom: 10%;
+    }
+    
+    .logo {
+        width: 50px; /* Tamaño fijo en móviles */
+        height: 50px;
+        left: 5%;
+        transform: translateY(-50%);
+    }
+    
+    p.don {
+        font-size: 1rem; /* Tamaño fijo en lugar de lvw */
+        margin-left: 30%;
+        margin-top: 8px;
+    }
+    
+    .fa-circle-exclamation {
+        font-size: 1.2rem; /* Tamaño fijo */
+        left: 45%;
+        top: 35%;
+    }
+    
+    #faceboock {
+        font-size: 1.2rem;
+        left: 70%;
+        top: 35%;
+    }
+    
+    #cel {
+        font-size: 1.2rem;
+        left: 80%;
+        top: 35%;
+    }
+    
+    #mapa {
+        font-size: 1.2rem;
+        left: 25%;
+        top: 35%;
+    }
+    
+    .barra a {
+        font-size: 1rem; /* Texto más pequeño */
+        padding: 8px 10px; /* Menos padding */
+        display: block; /* Ocupa toda la línea */
+        width: 100%; /* Ancho completo */
+        margin: 2px 0; /* Espacio entre enlaces */
+    }
+    
+    #baner {
+        width: 100vw; /* Ocupa todo el ancho */
+        margin-left: 0;
+        margin-top: 1%;
+    }
+}
+
+
+
+
+
+
+
+
+
+.img-platillo {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    cursor: pointer;
+}
+
+.card {
+    /* Estilos para Desktop / Tablet (lado a lado) */
+    width: 40%;
+    /* Un poco más pequeño para dejar más espacio entre ellas */
+    max-width: 450px;
+    margin: 30px;
+    /* Margen para separar las tarjetas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card i {
+    font-size: 2rem;
+    /* Tamaño del ícono */
+    color: #ffaf04;
+    /* Color del ícono */
+    cursor: pointer;
+    margin-right: 20px;
+    /* Espacio a la derecha del ícono */
+    float: right;
+    /* Alinea el ícono a la derecha */
+    margin-bottom: 10px;
+}
+
+.card i:hover {
+    color: #f7c251;
+    /* Color al pasar el ratón */
     transition: 0.3s;
 }
 
@@ -119,99 +318,40 @@ p.don {
 }
 
 .card {
-    /* Estilos para Desktop / Tablet (lado a lado) */
-    width: 40%; /* Un poco más pequeño para dejar más espacio entre ellas */
-    max-width: 450px; 
-    margin: 30px; /* Margen para separar las tarjetas */
+    /* Estilos para Desktop/Tablet */
+    width: 40%;
+    max-width: 450px;
+    margin: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card i {
-    font-size: 2rem; /* Tamaño del ícono */
-    color: #ffaf04; /* Color del ícono */
+    font-size: 2rem;
+    color: #ffaf04;
     cursor: pointer;
-    margin-right: 20px; /* Espacio a la derecha del ícono */
-    float: right; /* Alinea el ícono a la derecha */
+    margin-right: 20px;
+    float: right;
     margin-bottom: 10px;
 }
 
 .card i:hover {
-    color: #f7c251; /* Color al pasar el ratón */
+    color: #f7c251;
     transition: 0.3s;
 }
 
-
-/* Media Query para Móviles (dispositivos pequeños/xs/sm) */
-@media (max-width: 768px) {
+/* Media Query para Móviles CORREGIDA */
+@media (max-width: 400px) {
     .card {
-        /* Fuerza a que cada tarjeta ocupe su propia fila */
-        width: 90%; 
-        max-width: none; /* Permite que ocupe el 90% real */
-        margin: 15px auto; /* Centra la tarjeta horizontalmente */
+        width: 90%; /* Solo cambia el ancho */
+        margin: 15px auto; /* Centra las cards */
     }
-}
 
-.list-container {
-    width: 100%;
-    background-color: rgb(247, 194, 81);
-    margin-bottom: 7px; /* Espacio inferior */
-    padding: 3px;
-}
-
-.list-group-item {
-    display: flex; /* Mantenemos flexbox para alinear contenido-botón */
-    justify-content: space-between; /* Espacio entre la información del producto y el botón */
-    align-items: center; /* Alinea verticalmente los elementos (info y botón) */
-    font-size: 1.2rem;
-    border: none;
-    padding: 10px; /* Agregamos padding para que no esté pegado a los bordes */
-}
-
-/* **Nuevo CSS para apilar el texto y el precio** */
-.product-info {
-    display: flex;
-    flex-direction: column; /* Esto apila los elementos (nombre y precio) */
-    align-items: flex-start; /* Alinea el texto y el precio a la izquierda */
-}
-
-.product-name {
-    font-size: 0.8rem; /* Tamaño de fuente para el nombre del producto */
-    color: rgb(0, 0, 0); /* Color del texto del producto */
-    /* Puedes agregar un margin-bottom si querés más espacio entre el nombre y el precio */
-}
-
-span.bidge {
-    color: rgb(0, 0, 0);
-    padding: 2px 5px; /* Ajustamos padding para que parezca más un precio */
-    border-radius: 12px;
-    font-size: 1.5rem;
-    margin-top: 5px; /* Espacio arriba del precio, si querés separarlo del nombre */
-}
-
-/* **Nuevo CSS para el botón** */
-.action-button {
-    background-color: #ffaf04; /* Un color para el botón */
-    color: rgb(0, 0, 0);
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-    border: none; /* Quita el borde predeterminado */
-    margin-left: 65%; /* Espacio entre el botón y la información del producto */
-    width: 30%;
-    margin-top: -50px;
-    text-align: center;
-    text-decoration: none;
-}
-
-.action-button:hover {
-    color: white;
 }
 
 .section {
     text-align: center;
-    margin: 1% 0;
+    font-size: 1rem;
+    margin: 1px 0; 
     background-color: #ffaf04;
     border-radius: 8px;
     width: 15%;
@@ -224,109 +364,165 @@ span.bidge {
     padding: 10px 0;
 }
 
-
-
-
-
-
-
-    /* MODAL / ventana emergente de información */
-    .modal {
-        display: none; 
-        position: fixed; 
-        z-index: 1000; 
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4); 
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
-        box-sizing: border-box;
+/* Media Query para Móviles */
+@media (max-width: 400px) {
+    .section {
+        width: 80%; /* Ocupa más ancho en móviles */
+        margin-left: 10%; /* Mantiene algo de margen */
+        margin-right: 10%; /* Balancea el margen derecho */
     }
+    
+    .section h2 {
+        font-size: 1.1rem; /* Texto un poco más pequeño */
+        padding: 8px 0; /* Menos padding */
+    }
+}
 
+
+
+.list-container {
+    width: 100%;
+    background-color: rgb(247, 194, 81);
+    margin-bottom: 7px;
+    /* Espacio inferior */
+    padding: 3px;
+}
+
+.list-group-item {
+    display: flex;
+    /* Mantenemos flexbox para alinear contenido-botón */
+    justify-content: space-between;
+    /* Espacio entre la información del producto y el botón */
+    align-items: center;
+    /* Alinea verticalmente los elementos (info y botón) */
+    font-size: 1.2rem;
+    border: none;
+    padding: 10px;
+    /* Agregamos padding para que no esté pegado a los bordes */
+}
+
+/* **Nuevo CSS para apilar el texto y el precio** */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    /* Esto apila los elementos (nombre y precio) */
+    align-items: flex-start;
+    /* Alinea el texto y el precio a la izquierda */
+}
+
+.product-name {
+    font-size: 0.8rem;
+    /* Tamaño de fuente para el nombre del producto */
+    color: rgb(0, 0, 0);
+    /* Color del texto del producto */
+    /* Puedes agregar un margin-bottom si querés más espacio entre el nombre y el precio */
+}
+
+span.bidge {
+    color: rgb(0, 0, 0);
+    padding: 2px 5px;
+    /* Ajustamos padding para que parezca más un precio */
+    border-radius: 12px;
+    font-size: 1.5rem;
+    margin-top: 5px;
+    /* Espacio arriba del precio, si querés separarlo del nombre */
+}
+
+/* **Nuevo CSS para el botón** */
+.action-button {
+    background-color: #ffaf04;
+    /* Un color para el botón */
+    color: rgb(255, 255, 255);
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    border: none;
+    /* Quita el borde predeterminado */
+    margin-left: 65%;
+    /* Espacio entre el botón y la información del producto */
+    width: 30%;
+    margin-top: -50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.action-button:hover {
+    background-color: #e59d00;
+    color: #333;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* MODAL / ventana emergente de información */
+@media (max-width: 480px) {
     .modal-contenido {
-        background-color: #fff;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 100%;
-        max-width: 600px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        position: relative;
-        animation: fadeIn 0.3s ease;
+        padding: 15px;
+        font-size: 0.9rem;
+        border-radius: 8px;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .cerrar-modal {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: color 0.2s ease;
-    }
-
-    .cerrar-modal:hover,
-    .cerrar-modal:focus {
-        color: #333;
-    }
-
-    @media (max-width: 480px) {
-        .modal-contenido {
-            padding: 15px;
-            font-size: 0.9rem;
-            border-radius: 8px;
-        }
-        #tipo1, #tipo2 {
-            flex-basis: 100%;
-            margin-bottom: 10px;
-        }
-    }
-
-    #horarios {
-        max-width: 900px;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #f8f8f8;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        font-family: Arial, sans-serif;
-    }
-
-    #horarios h3 {
-        color: #333;
+    #tipo1,
+    #tipo2 {
+        flex-basis: 100%;
         margin-bottom: 10px;
-        padding-bottom: 5px;
-        border-bottom: 3px solid #ffaf04;
     }
+}
 
-    #direccion i {
-        font-size: 0.65em;
-        color: #555;
-        display: block;
-        margin-top: 8px;
-        left: auto;
-    }
+#horarios {
+    max-width: 900px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+#horarios h3 {
+    color: #333;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 3px solid #ffaf04;
+    /* Línea decorativa */
+}
+
+
+#direccion i {
+    font-size: 0.65em;
+    color: #555;
+    display: block;
+    margin-top: 8px;
+    left: auto;
+}
 
 /* Estilos del contenedor padre */
 #servicio {
     /* Eliminamos display: flex; de aquí */
-    margin-top: 5px; /* Reducimos el margen superior */
-    margin-bottom: 20px; /* Margen para separarlo de la siguiente sección */
+    margin-top: 5px;
+    /* Reducimos el margen superior */
+    margin-bottom: 20px;
+    /* Margen para separarlo de la siguiente sección */
 }
 
 /* Estilos para el Título H2 */
 #servicio h3 {
     margin-top: 10%;
-    margin-bottom: 15px; /* Crea espacio entre el título y los botones */
-    text-align: left; /* Asegura que el título no esté centrado si no debe */
+    margin-bottom: 15px;
+    /* Crea espacio entre el título y los botones */
+    text-align: left;
+    /* Asegura que el título no esté centrado si no debe */
 }
 
 /* Estilos del NUEVO Contenedor (para alinear los botones) */
@@ -335,22 +531,24 @@ span.bidge {
     /* CLAVE: Cambiar 'display: contents' por 'display: flex' */
     display: flex;
     /* Espacio entre los botones */
-    gap: 20px; 
+    gap: 20px;
     /* Distribuye el espacio entre los botones */
-    justify-content: space-between; 
+    justify-content: space-between;
     /* Margen superior para separarlo del H2 */
-    margin-top: 15px; 
+    margin-top: 15px;
 }
 
 /* 2. ESTILOS DE LOS BOTONES INDIVIDUALES */
-#tipo1, #tipo2 {
+#tipo1,
+#tipo2 {
     /* Usamos 'flex: 1' en lugar de 'width: 40%' para que se adapten mejor al espacio */
-    flex: 1; 
+    flex: 1;
     /* Eliminar margin-bottom: 5% de #tipo1 si #tipo2 no lo tiene, o moverlo a #tipo1, #tipo2 */
-    margin-bottom: 0; 
-    
-    padding: 15px 10px; /* Un poco de padding */
-    border-radius: 8px; 
+    margin-bottom: 0;
+
+    padding: 15px 10px;
+    /* Un poco de padding */
+    border-radius: 8px;
     text-align: center;
     background-color: #ffaf04;
     color: #fff;
@@ -359,68 +557,77 @@ span.bidge {
 }
 
 /* El resto de los estilos se mantienen */
-#tipo1:hover, #tipo2:hover {
+#tipo1:hover,
+#tipo2:hover {
     transform: translateY(-5px);
 }
 
-#tipo1 i, #tipo2 i {
+#tipo1 i,
+#tipo2 i {
     font-size: 1.5em;
     margin-top: 8px;
 }
 
-    #horario-laboral {
-        margin-top: 10px;
+#horario-laboral {
+    margin-top: 10px;
+}
+
+.fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.fila:last-child {
+    border-bottom: none;
+}
+
+.fila p {
+    margin: 0;
+    font-size: 0.95em;
+}
+
+.fila i {
+    margin: 0 10px;
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    #servicio {
+        flex-direction: column;
     }
 
     .fila {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 0;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .fila:last-child {
-        border-bottom: none;
-    }
-
-    .fila p {
-        margin: 0;
-        font-size: 0.95em;
-    }
-
+    .fila p,
     .fila i {
-        margin: 0 10px;
-        color: #666;
+        margin: 3px 0;
     }
-
-    @media (max-width: 600px) {
-        #servicio {
-            flex-direction: column;
-        }
-        .fila {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .fila p, .fila i {
-            margin: 3px 0;
-        }
-    }
+}
 
 
 
 
 
- /* Estilos del modal principal (ventanaoption) */
+
+
+/* Estilos del modal principal (ventanaoption) */
 #ventanaoption {
     /* CLAVE: Oculto por defecto */
-    display: none; 
-    position: fixed; 
-    z-index: 2000; /* Asegura que esté por encima de todos los demás elementos */
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    /* Asegura que esté por encima de todos los demás elementos */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Fondo oscuro */
     justify-content: center;
     align-items: center;
 }
@@ -437,92 +644,45 @@ span.bidge {
 
 #V-card {
     /* Estilos para Desktop / Tablet (lado a lado) */
-    width: 100%; /* Un poco más pequeño para dejar más espacio entre ellas */
-    max-width: 450%; 
-    margin: 1%; /* Margen para separar las tarjetas */
+    width: 100%;
+    /* Un poco más pequeño para dejar más espacio entre ellas */
+    max-width: 450%;
+    margin: 1%;
+    /* Margen para separar las tarjetas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
+
 }
 
 /* Media Query para Móviles (dispositivos pequeños/xs/sm) */
 @media (max-width: 768px) {
     .car {
         /* Fuerza a que cada tarjeta ocupe su propia fila */
-        width: 90%; 
-        max-width: none; /* Permite que ocupe el 90% real */
-        margin: 15px auto; /* Centra la tarjeta horizontalmente */
+        width: 90%;
+        max-width: none;
+        /* Permite que ocupe el 90% real */
+        margin: 15px auto;
+        /* Centra la tarjeta horizontalmente */
     }
 }
 
 
 
-/* ventana sesion */
-.form-grupo {
-    margin-bottom: 20px;
-}
-
-/* Etiqueta */
-.form-grupo label {
-    display: block;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 8px;
-}
-
-/* Campos de entrada (Input) */
-.form-grupo input[type="email"],
-.form-grupo input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-    box-sizing: border-box; /* Crucial para que el padding no desborde el ancho */
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.form-grupo input:focus {
-    border-color: #ffaf04; /* Borde de enfoque de color temático */
-    box-shadow: 0 0 5px rgba(255, 175, 4, 0.5);
-    outline: none;
-}
-
-/* Botón de Confirmar (Iniciar Sesión) */
-.boton-confirmar {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background-color: #ffaf04; /* Color temático fuerte */
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background-color 0.2s ease, transform 0.1s;
-}
-
-.boton-confirmar:hover {
-    background-color: #ff9800; /* Color ligeramente más oscuro al pasar el ratón */
-    transform: translateY(-1px);
-}
 
 
 
 
 
-
-
+/* Estilos para la cuadrícula de administración */
 #admin-grid-layout {
     display: grid;
     /* Define 3 columnas de igual ancho (1fr) */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 15px; /* Espacio entre las tarjetas */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    /* Espacio entre las tarjetas */
     /* Lo ideal es que el margen de 30px se mueva aquí para centrar la cuadrícula */
-    margin: 30px auto; 
-    margin-bottom: 50px; /* Espacio inferior */
+    margin: 30px auto;
+    margin-bottom: 50px;
+    /* Espacio inferior */
 }
 
 #opcion-admin {
@@ -532,40 +692,55 @@ span.bidge {
     cursor: pointer;
 }
 
-.admin-card-style, .admin-container { 
-    max-width: none; /* Permitir que ocupe todo el espacio de la columna */
+
+
+
+
+
+
+.admin-card-style,
+.admin-container {
+    max-width: none;
+    /* Permitir que ocupe todo el espacio de la columna */
     cursor: pointer;
 }
 
 .card-option {
-    background-color: #ffaf04; /* Cambiado a gris claro para coincidir con la imagen */
-    border-radius: 8px; /* Reducido para coincidir con la imagen */
+    background-color: #ffaf04;
+    /* Cambiado a gris claro para coincidir con la imagen */
+    border-radius: 8px;
+    /* Reducido para coincidir con la imagen */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     padding: 20px;
-    text-decoration: none; 
+    text-decoration: none;
 }
 
 .card-option:hover {
-    transform: translateY(-3px); /* Movimiento ligero */
-    background-color: #f7c251; /* Efecto de hover */
+    transform: translateY(-3px);
+    /* Movimiento ligero */
+    background-color: #f7c251;
+    /* Efecto de hover */
 }
 
 .card-option .card-text {
-    font-size: 1rem; /* Ajustado para un tamaño más estándar para un botón */
+    font-size: 1rem;
+    /* Ajustado para un tamaño más estándar para un botón */
     font-weight: bold;
-    color: #fff; /* Color del texto */
+    color: #fff;
+    /* Color del texto */
 }
 
 
 /* Media Query para responsividad (como en el ejemplo anterior) */
 @media (max-width: 768px) {
     #admin-grid-layout {
-        grid-template-columns: repeat(2, 1fr); 
+        grid-template-columns: repeat(2, 1fr);
     }
 }
+
 @media (max-width: 480px) {
     #admin-grid-layout {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
     }
 }

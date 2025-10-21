@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -58,9 +57,6 @@
     <?php 
         // Puedes usar include, pero require_once es más seguro
         require_once('F-modal_C.php'); 
-        require_once('D-modal_C.php');
-        require_once('P-modal_P.php');
-        require_once('P-modal_C.php');
     ?>
 
     <?php
@@ -85,6 +81,7 @@
     <script src="js/cuenta_local.js"></script>
     <script src="js/formulario_carrito.js"></script>
     <scrpt src="js/cuenta_carrito.js"></script>
+    <script src="js/domicilio_carrito.js"></script>
 
 </body>
 

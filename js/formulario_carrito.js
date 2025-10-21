@@ -20,9 +20,6 @@ if (btnAbrirCuenta) {
     });
 }
 
-// ===============================================
-// 2. CERRAR PRIMER MODAL
-// ===============================================
 if (btnCerrarCuenta) {
     btnCerrarCuenta.addEventListener('click', function() {
         modalServicio.style.display = "none";

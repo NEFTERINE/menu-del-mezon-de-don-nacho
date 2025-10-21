@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // En cuenta_local.js - usa nombres únicos
 const modal = document.getElementById("editar-platillo");
 const btnAbrir = document.getElementById("editar");
-const btnCerrar = document.querySelector(".cerrar-modal");
+const btnCerrar = document.querySelector(".cerrar-plato");
 
 // Luego usa estos nombres únicos en todo tu código...
 if (btnAbrir && modal) {

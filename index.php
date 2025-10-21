@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/style.css">
     </head>
 
 <body>
@@ -85,7 +84,7 @@
                 </a>
             </div>
 
-            <div class="footer-item"> Rede Sociale:
+            <div class="footer-item"> Red Social:
                 <a href="https://www.facebook.com/RestauranteElMesonDeDonNacho/">
                     <i class="bi bi-facebook" style="cursor: pointer;"> Facebook</i>
                 </a>
