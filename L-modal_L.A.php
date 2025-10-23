@@ -1,9 +1,8 @@
-<!-- agregar usuario -->
-<div id="registro-usuario" class="modal">
+<div id="editar-usuarios" class="modal">
     <div class="modal-contenido">
-        <span class="cerrar-modal" id="cerrar-modal">&times;</span>
+        <span class="C-editar-U" id="cerrar-modal">&times;</span>
 
-        <h2>Registrar Nuevo Usuario</h2>
+        <h2>Editar Usuario</h2>
 
         <form action="#" method="POST">
 
@@ -20,23 +19,23 @@
                 <option value="plato_fuerte">Empleado</option>
             </select>
 
-            <button type="submit">Agregar Usuario</button>
+            <button type="submit">Editar Usuario</button>
         </form>
 
     </div>
 </div>
 
-<script src="js/registro-usuario.js"></script>
+<script src="js/lista_usuarios.js"></script>
 
 
 
 
 <!-- agregar plato -->
-<div id="registro-platillo" class="modal">
+<div id="editar-platillos" class="modal">
     <div class="modal-contenido">
-        <span class="cerrar-platillo" id="cerrar-modal">&times;</span>
+        <span class="C-editar-P" id="cerrar-modal">&times;</span>
 
-        <h2>Agregar Nuevo Platillo</h2>
+        <h2>Editar Platillo</h2>
 
         <form action="#" method="POST">
             <label for="nombre">Nombre del Platillo:</label>
@@ -60,21 +59,21 @@
             <label for="imagen">Imagen del Platillo:</label>
             <input type="file" id="imagen" name="imagen" accept="image/*" required>
 
-            <button type="submit">Agregar Platillo</button>
+            <button type="submit">Editar Platillo</button>
         </form>
     </div>
 </div>
 
-<script src="js/registro_platillo.js"></script>
+<script src="js/lista_pedidos.js"></script>
 
 
 
 
 <!-- agregar categoria -->
-<div id="registro-categoria" class="modal">
+<div id="editar-categorias" class="modal">
     <div class="modal-contenido">
 
-        <span class="cerrar-categoria" id="cerrar-modal">&times;</span>
+        <span class="C-categoria" id="cerrar-modal">&times;</span>
 
         <h2>Agregar Nueva Categoría</h2>
 
@@ -82,10 +81,10 @@
             <label for="nombre">Nombre de la Categoría:</label>
             <input type="text" id="nombre" name="nombre" required>
 
-            <button type="submit">Agregar Categoría</button>
+            <button type="submit">Editar Categoría</button>
         </form>
 
     </div>
 </div>
 
-<script src="js/registro_categoria.js"></script>
+<script src="js/lista_categorias.js"></script>

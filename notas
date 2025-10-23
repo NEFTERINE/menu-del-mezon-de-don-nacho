@@ -1,3 +1,72 @@
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Obtener elementos estáticos
+    const modalP = document.getElementById("editar-platillos");
+    const contenedorEstatico = document.getElementById("lista-pedidos"); // Cambia este ID al contenedor real
+    const btnCerrarP = document.querySelector(".C-editar-P");
+
+    if (contenedorEstatico && modalP) {
+        
+        // Adjuntamos el evento al contenedor padre estático
+        contenedorEstatico.addEventListener('click', function(e) {
+            
+            // Verificamos si el elemento clicado TIENE la clase de nuestros botones
+            // 'e.target' es el elemento exacto que fue clicado
+            if (e.target.classList.contains('abrir-modal-plato')) {
+                e.preventDefault(); 
+                
+                // Obtenemos la información del botón que generó el evento
+                const platoId = e.target.getAttribute('data-id');
+                console.log(`Delegación exitosa: Editando plato ID: ${platoId}`);
+                
+                modalP.style.display = "flex";
+                // Llama a tu función para cargar los datos aquí:
+                // cargarDatosPlato(platoId);
+            }
+        });
+    }
+
+    // El resto de la lógica de cierre (para la X y clic fuera) se mantiene:
+    
+    // 2. Cerrar el modal al hacer clic en la 'x'
+    if (btnCerrarP && modalP) {
+        btnCerrarP.addEventListener('click', function(e) {
+            e.preventDefault();
+            modalP.style.display = "none";
+        });
+    }
+
+    // 3. Cerrar el modal si el usuario hace clic fuera del contenido
+    if (modalP) {
+        window.addEventListener('click', function(event) {
+            if (event.target === modalP) {
+                modalP.style.display = "none";
+            }
+        });
+    }
+});
+
+// Esto se ejecuta por cada registro de plato
+foreach ($platos as $plato) {
+    echo '<tr>';
+    echo '<td>' . htmlspecialchars($plato['nombre']) . '</td>';
+    echo '<td>';
+    
+    // 🛑 CLAVE: El CLASS es fijo para el JS.
+    // 🛑 CLAVE: El DATA-ID toma el ID ÚNICO de la base de datos ($plato['id']).
+    echo '<button class="abrir-modal-plato" data-id="' . $plato['id'] . '">';
+    echo 'Editar';
+    echo '</button>';
+    
+    echo '</td>';
+    echo '</tr>';
+}
+
+
+
+
+
+
 
 
 

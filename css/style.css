@@ -1,4 +1,11 @@
 
+
+a{
+    text-decoration: none !important;
+
+}
+
+
 label {
     display: block; /* Hace que el label se comporte como un bloque en línea */
     margin-bottom: 8px;
@@ -43,11 +50,47 @@ textarea:focus {
     outline: none; /* Elimina el contorno azul por defecto del navegador */
 }
 
+
 /* Estilo para áreas de texto */
 textarea {
     resize: vertical; /* Permite redimensionar solo verticalmente */
-    min-height: 100px;
 }
+
+#regreso{
+    margin-top: 1%;
+    margin-left: 20px;
+    font-size: 1rem;
+    width: 10%;
+    text-align: center;
+}
+
+button, a.button {
+    display: block;
+    width: 25%;
+    padding: 12px 20px;
+    background-color: #ffaf04; /* Fondo naranja llamativo */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold; 
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+button:hover, a.button:hover {
+    background-color: #e59d00; /* Naranja ligeramente más oscuro al pasar el ratón */
+    transform: translateY(-1px);
+}
+
+button:hover, a.button:active {
+    transform: translateY(1px); /* Efecto de "clic" */
+}
+
+button:hover {
+    background-color: #e59d00;
+    color: #333;
+}
+
 button[type="submit"] {
     display: block;
     width: 100%;
@@ -104,15 +147,6 @@ select option {
     padding: 10px;
 }
 
-input[type="file"] {
-    /* Hace que el campo de archivo nativo sea invisible, pero accesible */
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
 
 /* Estilo personalizado para el label que actúa como botón */
 .file-label {
@@ -140,10 +174,12 @@ input[type="file"] {
     border-color: #ffaf04;
 }
 
+
 table{
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    
 }
 
 thead {
@@ -162,7 +198,40 @@ th, td {
     margin: 10px;
 }
 
-#edit,#eli {
+
+
+#lista-categorias, #lista-pedidos, #lista-usuarios, table {
+    /* 1. ANCHO ADAPTABLE: La tabla solo será tan ancha como lo requiera el contenido. */
+    width: fit-content; 
+    /* 2. CENTRADO: Esto centra la tabla horizontalmente. */
+    margin: 20px auto; 
+    border-collapse: collapse;
+}
+#lista-categorias, #lista-pedidos, #lista-usuarios, th, 
+#lista-categorias, #lista-pedidos, #lista-usuarios, td {
+    padding: 12px 15px; 
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+/* Ajuste de Texto: Centra los títulos del header */
+#lista-categorias, #lista-pedidos, #lista-usuarios, th {
+    text-align: center;
+}
+
+/* Ajuste de Texto: Asegura que la columna de la categoría esté a la izquierda */
+#lista-categorias, #lista-pedidos, #lista-usuarios, tbody td:first-child {
+    text-align: left;
+}
+
+/* Ajuste de Texto: Centra la columna de Opciones (botones) */
+#lista-categorias , #lista-pedidos, #lista-usuarios, tbody td:last-child {
+    text-align: center;
+}
+
+
+
+.edit,.eli {
     background-color: #ffaf04;
     color: white;
     padding: 10px; /* Espaciado interno */
@@ -179,7 +248,7 @@ th, td {
     text-align: center; /* Centra el texto dentro del botón */
 }
 
-#edit:hover ,#eli:hover {
+.edit:hover ,.eli:hover {
     background-color: #e59d00;
     color: #333;
 }
@@ -191,7 +260,7 @@ th, td {
         padding: 20px;
     }
 
-    #edit, #eli {
+    .edit, .eli {
         display: block; /* Ocupa toda la línea */
         width: 100%; /* Ocupa el ancho disponible de la celda */
         margin: 5px 0; /* Margen superior e inferior para separarlos */
@@ -208,3 +277,4 @@ th, td {
         display: block;
     }
 }
+

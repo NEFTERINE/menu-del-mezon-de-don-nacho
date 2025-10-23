@@ -32,53 +32,53 @@
         </div>
     </div>
 
-<script src="js/formulario_carrito.js"></script>
+    <script src="js/formulario_carrito.js"></script>
 
 
 
-<!-- ventana de domicilio -->
-<div id="subServicio" class="modal">
-    <div class="modal-contenido">
-        <span class="cerrarsubServicio" id="cerrar-modal">&times;</span>
+    <!-- ventana de domicilio -->
+    <div id="subServicio" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrarsubServicio" id="cerrar-modal">&times;</span>
 
-        <h2><i class="fa-solid fa-motorcycle"></i> Selecciona tu Dirección</h2>
+            <h2><i class="fa-solid fa-motorcycle"></i> Selecciona tu Dirección</h2>
 
-        <div id="contenido-domicilio">
+            <div id="contenido-domicilio">
 
-            <div class="seccion-datos-usuario">
-                <h3 class="titulo-seccion">Tus Datos de Contacto</h3>
+                <div class="seccion-datos-usuario">
+                    <h3 class="titulo-seccion">Tus Datos de Contacto</h3>
 
-                <div class="info-item">
-                    <label>Nombre:</label>
-                    <p>Lissa</p>
+                    <div class="info-item">
+                        <label>Nombre:</label>
+                        <p>Lissa</p>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Teléfono:</label>
+                        <p>694 116****</p>
+                    </div>
                 </div>
 
-                <div class="info-item">
-                    <label>Teléfono:</label>
-                    <p>694 116****</p>
+                <div class="seccion-direcciones">
+                    <h3 class="titulo-seccion">Direcciones de Entrega</h3>
+
+                    <div class="direccion-item seleccionable activo">
+                        <p><i class="bi bi-geo-alt-fill"></i> 21 de Diciembre #11 - Cerca de la tortillería.</p>
+                    </div>
+
+                    <div class="form-grupo">
+                        <button class="button-direccion" id="btnAgregarNuevaDireccion">
+                            <i class="bi bi-file-plus-fill"></i> Agregar Nueva Dirección
+                        </button>
+                    </div>
                 </div>
+
+                <button type="button" class="boton-confirmar" id="BtnCuenta">Confirmar Dirección</button>
+
             </div>
-
-            <div class="seccion-direcciones">
-                <h3 class="titulo-seccion">Direcciones de Entrega</h3>
-
-                <div class="direccion-item seleccionable activo">
-                    <p><i class="bi bi-geo-alt-fill"></i> 21 de Diciembre #11 - Cerca de la tortillería.</p>
-                </div>
-
-                <div class="form-grupo">
-                    <button class="button-direccion" id="btnAgregarNuevaDireccion">
-                        <i class="bi bi-file-plus-fill"></i> Agregar Nueva Dirección
-                    </button>
-                </div>
-            </div>
-
-            <button type="button" class="boton-confirmar" id="BtnCuenta">Confirmar Dirección</button>
-
         </div>
     </div>
-</div>
-<script src="js/domicilio_carrito.js"></script>
+    <script src="js/domicilio_carrito.js"></script>
 
 
 
@@ -94,12 +94,36 @@
 
             <div class="cuenta">
 
-                <div class="general">
+                <div class="general" id="resumen">
                     <p>Resumen de Cuenta</p>
                     <div>
                         <p>1 Producto(s) Total $30.00MX</p>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
+                </div>
+
+                <div class="detalle-productos" id="detalle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Resumen de cuenta</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Producto (1)</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Indicile nature de fissure</td>
+                                <td>$100.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Total $100.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="coment">
@@ -113,11 +137,26 @@
                         <option value="efectivo"><i class="fa-solid fa-wallet"></i> Efectivo</option>
                         <option value="transferencia"><i class="fa-solid fa-credit-card"></i> Transferencia</option>
                     </select>
-                        <p id="alert">* Al seleccionar transferencia ocupara poner normbre del restaurante y motivo de trasferencia</p>
+                    <p id="alert">* Al seleccionar transferencia ocupara poner normbre del restaurante y motivo de trasferencia</p>
                 </div>
 
-                <div class="total">
-                    <a href="#"><button class="button">Pedir $30MX</button></a>
+                <!-- Spinner de procesando -->
+                <div id="proces" style="display: none;">
+                    <div class="spinner-border text-success mb-3"></div>
+                    <h5>Procesando tu orden...</h5>
+                </div>
+
+                <!-- Confirmación -->
+                <div id="confir" style="display: none;">
+                    <div class="text-success mb-3">
+                        <i class="fas fa-check-circle" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5>¡Orden Confirmada!</h5>
+                    <p class="text-muted">Tu pedido ha sido procesado</p>
+                </div>
+
+                <div class="total" id="cont">
+                    <button type="submit" class="button" id="btn-pedir-domicilio">Pedir $30MX</button>
                 </div>
 
             </div>
@@ -129,23 +168,49 @@
 
 
 
-    
+
     <!-- ventana de confirmar pedido local -->
 
     <div class="modal" id="LocalCuenta">
         <div class="modal-contenido">
-            <span class=".cerrar-local" id="cerrar-modal">&times;</span>
+            <span class="cerrar-local" id="cerrar-modal">&times;</span>
             <h2><i class="bi bi-fork-knife"></i> Confirma Tu Pedido</h2>
 
             <div class="cuenta">
 
-                <div class="general">
+                <div class="general" id="flecha-resumen">
                     <p>Resumen de Cuenta</p>
                     <div>
                         <p>1 Producto(s) Total $30.00MX</p>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                 </div>
+
+
+                <div class="detalle-productos" id="detalle-productos">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Resumen de cuenta</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Producto (1)</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Indicile nature de fissure</td>
+                                <td>$100.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Total $100.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
 
                 <div class="coment">
                     <label>Agregar Comentario</label>
@@ -159,13 +224,33 @@
                     </select>
                 </div>
 
-                <div class="total">
-                    <a href="#"><button class="button">Pedir $30MX</button></a>
+                <!-- Spinner de procesando -->
+                <div id="procesando" style="display: none;">
+                    <div class="spinner-border text-success mb-3"></div>
+                    <h5>Procesando tu orden...</h5>
                 </div>
+
+                <!-- Confirmación -->
+                <div id="confirmado" style="display: none;">
+                    <div class="text-success mb-3">
+                        <i class="fas fa-check-circle" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5>¡Orden Confirmada!</h5>
+                    <p class="text-muted">Tu pedido ha sido procesado</p>
+                </div>
+
+                <div class="total" id="contenido">
+                    <button type="submit" class="button" id="btn-pedir-local">Pedir $30MX</button>
+                </div>
+
 
             </div>
 
         </div>
+        <!-- Font Awesome para el ícono -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+
     </div>
 
     <script src="js/cuenta_local.js"></script>

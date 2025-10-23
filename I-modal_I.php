@@ -157,7 +157,7 @@
             </select>
 
             <label for="imagen">Imagen del Platillo:</label>
-            <input type="file" id="imagen" name="imagen" accept="image/*">
+            <input type="file" id="imagen" name="imagen" accept=".jpg, .jpeg, .png" multiple>
 
             <button type="submit">Guardar Cambios</button>
         </form>

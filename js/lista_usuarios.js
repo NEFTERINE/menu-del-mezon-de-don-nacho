@@ -2,9 +2,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // Obtén los elementos que usaremos
-    const modal = document.getElementById("lista-usuarios");
-    const btnA = document.getElementById("lista-usu");     
-    const btnC = document.querySelector(".cerrar-lista-usuarios");
+    const modal = document.getElementById("editar-usuarios");
+    const btnA = document.getElementById("edit-usuario");     
+    const btnC = document.querySelector(".C-editar-U");
 
     // 1. Lógica de Apertura
     if (btnA && modal) {

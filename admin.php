@@ -30,9 +30,6 @@
     <script src="js/registro-usuario.js"></script>
     <script src="js/registro_platillo.js"></script>
     <script src="js/registro_categoria.js"></script>
-    <script src="js/lista_usuarios.js"></script>
-    <script src="js/lista_pedidos.js"></script>
-    <script src="js/lista_categorias.js"></script>
 
 
 
@@ -55,18 +52,24 @@
                 <span class="card-text">Registrar Nueva Categoría</span>
             </div>
 
+            <a href="Lista_usuario.php">
             <div id="lista-usu" class="card-option">
                 <span class="card-text">Ver lista de usuarios</span>
             </div>
+            </a>
 
+            <a href="Lista_pedido.php">
             <div id="lista-ped" class="card-option">
                 <span class="card-text">Ver lista de pedidos</span>
             </div>
+            </a>
 
+            <a href="Lista_categoria.php">
             <div id="lista-cate" class="card-option">
                 <span class="card-text">Ver lista de categorías</span>
             </div>
-
+            </a>
+            
         </div>
     </div>
     

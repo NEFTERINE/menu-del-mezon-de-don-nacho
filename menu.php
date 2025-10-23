@@ -31,7 +31,7 @@
     </div>
     <div class="logo-container">
       <img id="sesionBtn" src="imagenes/logo-nacho.jpg" alt="Logo" class="logo">
-      <p  class="don"> El Meson de Don Nacho </p>
+      <p  class="don"> El Mesón de Don Nacho </p>
       <a href="#"><i class="fa-solid fa-circle-exclamation" id="abrirModalBtn" style="cursor: pointer;"> </i> </a>
       <a href="https://www.facebook.com/RestauranteElMesonDeDonNacho/"><i id="faceboock" class="bi bi-facebook"
           style="cursor: pointer;"> </i> </a>
@@ -48,7 +48,7 @@
       <a href="index.php?#comidad">Comidas</a>
       <a href="index.php?#carnes">Carne Asada</a>
       <a href="index.php?#bebidas">Bebidas</a>
-      <a href="admin.php">Admin options</a>
+      <a href="admin.php">Administración</a>
     </div>
   </div>
 
