@@ -1,0 +1,323 @@
+/* 1. Estilos de la Pantalla Completa (simulando body/index) */
+body {
+    background-color: #f8f8f8; /* Fondo muy claro, similar al index */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    
+
+}
+
+/* 2. Encabezado y Costo Total */
+.c_tot {
+    font-size: 2rem;
+    color: #ffaf04; /* Color temático del restaurante */
+    text-align: right;
+    margin: 0 0 25px 0;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+/* 3. Botón "Atrás" */
+.modal-contenido .button#button1 {
+    /* Estilo como un botón secundario */
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    margin-bottom: 20px;
+}
+
+/* 4. Estructura del Producto y Cantidad */
+.productos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ffaf04; /* Línea separadora naranja */
+    padding-bottom: 15px;
+    margin-bottom: 18%;
+}
+
+.producto-seleccion {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    flex-grow: 1;
+}
+
+#nombre {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+#costo {
+    font-size: 1rem;
+    color: #999;
+}
+
+/* 5. Control de Cantidad */
+.cantidad-control input {
+    width: 60px;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 6. Panel de Servicio */
+#panel-servicio-decoracion h2 {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    /* border-left: 5px solid #ffaf04; Decoración de barra lateral */
+    padding-left: 10px;
+    text-align: center;
+}
+
+#panel-servicio-decoracion {
+    background-color: #f7c251;
+    width: 100%;
+    height: 40%;
+
+}
+
+.opciones-servicio {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* 7. Contenedores de Opciones */
+.opciones-servicio > div {
+    flex: 1; 
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.opciones-servicio > div:hover {
+    border-color: #ffaf04; /* Resaltar al pasar el ratón */
+    box-shadow: 0 0 5px rgba(255, 175, 4, 0.5);
+}
+
+
+
+
+
+
+/* 8. Botones de Servicio */
+.opciones-servicio button {
+    background-color: #ffaf04;
+    color: white;
+    padding: 10px;
+    width: 50%;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 5px;
+    transition: background-color 0.2s;
+}
+
+i{
+    margin: 0;
+    padding: 0 5px 0 0;
+}
+
+.opciones-servicio button:hover {
+    background-color: #e59d00;
+}
+
+/* 9. Texto descriptivo */
+.opciones-servicio p.llevar,
+.opciones-servicio p.local {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 5px 0 0 0;
+}
+
+#regreso button {
+    text-align: center;
+    background-color: #ffaf04;
+    border-radius: 8px;
+    width: 10%;
+    border: none;
+    color: #ffffff;
+    margin-top: 1%;
+    margin-left: 2%;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+#regreso button:hover {
+    background-color: #e59d00;
+    color: #333;
+}
+
+
+
+
+
+/* Nuevos estilos para el formulario dentro del modal */
+.modal {
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: none; 
+}
+
+.modal-contenido {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-contenido h2 {
+    color: #333;
+    border-bottom: 2px solid #ffaf04;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#cerrar-modal:hover,
+#cerrar-modal:focus {
+    color: #333;
+}
+
+@media (max-width: 480px) {
+    .modal-contenido {
+        padding: 15px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.form-grupo {
+    margin-bottom: 15px;
+}
+
+.form-grupo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-grupo input[type="text"],
+.form-grupo input[type="number"],
+.form-grupo textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Fundamental para que el padding no afecte el width */
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-grupo input:focus,
+.form-grupo textarea:focus {
+    border-color: #ffaf04;
+    outline: none;
+}
+
+.boton-confirmar {
+    background-color: #ffaf04;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.button-direccion {
+    background-color: oklab(84.133% 0.01632 0.14012);
+    color: #2b2b2b;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transition: background-color 0.2s;
+}
+
+.button-direccion:hover {
+    background-color: #ffaf04;
+}
+
+.boton-confirmar:hover {
+    background-color: #e59d00;
+}
+
+/* ---------------------------------------------------- */
+/* Solución para Google Chrome, Edge y Safari (WebKit) */
+/* ---------------------------------------------------- */
+body::-webkit-scrollbar {
+    /* Oculta completamente la barra visual */
+    display: none; 
+}
+
+
+

@@ -1,0 +1,492 @@
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Obtener elementos estáticos
+    const modalP = document.getElementById("editar-platillos");
+    const contenedorEstatico = document.getElementById("lista-pedidos"); // Cambia este ID al contenedor real
+    const btnCerrarP = document.querySelector(".C-editar-P");
+
+    if (contenedorEstatico && modalP) {
+        
+        // Adjuntamos el evento al contenedor padre estático
+        contenedorEstatico.addEventListener('click', function(e) {
+            
+            // Verificamos si el elemento clicado TIENE la clase de nuestros botones
+            // 'e.target' es el elemento exacto que fue clicado
+            if (e.target.classList.contains('abrir-modal-plato')) {
+                e.preventDefault(); 
+                
+                // Obtenemos la información del botón que generó el evento
+                const platoId = e.target.getAttribute('data-id');
+                console.log(`Delegación exitosa: Editando plato ID: ${platoId}`);
+                
+                modalP.style.display = "flex";
+                // Llama a tu función para cargar los datos aquí:
+                // cargarDatosPlato(platoId);
+            }
+        });
+    }
+
+    // El resto de la lógica de cierre (para la X y clic fuera) se mantiene:
+    
+    // 2. Cerrar el modal al hacer clic en la 'x'
+    if (btnCerrarP && modalP) {
+        btnCerrarP.addEventListener('click', function(e) {
+            e.preventDefault();
+            modalP.style.display = "none";
+        });
+    }
+
+    // 3. Cerrar el modal si el usuario hace clic fuera del contenido
+    if (modalP) {
+        window.addEventListener('click', function(event) {
+            if (event.target === modalP) {
+                modalP.style.display = "none";
+            }
+        });
+    }
+});
+
+// Esto se ejecuta por cada registro de plato
+foreach ($platos as $plato) {
+    echo '<tr>';
+    echo '<td>' . htmlspecialchars($plato['nombre']) . '</td>';
+    echo '<td>';
+    
+    // 🛑 CLAVE: El CLASS es fijo para el JS.
+    // 🛑 CLAVE: El DATA-ID toma el ID ÚNICO de la base de datos ($plato['id']).
+    echo '<button class="abrir-modal-plato" data-id="' . $plato['id'] . '">';
+    echo 'Editar';
+    echo '</button>';
+    
+    echo '</td>';
+    echo '</tr>';
+}
+
+
+
+
+
+
+
+
+
+
+
+<!-- ver lista de pedidos -->
+<div class="lista-pedidos">
+    <h2>Lista de Pedidos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Pedido</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Conexión a la base de datos
+            $conn = new mysqli('localhost', 'root', '', 'restaurante');
+
+            // Verificar conexión
+            if ($conn->connect_error) {
+                die("Conexión fallida: " . $conn->connect_error);
+            }
+
+            // Consulta para obtener los pedidos
+            $sql = "SELECT id, cliente, fecha, total, estado FROM pedidos";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Mostrar datos de cada pedido
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td>" . $row["id"]. "</td>
+                            <td>" . $row["cliente"]. "</td>
+                            <td>" . $row["fecha"]. "</td>
+                            <td>" . $row["total"]. "</td>
+                            <td>" . $row["estado"]. "</td>
+                            <td><a href='ver_pedido.php?id=" . $row["id"] . "'>Ver</a> | 
+                                <a href='eliminar_pedido.php?id=" . $row["id"] . "' onclick='return confirm(\"¿Estás seguro de eliminar este pedido?\")'>Eliminar</a></td>
+                          </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='6'>No hay pedidos registrados</td></tr>";
+            }
+            $conn->close();
+            ?>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- ver lista de usuarios -->
+<div class="lista-usuarios">
+    <h2>Lista de Usuarios</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Conexión a la base de datos
+            $conn = new mysqli('localhost', 'root', '', 'restaurante');
+
+            // Verificar conexión
+            if ($conn->connect_error) {
+                die("Conexión fallida: " . $conn->connect_error);
+            }
+
+            // Consulta para obtener los usuarios
+            $sql = "SELECT id, nombre, email FROM usuarios";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Mostrar datos de cada usuario
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td>" . $row["id"]. "</td>
+                            <td>" . $row["nombre"]. "</td>
+                            <td>" . $row["email"]. "</td>
+                            <td><a href='editar_usuario.php?id=" . $row["id"] . "'>Editar</a> | 
+                                <a href='eliminar_usuario.php?id=" . $row["id"] . "' onclick='return confirm(\"¿Estás seguro de eliminar este usuario?\")'>Eliminar</a></td>
+                          </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='4'>No hay usuarios registrados</td></tr>";
+            }
+            $conn->close();
+            ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+<!-- ver lista de categorias -->
+<div class="lista-categorias">
+    <h2>Lista de Categorías</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre de la Categoría</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Conexión a la base de datos
+            $conn = new mysqli('localhost', 'root', '', 'restaurante');
+
+            // Verificar conexión
+            if ($conn->connect_error) {
+                die("Conexión fallida: " . $conn->connect_error);
+            }
+
+            // Consulta para obtener las categorías
+            $sql = "SELECT id, nombre FROM categorias";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Mostrar datos de cada categoría
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td>" . $row["id"]. "</td>
+                            <td>" . $row["nombre"]. "</td>
+                            <td><a href='editar_categoria.php?id=" . $row["id"] . "'>Editar</a> | 
+                                <a href='eliminar_categoria.php?id=" . $row["id"] . "' onclick='return confirm(\"¿Estás seguro de eliminar esta categoría?\")'>Eliminar</a></td>
+                          </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='3'>No hay categorías registradas</td></tr>";
+            }
+            $conn->close();
+            ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+/* -- general -- */
+
+/* --- ESTILOS DEL MODAL DE INICIO DE SESIÓN --- */
+
+.modal-sesion { /* Estilos del fondo del modal */
+    position: fixed; 
+    z-index: 1000; /* Asegura que el modal esté por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6); 
+    display: flex; /* Usamos Flexbox para centrar el contenido */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+}
+
+.modal-contenido-sesion { /* Estilos del contenido del modal */
+    background-color: #d8d8d8; 
+    padding: 20px;
+    /* border: 1px solid #000000; */
+    width: 25%; 
+    height: 45%;
+    min-height: 300px; /* Se agregó para que tenga una altura mínima */
+    max-width: 900px; /* Se aumentó el ancho máximo para mejor visualización */
+    border-radius: 20px; 
+    text-align: left; /* Alineación a la izquierda para el contenido */
+    box-sizing: border-box; /* Asegura que el padding no incremente el ancho/alto */
+    position: relative; /* Necesario para posicionar el botón de atrás */
+}
+
+/* -- formulario-- */
+
+form {
+    background-color: #616161; 
+    padding: 30px; /* Aumentamos el padding para mejor estética */
+    width: 350px; /* Ancho fijo para control en la pantalla */
+    max-width: 90%; /* Asegura que se vea bien en móvil */
+    height: auto; /* Altura automática basada en el contenido */
+    text-align: left;
+    box-sizing: border-box;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    margin: 100px auto;
+    border-radius: 10px;
+}
+
+label, p {
+    font-size: 1em; 
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 3px; /* Más espacio debajo de la etiqueta */
+    display: block; 
+    color: #000000; 
+    padding: 0;
+}
+
+/* Reglas de estilo para todos los inputs de texto y áreas de texto */
+input, textarea {
+    width: 100%;
+    padding: 8px 5px; /* Padding interno para mejor usabilidad */
+    margin: 5px 0 15px 0; /* Margen inferior para separar campos */
+    border: 1px solid #999; /* Borde suave */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #e9e9e9;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
+
+textarea { 
+    resize: vertical;
+    min-height: 30px; /* Altura mínima más útil */
+}
+
+input:focus, textarea:focus { 
+    outline: none;
+    border-color: #ffaf04; /* Resaltamos el borde al enfocar */
+    box-shadow: 0 0 5px #f7c251(0, 177, 184, 0.5);
+}
+
+
+/* -- Botón de Envío -- */
+input[type="submit"] { 
+    background-color: #f7c251; 
+    color: rgb(0, 0, 0); 
+    padding: 10px ; 
+    cursor: pointer;
+    text-transform: uppercase; 
+    width: 100%; /* El botón ocupa todo el ancho */
+    border: none;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover , button:hover { 
+    background-color: #f7c251;
+    color: rgb(255, 255, 255);
+}
+
+
+/* --- GENERALES DEL MODAL - v-carrito --- */
+.modal { /* Estilos del fondo del modal */
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6); 
+    display: flex; /* Usamos Flexbox para centrar el contenido */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+}
+
+.modal-contenido { /* Estilos del contenido del modal */
+    background-color: #eeeeee; 
+    padding: 20px;
+    border: 1px solid #000000;
+    width: 50%; 
+    height: 60%;
+    min-height: 400px; /* Se agregó para que tenga una altura mínima */
+    max-width: 900px; 
+    border-radius: 20px; 
+    /* box-shadow: 0 5px 15px rgba(0,0,0,0.3);  */
+    text-align: left; /* Alineación a la izquierda para el contenido */
+    box-sizing: border-box; /* Asegura que el padding no incremente el ancho/alto */
+    position: relative; /* Necesario para posicionar el botón de atrás */
+}
+
+
+/* --- ESTILOS DE BOTONES Y TEXTO --- */
+.button {
+    background-color: #ffaf04; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    text-transform: uppercase;
+}
+
+#button1 {
+    /* Posicionamos el botón "atrás" en la esquina superior izquierda */
+    position: absolute;
+    top: 20px; 
+    left: 20px;
+}
+
+.c_tot {
+    /* Posicionamos el total en la esquina superior derecha */
+    position: absolute;
+    top: 20px; 
+    right: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* --- ESTILO DE PRODUCTOS --- */
+.productos {
+    display: flex;
+    /* space-between empuja la cantidad a la derecha */
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 3px solid #ffaf04; 
+    margin-top: 60px; /* Espacio para no chocar con el total */
+    margin-bottom: 20px;
+}
+
+.producto-seleccion span {
+    display: flex;
+    flex-direction: column;
+    /* width: 65%;  */
+}
+
+#costo {
+    color: #8d8d8d;
+    margin-top: 5px; /* Pequeño espacio debajo del nombre */
+}
+/* Contenedor para la etiqueta 'Cantidad' y el input */
+
+#cantidad {
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.cantidad-control input {
+    /* 1. TAMAÑO Y ESPACIADO */
+    padding: 8px; /* Aumentamos el espacio interno */
+    width: 60px; /* Ancho fijo para el número */
+    text-align: center; /* Centramos el número */
+    font-size: 1.1em; /* Un poco más grande para ser legible */
+    font-weight: bold; /* El número resaltará */
+
+    /* 2. BORDE Y FONDO */
+    border: 2px solid #eca200; /* Borde naranja (el color de tu marca) */
+    border-radius: 8px; /* Bordes redondeados sutiles */
+    background-color: white; /* Fondo blanco para contraste */
+    color: #333; /* Color oscuro para el texto */
+    
+    /* 3. EFECTO AL HACER CLIC (Focus) */
+    /* Cuando el usuario haga clic, el borde se vuelve más grueso o cambia ligeramente */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Animación suave */
+}
+.cantidad-control {
+    display: flex; /* Usamos Flexbox para alinear los elementos */
+    align-items: center;
+    justify-content: flex-end; /* Alinea el contenido a la derecha de su contenedor */
+    width: 35%; /* Ocupa el espacio restante */
+    
+}
+
+
+/* --- ESTILO DE CANTIDAD Y TIPO DE SERVICIO --- */
+
+#a {
+    padding: 10px 0 0 0;
+}
+
+#a h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+#panel-servicio-decoracion {
+    /* Color de fondo naranja */
+    background-color: #f7c251; 
+    /* Bordes redondeados para que se vea más suave */
+    border-radius: 15px; 
+    /* Espacio interno para que el contenido no pegue con el borde */
+    padding: 15px; 
+    /* Empuja hacia abajo y le da espacio del producto de arriba */
+    margin-top: 30px; 
+}
+
+/* Ajustes dentro del panel decorativo */
+#panel-servicio-decoracion #a {
+    /* Eliminamos el padding que tenía el div #a para que no duplique el espacio */
+    padding: 0; 
+}
+
+#panel-servicio-decoracion #a h2 {
+    color: rgb(255, 255, 255); /* Cambiamos el color del título a blanco para que contraste */
+    margin-bottom: 15px;
+}
+
+.opciones-servicio {
+    /* Usamos un color de fondo diferente para las opciones dentro del panel */
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Modificamos los botones para que se vean bien sobre el fondo naranja */
+#button2, #button3 {
+    /* Le quitamos el fondo naranja al botón para que use un color contrastante (o blanco) */
+    background-color: #ffaf04;
+}
+
+p.llevar, p.local {
+    color: rgb(0, 0, 0); /* Color del texto de servicio en blanco */
+}

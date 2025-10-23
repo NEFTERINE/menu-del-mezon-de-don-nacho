@@ -1,0 +1,72 @@
+
+/* Estilos del contenedor principal del footer */
+footer {
+    background-color: #ffaf04; /* Fondo oscuro (típico para footers) */
+    color: #fff;
+    padding: 20px 0;
+    width: 100%;
+    margin-top: 60px;
+    
+    /* Opcional: Si quieres que el footer siempre esté abajo del todo */
+    /* position: fixed; 
+    bottom: 0; */ 
+}
+
+.footer-contenido {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los ítems salten de línea en móvil */
+    justify-content: space-around;
+    align-items: center;
+    max-width: 100%x; /* Ancho máximo para centrar */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Estilos de cada elemento (Teléfono, Mapa) */
+.footer-item {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+/* Estilo para los íconos */
+.footer-item i {
+    color: #ffffff; /* Color temático (naranja) */
+    font-size: 1.3rem;
+    margin-right: 15px;
+    margin: 10px;
+}
+
+/* Estilo para los enlaces (teléfono y ubicación) */
+.footer-item a {
+    text-decoration: none;
+    transition: color 0.3s;
+    color: #ffffff; /* Color temático (naranja) */
+}
+
+/* Estilos para el texto de Copyright */
+.footer-copyright {
+    width: 100%;
+    text-align: center;
+    padding-top: 15px;
+    margin-top: 10px;
+    border-top: 1px solid rgb(247, 194, 81);
+}
+
+.footer-copyright p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #ffffff;
+}
+
+/* Media Query para pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+    .footer-contenido {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .footer-item {
+        margin: 5px 0;
+    }
+}
