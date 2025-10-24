@@ -54,6 +54,19 @@ body {
     transform: translateY(-90%); /* Centrado vertical correcto */
 }
 
+/* Por si el de arriba no jala
+ #logo {
+    width: 12%; 
+    aspect-ratio: 1 / 1;     Asegura que siempre sea cuadrado */
+    /* border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 2%;
+    transform: translateY(-25%);
+} */
+
+
 p.don {
     font-size: 2lvw; 
     color: #000000; 

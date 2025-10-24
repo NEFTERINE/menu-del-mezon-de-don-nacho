@@ -14,6 +14,11 @@
         <?php
         // Usar require_once es ideal para componentes críticos como el menú.
         require_once('menu.php');
+
+      require_once 'funciones/conexion.php';
+      require_once 'clases/Platillos.php';
+      $funcionesPlatillos = new Platillos($pdo);
+      $todosPlatillos = $funcionesPlatillos->obtenerPlatillos();
         ?>
     </header>
 
@@ -24,28 +29,157 @@
 
   <div class="d-flex justify-content-center flex-wrap">
 
+    <?php
+     foreach($todosPlatillos as $platillos) {
+      if($platillos['estatus_platillo'] === 1) {
+    ?>
     <div class="card mb-3">
       <div class="row g-0">
         <div id="card-img" class="col-md-4">
-          <img class="img-platillo" id="abrirModalOption" src="https://th.bing.com/th/id/OIP.KYvrHQx6vlVPMHmoe-ENdAHaHa?w=206&h=206&c=7&r=0&o=7&pid=1.7&rm=3"
+          <img class="img-platillo" id="abrirModalOption" src="imagenes/<?=$platillos['foto_platillo']?>"
             class="img-fluid rounded-start" alt="...">
         </div>
-
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer.</p>
-              <p class="car-text"><small class="text-body-secondary">$30.00 MX</small></p>
-              <i id="editar" class="bi bi-pencil-square"></i>
-              <i id="" class="bi bi-plus-lg"></i>
-          </div>
-        </div>
+            <h5 class="card-title"><?=$platillos['nom_platillo']?></h5>
+            <p class="card-text"><?=$platillos['descripcion_platillo']?></p>
+              <p class="car-text"><small class="text-body-secondary"><?="$".$platillos['precio_platillo']?></small></p>
+              <i id="editar" class="bi bi-pencil-square editar" 
+              data-id="<?=$platillos['pk_platillo'] ?>" 
+              title="Editar platillo"></i>
 
+                <?php echo '<a href="funciones/bajaPlatillos.php?pk_platillo='.$platillos['pk_platillo'].'" title="Dar de Baja">
+                <i class="bi bi-trash"></i>
+              </a>' ?>
+              <i id="" class="bi bi-plus-lg"></i>
+            </div>
+        </div>
       </div>
     </div>
-
+    <?php
+     }
+    }
+    ?>
   </div>
+
+  <section id="comidas" class="section">
+    <h2>Comidas</h2>
+  </section>
+
+  <div class="d-flex justify-content-center flex-wrap">
+
+    <?php
+     foreach($todosPlatillos as $platillos) {
+      if($platillos['estatus_platillo'] === 1) {
+    ?>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div id="card-img" class="col-md-4">
+          <img class="img-platillo" id="abrirModalOption" src="imagenes/<?=$platillos['foto_platillo']?>"
+            class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><?=$platillos['nom_platillo']?></h5>
+            <p class="card-text"><?=$platillos['descripcion_platillo']?></p>
+              <p class="car-text"><small class="text-body-secondary"><?="$".$platillos['precio_platillo']?></small></p>
+              <i id="editar" class="bi bi-pencil-square editar" 
+              data-id="<?=$platillos['pk_platillo'] ?>" 
+              title="Editar platillo"></i>
+
+                <?php echo '<a href="funciones/bajaPlatillos.php?pk_platillo='.$platillos['pk_platillo'].'" title="Dar de Baja">
+                <i class="bi bi-trash"></i>
+              </a>' ?>
+              <i id="" class="bi bi-plus-lg"></i>
+            </div>
+        </div>
+      </div>
+    </div>
+    <?php
+     }
+    }
+    ?>
+    </div>
+
+     <section id="carnes" class="section">
+    <h2>Carne Asada</h2>
+  </section>
+
+  <div class="d-flex justify-content-center flex-wrap">
+
+    <?php
+     foreach($todosPlatillos as $platillos) {
+      if($platillos['estatus_platillo'] === 1) {
+    ?>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div id="card-img" class="col-md-4">
+          <img class="img-platillo" id="abrirModalOption" src="imagenes/<?=$platillos['foto_platillo']?>"
+            class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><?=$platillos['nom_platillo']?></h5>
+            <p class="card-text"><?=$platillos['descripcion_platillo']?></p>
+              <p class="car-text"><small class="text-body-secondary"><?="$".$platillos['precio_platillo']?></small></p>
+              <i id="editar" class="bi bi-pencil-square editar" 
+              data-id="<?=$platillos['pk_platillo'] ?>" 
+              title="Editar platillo"></i>
+
+                <?php echo '<a href="funciones/bajaPlatillos.php?pk_platillo='.$platillos['pk_platillo'].'" title="Dar de Baja">
+                <i class="bi bi-trash"></i>
+              </a>'
+               ?>
+               <!-- <p><?=$platillos['pk_platillo'] ?></p> -->
+              <i id="" class="bi bi-plus-lg"></i>
+            </div>
+        </div>
+      </div>
+    </div>
+    <?php
+     }
+    }
+    ?>
+    </div>
+
+     <section id="bebidas" class="section">
+    <h2>Bebidas</h2>
+  </section>
+
+  <div class="d-flex justify-content-center flex-wrap">
+
+    <?php
+     foreach($todosPlatillos as $platillos) {
+      if($platillos['estatus_platillo'] === 1) {
+    ?>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div id="card-img" class="col-md-4">
+          <img class="img-platillo" id="abrirModalOption" src="imagenes/<?=$platillos['foto_platillo']?>"
+            class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><?=$platillos['nom_platillo']?></h5>
+            <p class="card-text"><?=$platillos['descripcion_platillo']?></p>
+              <p class="car-text"><small class="text-body-secondary"><?="$".$platillos['precio_platillo']?></small></p>
+              <i id="editar" class="bi bi-pencil-square editar" 
+              data-id="<?=$platillos['pk_platillo'] ?>" 
+              title="Editar platillo"></i>
+
+                <?php echo '<a href="funciones/bajaPlatillos.php?pk_platillo='.$platillos['pk_platillo'].'" title="Dar de Baja">
+                <i class="bi bi-trash"></i>
+              </a>' ?>
+              <i id="" class="bi bi-plus-lg"></i>
+            </div>
+        </div>
+      </div>
+    </div>
+    <?php
+     }
+    }
+    ?>
+    </div>
 
 
   <div class="list-container">
