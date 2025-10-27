@@ -19,6 +19,10 @@
 
 </head>
 
+ <?php
+  session_start();
+?>
+
 <body>
 
       <div class="navbar">
@@ -47,7 +51,14 @@
       <a href="index.php?#comidas">Comidas</a>
       <a href="index.php?#carnes">Carne Asada</a>
       <a href="index.php?#bebidas">Bebidas</a>
-      <a href="admin.php">Administración</a>
+      <?php
+        if(isset($_SESSION['usuario']['estatusUsu'])){
+          if( $_SESSION['usuario']['estatusUsu']==1){
+              echo '<a href="admin.php">Administración</a>';
+              echo '<a href="funciones/cerrarSesion.php">Cerrar Sesión</a>';
+          }
+        }
+      ?>
     </div>
   </div>
 

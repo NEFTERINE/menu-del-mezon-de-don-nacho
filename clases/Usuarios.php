@@ -42,9 +42,9 @@ class Usuarios {
                 'success' => true,
                 'message' => 'Inicio de sesión exitoso',
                 'data' => [
-                    'id' => $usuario['pk_usuario'],
+                    'pkUsu' => $usuario['pk_usuario'],
                     'correo' => $usuario['correo_usuario'],
-                    'rol' => $usuario['estatus_usuario']
+                    'estatusUsu' => $usuario['estatus_usuario']
                 ]
             ];
         } else {
