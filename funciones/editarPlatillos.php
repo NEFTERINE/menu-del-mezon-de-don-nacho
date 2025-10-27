@@ -15,7 +15,9 @@ if($archivo){
 	$nombre_archivo=$_FILES['imagen']['name'];
 	//lo paso a la carpeta donde quiero que se guarde (en mi proyecto)
 	move_uploaded_file($archivo, '../imagenes/'.$nombre_archivo);
-}
+} 
+
+//Arreglar que pasa si la varible nombre_archivo no tiene datos.
 
 $resultado = $funcionesPlatillos->editarPlatillo($pkPlatillo, $nombrePlatillo, $descripcionPlatillo, 
 $precioPlatillo, $fk_categoria, $nombre_archivo );

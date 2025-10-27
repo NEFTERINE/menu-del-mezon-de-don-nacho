@@ -14,7 +14,6 @@
         <?php
         // Usar require_once es ideal para componentes críticos como el menú.
         require_once('menu.php');
-
       require_once 'funciones/conexion.php';
       require_once 'clases/Platillos.php';
       $funcionesPlatillos = new Platillos($pdo);
@@ -44,13 +43,18 @@
             <h5 class="card-title"><?=$platillos['nom_platillo']?></h5>
             <p class="card-text"><?=$platillos['descripcion_platillo']?></p>
               <p class="car-text"><small class="text-body-secondary"><?="$".$platillos['precio_platillo']?></small></p>
-              <i id="editar" class="bi bi-pencil-square editar" 
-              data-id="<?=$platillos['pk_platillo'] ?>" 
-              title="Editar platillo"></i>
+             <?php 
+if (isset($_SESSION['usuario']['estatusUsu']) && $_SESSION['usuario']['estatusUsu'] == 1): ?>
+    <i class="bi bi-pencil-square editar" 
+       data-id="<?= $platillos['pk_platillo'] ?>" 
+       title="Editar platillo"></i>
 
-                <?php echo '<a href="funciones/bajaPlatillos.php?pk_platillo='.$platillos['pk_platillo'].'" title="Dar de Baja">
-                <i class="bi bi-trash"></i>
-              </a>' ?>
+    <a href="funciones/bajaPlatillos.php?pk_platillo=<?= $platillos['pk_platillo'] ?>" 
+       title="Dar de Baja">
+       <i class="bi bi-trash"></i>
+    </a>
+<?php endif; ?>
+
               <i id="" class="bi bi-plus-lg"></i>
             </div>
         </div>
