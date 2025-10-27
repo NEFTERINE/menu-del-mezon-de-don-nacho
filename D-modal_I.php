@@ -19,7 +19,7 @@
 <body>
 
   <!-- ventana del menu -->
-  <div id="ventanaoption" class="modal-option">
+  <!-- <div id="ventanaoption" class="modal-option">
     <div class="container-option" id="menu-option">
 
       <span class="cerrar-modal">&times;</span>
@@ -45,7 +45,7 @@
 
 
     </div>
-  </div>
+  </div> -->
 
 
   <script src="js/option.js"></script>
