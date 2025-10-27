@@ -14,6 +14,7 @@
         <?php
         // Usar require_once es ideal para componentes críticos como el menú.
         require_once('menu.php');
+
       require_once 'funciones/conexion.php';
       require_once 'clases/Platillos.php';
       $funcionesPlatillos = new Platillos($pdo);
@@ -33,9 +34,10 @@
       if($platillos['estatus_platillo'] === 1) {
     ?>
     <div class="card mb-3">
-      <div class="row g-0">
+
+      <div class="row g-0" >
         <div id="card-img" class="col-md-4">
-          <img class="img-platillo" id="abrirModalOption" src="imagenes/<?=$platillos['foto_platillo']?>"
+          <img class="img-platillo abrir-modal-option" src="imagenes/<?=$platillos['foto_platillo']?>"
             class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-8">
@@ -43,18 +45,13 @@
             <h5 class="card-title"><?=$platillos['nom_platillo']?></h5>
             <p class="card-text"><?=$platillos['descripcion_platillo']?></p>
               <p class="car-text"><small class="text-body-secondary"><?="$".$platillos['precio_platillo']?></small></p>
-             <?php 
-if (isset($_SESSION['usuario']['estatusUsu']) && $_SESSION['usuario']['estatusUsu'] == 1): ?>
-    <i class="bi bi-pencil-square editar" 
-       data-id="<?= $platillos['pk_platillo'] ?>" 
-       title="Editar platillo"></i>
+              <i id="editar" class="bi bi-pencil-square editar" 
+              data-id="<?=$platillos['pk_platillo'] ?>" 
+              title="Editar platillo"></i>
 
-    <a href="funciones/bajaPlatillos.php?pk_platillo=<?= $platillos['pk_platillo'] ?>" 
-       title="Dar de Baja">
-       <i class="bi bi-trash"></i>
-    </a>
-<?php endif; ?>
-
+                <?php echo '<a href="funciones/bajaPlatillos.php?pk_platillo='.$platillos['pk_platillo'].'" title="Dar de Baja">
+                <i class="bi bi-trash"></i>
+              </a>' ?>
               <i id="" class="bi bi-plus-lg"></i>
             </div>
         </div>

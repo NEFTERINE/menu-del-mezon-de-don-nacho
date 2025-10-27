@@ -274,47 +274,18 @@ p.don {
 
 .img-platillo {
     width: 100%;
-    height: auto;
+    height: 180px; /* 🔥 ALTURA OPTIMA */
+    object-position: center;
     border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px; /* 🔥 AGREGAR esto */
     cursor: pointer;
+    
 }
 
-.card {
-    /* Estilos para Desktop / Tablet (lado a lado) */
-    width: 40%;
-    /* Un poco más pequeño para dejar más espacio entre ellas */
-    max-width: 450px;
-    margin: 30px;
-    /* Margen para separar las tarjetas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card i {
-    font-size: 2rem;
-    /* Tamaño del ícono */
-    color: #ffaf04;
-    /* Color del ícono */
-    cursor: pointer;
-    margin-right: 20px;
-    /* Espacio a la derecha del ícono */
-    float: right;
-    /* Alinea el ícono a la derecha */
-    margin-bottom: 10px;
-}
-
-.card i:hover {
-    color: #f7c251;
-    /* Color al pasar el ratón */
-    transition: 0.3s;
-}
-
-.img-platillo {
-    width: 100%;
-    height: auto;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    cursor: pointer;
+/* OPCIONAL: Si quieres ver la imagen completa */
+.img-platillo.completa {
+object-fit: scale-down; /* Como contain pero no agranda */
+    background: #f8f9fa;
 }
 
 .card {
