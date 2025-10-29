@@ -40,27 +40,39 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nombre</th>
                     <th>Correo Electrónico</th>
-                    <th>Contraseña</th>
                     <th>Estado</th>
-                    <th>Tipo</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Maria</td>
-                    <td>Maria@gmail.com</td>
-                    <td>12345</td>
-                    <td>Activo</td>
-                    <td>Administrador</td>
+                <?php
+                require_once 'funciones/conexion.php';
+                require_once('clases/Usuarios.php');
+                // Crear instancia de Usuarios y obtener los datos
+                $usuarioObj = new Usuarios($pdo);
+                $usuarios = $usuarioObj->verUsuarios();
 
-                    <td>
-                        <button class="edit" name="edit" id="edit-usuario" href="#">Editar</button>
-                        <button class="eli" id="eli" href="#">Eliminar</button>
-                    </td>
-                </tr>
+                 foreach ($usuarios as $fila) {
+                ?>
+                    <tr>
+                        <td><?= $fila['correo_usuario'] ?></td>
+                        <td><?= $fila['estatus_usuario'] == 1 ? 'Activo' : 'Inactivo' ?></td>
+
+                        <?php
+                        if ($fila['estatus_usuario'] == 1){
+                            echo '<td>
+                            <button class="edit" name="edit" id="edit-usuario" href="#">Editar</button>
+                            <button class="eli" id="eli" href="#">Eliminar</button>
+                        </td>';
+                        }
+                        ?>
+                        </td>
+                    </tr>
+                <?php
+                 }
+                ?>
+
             </tbody>
         </table>
 
