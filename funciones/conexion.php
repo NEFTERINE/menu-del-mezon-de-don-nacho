@@ -2,7 +2,7 @@
  $host= "localhost";
  $usuario= "root";
  $password="mysql";
- $base_datos= "mezón nacho";
+ $base_datos= "restaurante_don_nacho";
 
  try {
    //Configurar DSN
