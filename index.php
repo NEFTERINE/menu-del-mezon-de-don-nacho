@@ -72,6 +72,8 @@
                                         <small class="text-body-secondary"><?= "$" . $platillo['precio_platillo'] ?></small>
                                     </p>
                                     <div class="card-actions">
+                                    <?php 
+                                    if (isset($_SESSION['usuario']['estatusUsu']) && $_SESSION['usuario']['estatusUsu'] == 1): ?>
                                         <i id="editar" class="bi bi-pencil-square editar" 
                                            data-id="<?= $platillo['pk_platillo'] ?>" 
                                            title="Editar platillo"></i>
@@ -81,6 +83,7 @@
                                            onclick="return confirm('¿Estás seguro de dar de baja este platillo?')">
                                             <i class="bi bi-trash"></i>
                                         </a>
+                                        <?php endif; ?>
                                         
                                         <i class="bi bi-plus-lg agregar-carrito" 
                                            data-id="<?= $platillo['pk_platillo'] ?>"
