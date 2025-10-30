@@ -35,7 +35,7 @@
     <?php
     // Obtener categorías activas
     $categoriaObj = new Categorias($pdo);
-    $categoriasActivas = $categoriaObj->CategoriasActivas();
+    $categoriasActivas = $categoriaObj->CategoriaPlatillo();
 
     foreach ($categoriasActivas as $categoria) {
         $id_html = strtolower(str_replace(' ', '-', $categoria['nombreCategoria']));
