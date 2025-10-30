@@ -19,5 +19,11 @@ class Categorias {
         $sql = $this->pdo->query("SELECT * FROM categorias");
         return $sql->fetchAll();
     }
+
+        function CategoriasActivas() {
+        $sql = "SELECT * FROM categorias WHERE estatusCategoria = 1";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
