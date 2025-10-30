@@ -1,12 +1,15 @@
 <?php
-class Usuarios {
+class Usuarios
+{
     private $pdo;
 
-     function __construct($pdo) {
+    function __construct($pdo)
+    {
         $this->pdo = $pdo;
     }
 
-    function insertarUsuario($correo, $password, $fk_persona) {
+    function insertarUsuario($correo, $password, $fk_persona)
+    {
         try {
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
             $sql = "INSERT INTO usuarios(correo_usuario, password, estatus_usuario, fk_persona)
@@ -19,42 +22,43 @@ class Usuarios {
             return false;
         }
     }
-    public function validarLogin($correo, $contrasena) {
-    try {
-        // Consulta preparada para buscar el usuario por correo
-        $sql = "SELECT * FROM usuarios WHERE correo_usuario= :correo AND estatus_usuario = 1";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':correo' => $correo]);
+    public function validarLogin($correo, $contrasena)
+    {
+        try {
+            // Consulta preparada para buscar el usuario por correo
+            $sql = "SELECT * FROM usuarios WHERE correo_usuario= :correo AND estatus_usuario = 1";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([':correo' => $correo]);
 
-        // Verificamos si existe el usuario
-        if ($stmt->rowCount() === 0) {
-            return ['success' => false, 'message' => 'Usuario no encontrado o inactivo'];
+            // Verificamos si existe el usuario
+            if ($stmt->rowCount() === 0) {
+                return ['success' => false, 'message' => 'Usuario no encontrado o inactivo'];
+            }
+            // echo password_hash('1234', PASSWORD_DEFAULT); <-- Esto sirve si se tiene un registro manual en la BD
+
+            // Obtenemos los datos del usuario
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Validar contraseña (encriptada con password_hash)
+            if (password_verify($contrasena, $usuario['password'])) {
+                // Opcional: puedes guardar datos en sesión aquí
+                return [
+                    'success' => true,
+                    'message' => 'Inicio de sesión exitoso',
+                    'data' => [
+                        'id' => $usuario['pk_usuario'],
+                        'correo' => $usuario['correo_usuario'],
+                        'rol' => $usuario['estatus_usuario']
+                    ]
+                ];
+            } else {
+                return ['success' => false, 'message' => 'Contraseña incorrecta'];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
         }
-        // echo password_hash('1234', PASSWORD_DEFAULT); <-- Esto sirve si se tiene un registro manual en la BD
-
-        // Obtenemos los datos del usuario
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Validar contraseña (encriptada con password_hash)
-        if (password_verify($contrasena, $usuario['password'])) {
-            // Opcional: puedes guardar datos en sesión aquí
-            return [
-                'success' => true,
-                'message' => 'Inicio de sesión exitoso',
-                'data' => [
-                    'pkUsu' => $usuario['pk_usuario'],
-                    'correo' => $usuario['correo_usuario'],
-                    'estatusUsu' => $usuario['estatus_usuario']
-                ]
-            ];
-        } else {
-            return ['success' => false, 'message' => 'Contraseña incorrecta'];
-        }
-
-    } catch (PDOException $e) {
-        return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
-    }   
     }
+
     function verUsuarios()
     {
         try {
@@ -67,5 +71,28 @@ class Usuarios {
             return [];
         }
     }
+
+        function eliminarUsuario($pk_usuario)
+    {
+        $sql = "UPDATE usuarios SET estatus_usuario = 0 WHERE pk_usuario = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$pk_usuario]);
+
+        return $stmt->rowCount() > 0; // true si se eliminó, false si no
+
+    }
+
+        function activarUsuario($pk_usuario)
+    {
+        if (empty($pk_usuario)){
+            return false;
+        }
+
+        $sql = "UPDATE usuarios SET estatus_usuario = 1 WHERE pk_usuario = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$pk_usuario]);
+
+        return $stmt->rowCount() > 0; // true si se eliminó, false si no
+
+    }
 }
-?>

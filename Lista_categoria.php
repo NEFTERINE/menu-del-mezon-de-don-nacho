@@ -39,7 +39,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Nombre de la Categoría</th>
+                        <th>Categoría</th>
                         <th>Estado</th>
                         <th colspan="2">Opciones</th>
                     </tr>
@@ -58,15 +58,14 @@
                             <td><?= htmlspecialchars($fila['nombreCategoria']) ?></td>
                             <td><?= $fila['estatusCategoria'] == 1 ? 'Activo' : 'Inactivo' ?></td>
                             <td>
-                                <a href="#" class="edit">Editar</a>
-                                <a href="#" class="eli">Eliminar</a>
-                                <!-- <a href="editar_categoria.php?categoria=<?= $fila['id_categoria'] ?>" class="edit">Editar</a> -->
-                                <!-- <?php
-                                if ($fila['estatus'] == 1){
- 							    echo '<a href="eliminar_producto.php?id_producto=' . $fila['id_categoria'] . '" class="eli" onclick="return confirm(\'¿Estás seguro de que deseas eliminar este producto?\')">Eliminar</a>';
-
+                                <a href="editarCategoria.php?categoria=<?= $fila['pk_categoria'] ?>" class="edit">Editar</a>
+                                <?php
+                                if ($fila['estatusCategoria'] == 1){
+ 							    echo '<a href="funciones/eliminarCategoria.php?pk_categoria=' . $fila['pk_categoria'] . '" class="eli" onclick="return confirm(\'¿Estás seguro de que deseas eliminar esta Categoria?\')">Eliminar</a>';
+                                } else if ($fila['estatusCategoria'] == 0){
+                                    echo '<a href="funciones/activarCategoria.php?pk_categoria=' . $fila['pk_categoria']. '" class="act" >Activar</a>';
                                 }
-                                ?> -->
+                                ?>
                             </td>
                         </tr>
                     <?php

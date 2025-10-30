@@ -72,26 +72,31 @@ $verCategorias = $funcionesCategoria->verCategorias();
 
 
 
-    <!-- ventana del menu -->
-    <div id="ventanaoption" class="modal-option">
+  <!-- ventana del menu -->
+  <div id="ventanaoption" class="modal-option">
     <div class="container-option" id="menu-option">
+
       <span class="cerrar-opcion" id="cerrar-modal">&times;</span>
 
       <div class="card mb-3" id="V-card">
         <div class="row g-0">
           <div id="card-img" class="col-md-4">
-            <img id="imgPlato" class="img-fluid rounded-start" alt="Imagen del platillo">
+            <img src="https://th.bing.com/th/id/OIP.KYvrHQx6vlVPMHmoe-ENdAHaHa?w=206&h=206&c=7&r=0&o=7&pid=1.7&rm=3"
+              class="img-fluid rounded-start" alt="...">
           </div>
 
           <div class="col-md-8">
             <div class="car-body">
-              <h5 id="nomPlato" class="car-title"></h5>
-              <p id="descPlato" class="car-text"></p>
-              <p id="precioPlato" class="car-text"></p>
+              <h5 class="car-title">Card title</h5>
+              <p class="car-text">This is a wider card with supporting text below as a natural lead-in to additional
+                content. This content is a little bit longer.</p>
             </div>
           </div>
+
         </div>
       </div>
+
+
     </div>
   </div>
 
