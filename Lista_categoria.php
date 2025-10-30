@@ -17,7 +17,7 @@
         require_once('menu.php');
         ?>
     </header>
-        <?php
+    <?php
     // Puedes usar include, pero require_once es más seguro
     require_once('I-modal_I.php');
     require_once('L-modal_L.A.php');
@@ -27,45 +27,63 @@
     <script src="js/info.js"></script>
     <script src="js/option.js"></script>
     <script src="js/sesion.js"></script>
-<script src="js/lista_categorias.js"></script>
+    <script src="js/lista_categorias.js"></script>
 
 
     <a href="admin.php" id="regreso" class="button"> Atrás </a>
 
-<!-- ver lista de categorias -->
-<div id="lista-categorias">
-    <div >
+    <!-- ver lista de categorias -->
+    <div id="lista-categorias">
+        <div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre de la Categoría</th>
-                    <th>Estado</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Entrada</td>
-                    <td>Activo</td>
-                    
-                    <td>
-                        <button class="edit" name="edit" id="Editar-cate" href="#">Editar</button>
-                        <button class="eli" id="eli" href="#">Eliminar</button>
-                    </td>
-            </tbody>
-        </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre de la Categoría</th>
+                        <th>Estado</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    require_once 'funciones/conexion.php';
+                    require_once('clases/Categorias.php');
+                    // Crear instancia de Categorias y obtener los datos
+                    $categoriaObj = new Categorias($pdo);
+                    $categorias = $categoriaObj->verCategorias();
 
+                     foreach ($categorias as $fila) {
+                    ?>
+                        <tr>
+                            <td><?= htmlspecialchars($fila['nombreCategoria']) ?></td>
+                            <td><?= $fila['estatusCategoria'] == 1 ? 'Activo' : 'Inactivo' ?></td>
+                            <td>
+                                <a href="#" class="edit">Editar</a>
+                                <a href="#" class="eli">Eliminar</a>
+                                <!-- <a href="editar_categoria.php?categoria=<?= $fila['id_categoria'] ?>" class="edit">Editar</a> -->
+                                <!-- <?php
+                                if ($fila['estatus'] == 1){
+ 							    echo '<a href="eliminar_producto.php?id_producto=' . $fila['id_categoria'] . '" class="eli" onclick="return confirm(\'¿Estás seguro de que deseas eliminar este producto?\')">Eliminar</a>';
+
+                                }
+                                ?> -->
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+            
+        </div>
     </div>
-</div>
 
-
-<footer>
+    <footer>
         <div class="footer-contenido">
 
             <div class="footer-item">Contacto:
                 <a href="#">
-                    <i  class="bi bi-telephone-fill"> 695 114 5859</i>
+                    <i class="bi bi-telephone-fill"> 695 114 5859</i>
                 </a>
             </div>
 

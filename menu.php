@@ -2,19 +2,19 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/CSS.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/CSS.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 
 </head>
@@ -25,7 +25,7 @@
 
 <body>
 
-      <div class="navbar">
+  <div class="navbar">
 
     <!-- /*-- Baner --*/ -->
 
@@ -35,7 +35,7 @@
     </div>
     <div class="logo-container">
       <img id="sesionBtn" src="imagenes/logo-nacho.jpg" alt="Logo" class="logo">
-      <p  class="don"> El Mesón de Don Nacho </p>
+      <p class="don"> El Mesón de Don Nacho </p>
       <a href="#"><i class="fa-solid fa-circle-exclamation" id="abrirModalBtn" style="cursor: pointer;"> </i> </a>
       <a style="cursor: pointer;" href="https://www.facebook.com/RestauranteElMesonDeDonNacho/"><i id="faceboock" class="bi bi-facebook"> </i> </a>
       <i id="cel" class="bi bi-telephone-fill" style="cursor: pointer;"> 695 114 5859 </i>
@@ -46,11 +46,23 @@
     </div>
     <!-- /*-- Barra de navegación --*/ -->
 
+    <?php
+    require_once 'funciones/conexion.php';
+    require_once 'clases/Categorias.php';
+
+    // Obtener categorías activas
+    $categoriaObj = new Categorias($pdo);
+    $categorias = $categoriaObj->CategoriasActivas();
+    ?>
+
     <div class="barra">
-      <a href="index.php?#desayunos">Desayunos</a>
-      <a href="index.php?#comidas">Comidas</a>
-      <a href="index.php?#carnes">Carne Asada</a>
-      <a href="index.php?#bebidas">Bebidas</a>
+      <?php foreach ($categorias as $categoria): ?>
+        <?php
+        // Convertir nombre de categoría a ID HTML (ej: "Carne Asada" -> "carnes")
+        $id_html = strtolower(str_replace(' ', '-', $categoria['nombreCategoria']));
+        ?>
+        <a href="index.php?#<?= $id_html ?>"><?= htmlspecialchars($categoria['nombreCategoria']) ?></a>
+      <?php endforeach; ?>
       <?php
         if(isset($_SESSION['usuario']['estatusUsu'])){
           if( $_SESSION['usuario']['estatusUsu']==1){
@@ -60,7 +72,6 @@
         }
       ?>
     </div>
-  </div>
 
 
 

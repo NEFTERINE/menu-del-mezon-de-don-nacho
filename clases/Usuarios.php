@@ -53,7 +53,19 @@ class Usuarios {
 
     } catch (PDOException $e) {
         return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
+    }   
     }
-}
+    function verUsuarios()
+    {
+        try {
+            $sql = "SELECT * FROM usuarios";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener los usuarios: " . $e->getMessage();
+            return [];
+        }
+    }
 }
 ?>
