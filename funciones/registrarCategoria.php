@@ -11,8 +11,8 @@ if(isset($_POST['nombreCategoria'])) {
 
     if($resultado) {
         echo "<script> alert('Categoría creada con éxito');
-    location.href='../index.php';</script>"; 
+        location.href='../index.php';</script>"; 
     }
 }
 
-?>
+?>  
