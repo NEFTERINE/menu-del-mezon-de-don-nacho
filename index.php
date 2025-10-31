@@ -85,9 +85,13 @@
                                         </a>
                                         <?php endif; ?>
                                         
-                                        <i class="bi bi-plus-lg agregar-carrito" 
-                                           data-id="<?= $platillo['pk_platillo'] ?>"
-                                           title="Agregar al carrito"></i>
+                                       <i class="bi bi-plus-lg agregarCarrito" 
+                                        data-id="<?= $platillo['pk_platillo'] ?>"
+                                        data-nombre="<?= htmlspecialchars($platillo['nom_platillo']) ?>"
+                                        data-precio="<?= $platillo['precio_platillo'] ?>"
+                                        title="Agregar al carrito">
+                                       </i>
+
                                     </div>
                                 </div>
                             </div>
@@ -102,24 +106,33 @@
     }
     ?>
 
+    <?php
+
+if (!empty($_SESSION['carrito'])) {
+//   foreach ($_SESSION['carrito'] as $item) {
+//         $subtotal = $item['precio'] * $item['cantidad'];
+//         $total += $subtotal;                // Sumar precios totales
+//         $totalCantidad += $item['cantidad']; // Sumar cantidades totales
+//     }
+    ?>
     <div class="list-container">
         <ul class="list">
             <li class="list-group-item">
                 <div class="product-info">
-                    <div class="product-name">Producto 1</div>
-                    <span class="bidge">$10.00</span>
+                    <div class="product-name"><?= $_SESSION['totalCantidad'] . ($_SESSION['totalCantidad'] > 1 ? " Productos" : " Producto") ?></div>
+                    <span class="bidge"><?= "$".$_SESSION['total'] ?></span>
                     <a href="carrito.php" class="action-button"> Ver pedido </a>
                 </div>
             </li>
         </ul>
     </div>
+    <?php
+}
+// Asegúrate de que el resto de tu página continúe aquí si es necesario
+?>
+
 
     <?php require_once('I-modal_I.php'); ?>
-
-    <script src="js/info.js"></script>
-    <script src="js/option.js"></script>
-    <script src="js/sesion.js"></script>
-    <script src="js/editar_platillo.js"></script>
 
     <footer>
         <div class="footer-contenido">
@@ -144,5 +157,11 @@
         </div>
     </footer>
 
+    <script src="js/info.js"></script>
+    <script src="js/option.js"></script>
+    <script src="js/sesion.js"></script>
+    <script src="js/agregar_carrito.js"></script>
+    <script src="js/editar_platillo.js"></script>
 </body>
+
 </html>
