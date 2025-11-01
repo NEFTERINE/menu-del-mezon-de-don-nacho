@@ -96,30 +96,26 @@ if (!empty($_SESSION['carrito'])) {
     ?>
 
     <?php
-    // ==========================================================
-    // LÓGICA DE APERTURA AUTOMÁTICA DEL SEGUNDO MODAL CON PHP/JS
-    // ==========================================================
-    if (isset($_GET['modal_abrir']) && $_GET['modal_abrir'] === 'subServicio') {
-        $modal_id = 'subServicio';
-        
-        // Generar el script para abrir el modal
-        echo "<script>";
-        echo "document.addEventListener('DOMContentLoaded', function() {";
-        echo "  const modalToOpen = document.getElementById('$modal_id');";
-        echo "  if (modalToOpen) {";
-        echo "    modalToOpen.style.display = 'flex';"; // Abrir el modal
-        echo "  }";
-        echo "});";
-        echo "</script>";
-    }
-    ?>
+// LÓGICA PARA ABRIR MODALS AUTOMÁTICAMENTE
+if (isset($_POST['abrir_modal'])) {
+    $modal_id = $_POST['abrir_modal'];
+    echo "<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modalToOpen = document.getElementById('$modal_id');
+        if (modalToOpen) {
+            modalToOpen.style.display = 'flex';
+        }
+    });
+    </script>";
+}
+?>
 
     <script src="js/eventoCarrito.js"></script> 
     <!-- <script src="js/servicio.js"></script>  -->
     <script src="js/cuenta_local.js"></script>
     <script src="js/formulario_carrito.js"></script>
     <script src="js/formulario_carritoLocal.js"></script>
-    <!-- <scrpt src="js/cuenta_carrito.js"></script> -->
+    <scrpt src="js/cuenta_carrito.js"></script>
     <script src="js/domicilio_carrito.js"></script>
 
 </body>

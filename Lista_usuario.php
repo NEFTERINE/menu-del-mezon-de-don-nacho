@@ -20,14 +20,14 @@
     <?php
     // Puedes usar include, pero require_once es más seguro
     require_once('I-modal_I.php');
-    require_once('L-modal_L.A.php');
+    require_once('options_admin.php');
     ?>
 
 
     <script src="js/info.js"></script>
     <script src="js/option.js"></script>
     <script src="js/sesion.js"></script>
-    <script src="js/lista_usuarios.js"></script>
+    <script src="js/editar-usuario.js"></script>
 
 
     <a href="admin.php" id="regreso" class="button"> Atrás </a>
@@ -60,7 +60,7 @@
                             <td><?= $fila['estatus_usuario'] == 1 ? 'Activo' : 'Inactivo' ?></td>
 
                             <td>
-                            <a href="editarUsuario.php?pk_usuario=<?= $fila['pk_usuario'] ?>" class="edit" name="edit" id="edit-usuario">Editar</a>
+                            <a href="options_admin.php?pk_usuario=<?= $fila['pk_usuario'] ?>" class="edit" name="edit" id="edit-usuario">Editar</a>
                             <?php
                             if ($fila['estatus_usuario'] == 1) {
                                 echo '<a href="funciones/eliminarUsuario.php?pk_usuario=' . $fila['pk_usuario'] . '" class="eli" id="eli" onclick="return confirm(\'¿Estás seguro de que deseas eliminar este usuario?\')">Eliminar</a>';

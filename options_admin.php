@@ -1,10 +1,26 @@
 <?php 
 require_once 'funciones/conexion.php';
 require_once 'clases/Categorias.php';
+require_once 'clases/Usuarios.php';
 
 $funcionesCategoria = new Categorias($pdo);
-$verCategorias = $funcionesCategoria->verCategorias()
+$verCategorias = $funcionesCategoria->verCategorias();
+
+$funcionesUsuario = new Usuarios($pdo);
+
+// Obtener el ID del usuario a editar
+$pk_usuario = $_GET['pk_usuario'];
+
+// Obtener los datos del usuario
+$datos = $funcionesUsuario->obtenerUsuario($pk_usuario);
+
+if(!$datos) {
+    die("Usuario no encontrado");
+}
+
+
 ?>
+
 <!-- agregar usuario -->
 <div id="registro-usuario" class="modal">
     <div class="modal-contenido">
@@ -13,15 +29,6 @@ $verCategorias = $funcionesCategoria->verCategorias()
         <h2>Registrar Nuevo Usuario</h2>
 
         <form action="funciones/registrarUsuario.php" method="POST">
-
-            <label for="email">Nombre:</label>
-            <input type="text" id="nombrePersona" name="nombrePersona" required>
-
-            <label for="email">Apellido Paterno:</label>
-            <input type="text" id="apaterno" name="apaterno" required>
-
-            <label for="email">Apellido Materno:</label>
-            <input type="text" id="amaterno" name="amaterno">
 
             <label for="email">Correo Electrónico:</label>
             <input type="email" id="email" name="email" required>
@@ -37,6 +44,31 @@ $verCategorias = $funcionesCategoria->verCategorias()
 
 <script src="js/registro-usuario.js"></script>
 
+
+<!-- editar usuario -->
+<div id="editar-usuario" class="modal">
+    <div class="modal-contenido">
+        <span class="cerrar-Eusuario" id="cerrar-modal">&times;</span>
+
+        <h2>Editar Usuario</h2>
+
+        <form action="funciones/editarUsuario.php"  method="POST">
+            <input type="hidden" name="pk_usuario" value="<?=$datos['pk_usuario']?>">
+            
+
+            <label for="email">Correo Electrónico:</label>
+            <input  type="email" id="email" name="email" required>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Guardar Cambios</button>
+        </form>
+
+    </div>
+</div>
+
+<script src="js/editar-usuario.js"></script>
 
 
 

@@ -105,11 +105,11 @@
     <?php
 
 if (!empty($_SESSION['carrito'])) {
-//   foreach ($_SESSION['carrito'] as $item) {
-//         $subtotal = $item['precio'] * $item['cantidad'];
-//         $total += $subtotal;                // Sumar precios totales
-//         $totalCantidad += $item['cantidad']; // Sumar cantidades totales
-//     }
+   foreach ($_SESSION['carrito'] as $item) {
+         $subtotal = $item['precio'] * $item['cantidad'];
+         $total += $subtotal;                // Sumar precios totales
+         $totalCantidad += $item['cantidad']; // Sumar cantidades totales
+     }
     ?>
     <div class="list-container">
         <ul class="list">

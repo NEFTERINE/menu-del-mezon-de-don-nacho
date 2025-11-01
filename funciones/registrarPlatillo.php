@@ -17,7 +17,7 @@ $descripcionPlatillo, $nombre_archivo, $fk_categoria );
 
 if($resultado) {
     echo "<script> alert('Platillo creada con éxito');
-    location.href='../index.php';</script>";
+    location.href='../admin.php';</script>";
 }
 
 ?>

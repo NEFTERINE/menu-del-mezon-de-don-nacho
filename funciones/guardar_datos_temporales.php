@@ -8,15 +8,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // Guarda los datos del cliente temporalmente
 $_SESSION['datos_cliente'] = [
     'nombre' => $_POST['nombre'],
-    'aPaterno' => $_POST['aPaterno'],
     'telefono' => $_POST['telefono'],
     'colonia' => $_POST['colonia'] ?? null,
     'calle' => $_POST['calle'] ?? null,
-    'referencias' => $_POST['referencias'] ?? null,
-    'pkMetPago' => $_POST['pk_metodo_pago'] ?? null
+    'referencias' => $_POST['referencias'] ?? null
 ];
 
-// Redirigir al resumen
-header('Location: ../resumen_pedido.php');
+// 2. Después de guardar con éxito, redirige a la página del carrito.
+// Redirección: La página 'carrito.php' debe incluir el modal #subServicio
+header('Location: carrito.php?modal_abrir=subServicio'); 
 exit;
 ?>
