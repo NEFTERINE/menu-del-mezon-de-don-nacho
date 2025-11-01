@@ -231,7 +231,7 @@ th, td {
 
 
 
-.edit,.eli {
+.edit,.eli,.act {
     background-color: #ffaf04;
     color: white;
     padding: 10px; /* Espaciado interno */
@@ -248,7 +248,7 @@ th, td {
     text-align: center; /* Centra el texto dentro del botón */
 }
 
-.edit:hover ,.eli:hover {
+.edit:hover ,.eli:hover, .act:hover {
     background-color: #e59d00;
     color: #333;
 }
@@ -260,7 +260,7 @@ th, td {
         padding: 20px;
     }
 
-    .edit, .eli {
+    .edit, .eli, .act {
         display: block; /* Ocupa toda la línea */
         width: 100%; /* Ocupa el ancho disponible de la celda */
         margin: 5px 0; /* Margen superior e inferior para separarlos */

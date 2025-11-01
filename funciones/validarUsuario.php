@@ -14,8 +14,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         echo "✅ Bienvenido, " . $resultado['data']['correo'];
         // Aquí puedes iniciar sesión PHP
         session_start();
-         $_SESSION['usuario'] = $resultado['data'];
-         header("Location: admin.php");
+        // $_SESSION['usuario'] = $resultado['data'];
+        // header("Location: menu.php");
     } else {
         echo "❌ " . $resultado['message'];
     }

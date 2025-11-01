@@ -1,32 +1,65 @@
     <!-- ventana de formulario -->
+    <?php 
+require_once 'funciones/conexion.php';
+require_once 'clases/MetPagos.php';
+
+$funcionesMetPagos = new MetPagos($pdo);
+$verMetPagos = $funcionesMetPagos->verMetPagos();
+?>
     <div id="modalServicio" class="modal">
         <div class="modal-contenido">
             <span class="cerrarModalServicio" id="cerrar-modal">&times;</span>
             <h2><i class="fa-solid fa-motorcycle"></i>Agrega Tu Domicilio</h2>
 
-            <form id="formulario-domicilio" action="guardar_datos.php" method="post">
+            <form id="formulario-domicilio" action="funciones/guardar_datos_temporales.php" method="post">
 
                 <div class="form-grupo">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required>
+                    <!-- <input type="hidden" id="tiposervicio" name="tiposervicio" value="domicilio"> -->
+                </div>
+                <div class="form-grupo">
+                    <label for="nombre">Apellido Paterno:</label>
+                    <input type="text" id="aPaterno" name="aPaterno" required>
+                    <!-- <input type="hidden" id="tiposervicio" name="tiposervicio" value="domicilio"> -->
                 </div>
 
                 <div class="form-grupo">
                     <label for="telefono">Teléfono de contacto:</label>
-                    <input type="number" id="telefono" name="telefono" required>
+                    <input type="number" id="telefono" name="telefono"  maxlength="10" required>
                 </div>
 
                 <div class="form-grupo">
-                    <label for="colonia">Colonia / Barrio:</label>
+                    <label for="colonia">Colonia:</label>
                     <input type="text" id="colonia" name="colonia" required>
                 </div>
 
                 <div class="form-grupo">
-                    <label for="referencia">Referencias:</label>
-                    <textarea type="tel" id="referencia" name="referencia" required></textarea>
+                    <label for="colonia">Calle:</label>
+                    <input type="text" id="calle" name="calle" required>
                 </div>
 
-                <button type="submit" id="BtnsubServicio" class="boton-confirmar">Confirmar Dirección</button>
+                <div class="form-grupo">
+                    <label for="referencia">Referencias:</label>
+                    <textarea type="tel" id="referencias" name="referencias" required></textarea>
+                </div>
+
+                <div class="form-grupo">
+                     <label for="categoria">Método de Pago:</label>
+                    <select id="pk_metodo_pago" name="pk_metodo_pago" required>
+                        <option value="">Seleccione un método de pago:</option>
+                        <?php foreach($verMetPagos as $MetPago){
+                            if ($MetPago['estatus_met_pago'] == 1) {
+                                echo "<option value='".$MetPago['pk_metodo_pago']."'>".$MetPago['nom_met_pago']."</option>";  
+                            }
+                        }
+                        ?>  
+                    </select>
+                </div>
+
+                
+
+                <button type="submit"  class="boton-confirmar">Confirmar Dirección</button>
 
             </form>
         </div>
@@ -254,3 +287,49 @@
     </div>
 
     <script src="js/cuenta_local.js"></script>
+
+    <div id="modalServicioLocal" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrarModalServicioLocal" id="cerrar-modal">&times;</span>
+            <h2>Agregar Datos Personales</h2>
+
+            <form id="formulario-domicilio" action="funciones/guardar_datos_temporalesLocal.php" method="post">
+
+                <div class="form-grupo">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                    <!-- <input type="hidden" id="tiposervicio" name="tiposervicio" value="domicilio"> -->
+                </div>
+                <div class="form-grupo">
+                    <label for="nombre">Apellido Paterno:</label>
+                    <input type="text" id="aPaterno" name="aPaterno" required>
+                    <!-- <input type="hidden" id="tiposervicio" name="tiposervicio" value="domicilio"> -->
+                </div>
+
+                <div class="form-grupo">
+                    <label for="telefono">Teléfono de contacto:</label>
+                    <input type="number" id="telefono" name="telefono"  maxlength="10" required>
+                </div>
+
+                <div class="form-grupo">
+                     <label for="categoria">Método de Pago:</label>
+                    <select id="pk_metodo_pago" name="pk_metodo_pago" required>
+                        <option value="">Seleccione un método de pago:</option>
+                        <?php foreach($verMetPagos as $MetPago){
+                            if ($MetPago['estatus_met_pago'] == 1) {
+                                echo "<option value='".$MetPago['pk_metodo_pago']."'>".$MetPago['nom_met_pago']."</option>";  
+                            }
+                        }
+                        ?>  
+                    </select>
+                </div>
+
+                
+
+                <button type="submit"  class="boton-confirmar">Confirmar Dirección</button>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="js/formulario_carritoLocal.js"></script>

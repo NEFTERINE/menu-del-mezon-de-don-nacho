@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         AC.addEventListener('click', function(e) {
             e.preventDefault(); 
             MC.style.display = "flex"; 
-            console.log("Modal de Categoría abierto.");
         });
     }
 

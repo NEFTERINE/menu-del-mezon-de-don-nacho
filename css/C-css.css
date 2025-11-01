@@ -33,6 +33,12 @@ body {
     margin-bottom: 20px;
 }
 
+
+.lista-de-productos {
+    display: flex;
+    flex-direction: column; /* Apila cada '.productos' uno debajo del otro */
+    gap: 20px; /* Espacio entre cada producto (opcional, ajusta a tu gusto) */
+}
 /* 4. Estructura del Producto y Cantidad */
 .productos {
     display: flex;
@@ -40,7 +46,7 @@ body {
     align-items: center;
     border-bottom: 2px solid #ffaf04; /* Línea separadora naranja */
     padding-bottom: 15px;
-    margin-bottom: 18%;
+    margin-bottom: 1%;
 }
 
 .producto-seleccion {
@@ -93,6 +99,7 @@ body {
 }
 
 #panel-servicio-decoracion {
+    margin-top: 8%;
     background-color: #f7c251;
     width: 100%;
     height: 40%;
