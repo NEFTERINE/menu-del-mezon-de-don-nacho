@@ -19,10 +19,6 @@
 
 </head>
 
- <?php
-  session_start();
-?>
-
 <body>
 
   <div class="navbar">
@@ -52,25 +48,18 @@
 
     // Obtener categorías activas
     $categoriaObj = new Categorias($pdo);
-    $categorias = $categoriaObj->CategoriasActivas();
+    $categorias = $categoriaObj->CategoriaPlatillo();
     ?>
 
     <div class="barra">
       <?php foreach ($categorias as $categoria): ?>
         <?php
         // Convertir nombre de categoría a ID HTML (ej: "Carne Asada" -> "carnes")
-        $id_html = strtolower(str_replace(' ', '-', $categoria['nombreCategoria']));
+         $id_html = strtolower(str_replace(' ', '-', $categoria['nombreCategoria']));
         ?>
         <a href="index.php?#<?= $id_html ?>"><?= htmlspecialchars($categoria['nombreCategoria']) ?></a>
       <?php endforeach; ?>
-      <?php
-        if(isset($_SESSION['usuario']['estatusUsu'])){
-          if( $_SESSION['usuario']['estatusUsu']==1){
-              echo '<a href="admin.php">Administración</a>';
-              echo '<a href="funciones/cerrarSesion.php">Cerrar Sesión</a>';
-          }
-        }
-      ?>
+      <a href="admin.php">Administración</a>
     </div>
 
 

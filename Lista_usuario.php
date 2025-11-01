@@ -17,74 +17,75 @@
         require_once('menu.php');
         ?>
     </header>
-        <?php
+    <?php
     // Puedes usar include, pero require_once es más seguro
     require_once('I-modal_I.php');
-    require_once('L-modal_L.A.php');
+    require_once('options_admin.php');
     ?>
 
 
     <script src="js/info.js"></script>
     <script src="js/option.js"></script>
     <script src="js/sesion.js"></script>
-    <script src="js/lista_usuarios.js"></script>
+    <script src="js/editar-usuario.js"></script>
 
 
     <a href="admin.php" id="regreso" class="button"> Atrás </a>
 
     <!-- ver lista de usuarios -->
-<div id="lista-usuarios" >
-    <div>
+    <div id="lista-usuarios">
+        <div>
 
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Correo Electrónico</th>
-                    <th>Estado</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                require_once 'funciones/conexion.php';
-                require_once('clases/Usuarios.php');
-                // Crear instancia de Usuarios y obtener los datos
-                $usuarioObj = new Usuarios($pdo);
-                $usuarios = $usuarioObj->verUsuarios();
 
-                 foreach ($usuarios as $fila) {
-                ?>
+            <table>
+                <thead>
                     <tr>
-                        <td><?= $fila['correo_usuario'] ?></td>
-                        <td><?= $fila['estatus_usuario'] == 1 ? 'Activo' : 'Inactivo' ?></td>
-
-                        <?php
-                        if ($fila['estatus_usuario'] == 1){
-                            echo '<td>
-                            <button class="edit" name="edit" id="edit-usuario" href="#">Editar</button>
-                            <button class="eli" id="eli" href="#">Eliminar</button>
-                        </td>';
-                        }
-                        ?>
-                        </td>
+                        <th>Correo Electrónico</th>
+                        <th>Estado</th>
+                        <th>Opciones</th>
                     </tr>
-                <?php
-                 }
-                ?>
+                </thead>
+                <tbody>
+                    <?php
+                    require_once 'funciones/conexion.php';
+                    require_once('clases/Usuarios.php');
+                    // Crear instancia de Usuarios y obtener los datos
+                    $usuarioObj = new Usuarios($pdo);
+                    $usuarios = $usuarioObj->verUsuarios();
 
-            </tbody>
-        </table>
+                    foreach ($usuarios as $fila) {
+                    ?>
+                        <tr>
+                            <td><?= $fila['correo_usuario'] ?></td>
+                            <td><?= $fila['estatus_usuario'] == 1 ? 'Activo' : 'Inactivo' ?></td>
 
+                            <td>
+                            <a href="options_admin.php?pk_usuario=<?= $fila['pk_usuario'] ?>" class="edit" name="edit" id="edit-usuario">Editar</a>
+                            <?php
+                            if ($fila['estatus_usuario'] == 1) {
+                                echo '<a href="funciones/eliminarUsuario.php?pk_usuario=' . $fila['pk_usuario'] . '" class="eli" id="eli" onclick="return confirm(\'¿Estás seguro de que deseas eliminar este usuario?\')">Eliminar</a>';
+                            } else {
+                                echo '<a href="funciones/activarUsuario.php?pk_usuario=' . $fila['pk_usuario'] . '" class="act" id="act" >Activar</a>';
+                            }
+                            ?>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+
+                </tbody>
+            </table>
+
+        </div>
     </div>
-</div>
 
-<footer>
+    <footer>
         <div class="footer-contenido">
 
             <div class="footer-item">Contacto:
                 <a href="#">
-                    <i  class="bi bi-telephone-fill"> 695 114 5859</i>
+                    <i class="bi bi-telephone-fill"> 695 114 5859</i>
                 </a>
             </div>
 

@@ -1,3 +1,26 @@
+    <?php 
+require_once 'funciones/conexion.php';
+$funcionesMetPagos = new MetPagos($pdo);
+$verMetPagos = $funcionesMetPagos->verMetPagos();
+?>
+
+<div class="form-grupo">
+                     <label for="categoria">Método de Pago:</label>
+                    <select id="pk_metodo_pago" name="pk_metodo_pago" required>
+                        <option value="">Seleccione un método de pago:</option>
+                        <?php foreach($verMetPagos as $MetPago){
+                            if ($MetPago['estatus_met_pago'] == 1) {
+                                echo "<option value='".$MetPago['pk_metodo_pago']."'>".$MetPago['nom_met_pago']."</option>";  
+                            }
+                        }
+                        ?>  
+                    </select>
+                </div>
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // Obtener elementos estáticos

@@ -35,7 +35,7 @@
     <?php
     // Obtener categorías activas
     $categoriaObj = new Categorias($pdo);
-    $categoriasActivas = $categoriaObj->CategoriasActivas();
+    $categoriasActivas = $categoriaObj->CategoriaPlatillo();
 
     foreach ($categoriasActivas as $categoria) {
         $id_html = strtolower(str_replace(' ', '-', $categoria['nombreCategoria']));
@@ -57,7 +57,6 @@
                             <!-- IMAGEN A LA IZQUIERDA -->
                             <div class="col-md-4">
                                 <img class="img-platillo abrir-modal-option" 
-                                    data-id="<?=$platillo['pk_platillo'] ?>"
                                      src="imagenes/<?= $platillo['foto_platillo'] ?>" 
                                      class="img-fluid rounded-start" 
                                      alt="<?= htmlspecialchars($platillo['nom_platillo']) ?>">
@@ -72,9 +71,7 @@
                                         <small class="text-body-secondary"><?= "$" . $platillo['precio_platillo'] ?></small>
                                     </p>
                                     <div class="card-actions">
-                                    <?php 
-                                    if (isset($_SESSION['usuario']['estatusUsu']) && $_SESSION['usuario']['estatusUsu'] == 1): ?>
-                                        <i id="editar" class="bi bi-pencil-square editar" 
+                                        <i class="bi bi-pencil-square editar" 
                                            data-id="<?= $platillo['pk_platillo'] ?>" 
                                            title="Editar platillo"></i>
 
@@ -83,11 +80,14 @@
                                            onclick="return confirm('¿Estás seguro de dar de baja este platillo?')">
                                             <i class="bi bi-trash"></i>
                                         </a>
-                                        <?php endif; ?>
                                         
-                                        <i class="bi bi-plus-lg agregar-carrito" 
-                                           data-id="<?= $platillo['pk_platillo'] ?>"
-                                           title="Agregar al carrito"></i>
+                                       <i class="bi bi-plus-lg agregarCarrito" 
+                                        data-id="<?= $platillo['pk_platillo'] ?>"
+                                        data-nombre="<?= htmlspecialchars($platillo['nom_platillo']) ?>"
+                                        data-precio="<?= $platillo['precio_platillo'] ?>"
+                                        title="Agregar al carrito">
+                                       </i>
+
                                     </div>
                                 </div>
                             </div>
@@ -102,24 +102,33 @@
     }
     ?>
 
+    <?php
+
+if (!empty($_SESSION['carrito'])) {
+   foreach ($_SESSION['carrito'] as $item) {
+         $subtotal = $item['precio'] * $item['cantidad'];
+         $total += $subtotal;                // Sumar precios totales
+         $totalCantidad += $item['cantidad']; // Sumar cantidades totales
+     }
+    ?>
     <div class="list-container">
         <ul class="list">
             <li class="list-group-item">
                 <div class="product-info">
-                    <div class="product-name">Producto 1</div>
-                    <span class="bidge">$10.00</span>
+                    <div class="product-name"><?= $_SESSION['totalCantidad'] . ($_SESSION['totalCantidad'] > 1 ? " Productos" : " Producto") ?></div>
+                    <span class="bidge"><?= "$".$_SESSION['total'] ?></span>
                     <a href="carrito.php" class="action-button"> Ver pedido </a>
                 </div>
             </li>
         </ul>
     </div>
+    <?php
+}
+// Asegúrate de que el resto de tu página continúe aquí si es necesario
+?>
+
 
     <?php require_once('I-modal_I.php'); ?>
-
-    <script src="js/info.js"></script>
-    <script src="js/option.js"></script>
-    <script src="js/sesion.js"></script>
-    <script src="js/editar_platillo.js"></script>
 
     <footer>
         <div class="footer-contenido">
@@ -144,5 +153,11 @@
         </div>
     </footer>
 
+    <script src="js/info.js"></script>
+    <script src="js/option.js"></script>
+    <script src="js/sesion.js"></script>
+    <script src="js/agregar_carrito.js"></script>
+    <script src="js/editar_platillo.js"></script>
 </body>
+
 </html>

@@ -16,7 +16,8 @@ $resultado = $funcionesPlatillos->insertarPlatillo($nombrePlatillo, $precioPlati
 $descripcionPlatillo, $nombre_archivo, $fk_categoria );
 
 if($resultado) {
-    echo "<script> alert('Platillo creada con éxito')</script>";
+    echo "<script> alert('Platillo creada con éxito');
+    location.href='../admin.php';</script>";
 }
 
 ?>
