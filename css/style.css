@@ -22,6 +22,9 @@ label {
     width: fit-content;
 }
 
+
+
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -30,13 +33,20 @@ input[type="file"],
 textarea {
     width: 100%; 
     padding: 5px;
-    border: 1px solid #ccc; /* Borde gris claro */
+    border: 1px solid #ccc /* Borde gris claro */ !important;
     border-radius: 8px;
     box-sizing: border-box; /* Asegura que padding no aumente el ancho total */
     font-size: 1rem;
     transition: border-color 0.3s, box-shadow 0.3s;
     display: block;
+  opacity: 1 !important;
+  visibility: visible !important;
+
+
+
 }
+
+
 
 /* Efecto al enfocar (focus) */
 input[type="text"]:focus,
