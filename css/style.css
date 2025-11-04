@@ -11,7 +11,7 @@ label {
     margin-bottom: 8px;
     margin-top: 15px;
     font-size: 1rem;
-    color: #333; /* Color de texto oscuro */
+    color: #333 /* Color de texto oscuro */ !important;
     font-weight: bold;
 }
 
@@ -79,7 +79,7 @@ button, a.button {
     width: 25%;
     padding: 12px 20px;
     background-color: #ffaf04; /* Fondo naranja llamativo */
-    color: white;
+    color: #333;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -193,12 +193,12 @@ table{
 }
 
 thead {
-    background-color: #ffaf04; /* Sombra sutil */
-    color: #333; /* Color de texto blanco para el encabezado */
+    background-color: #001f3f; /* Sombra sutil */
+    color: #e9e9e9; /* Color de texto blanco para el encabezado */
 }
 
 tbody{
-    box-shadow: 0 2px 4px rgb(255, 175, 4); /* Sombra sutil */
+    box-shadow: 0 2px 4px rgb(107, 107, 107); /* Sombra sutil */
     color: #333; /* Color de texto blanco para el encabezado */
 }
 
@@ -243,7 +243,7 @@ th, td {
 
 .edit,.eli {
     background-color: #ffaf04;
-    color: white;
+    color: #333;
     padding: 10px; /* Espaciado interno */
     border: none;
     border-radius: 10px;
@@ -260,7 +260,7 @@ th, td {
 
 .edit:hover ,.eli:hover {
     background-color: #e59d00;
-    color: #333;
+    color: #0c0c0c;
 }
 
 

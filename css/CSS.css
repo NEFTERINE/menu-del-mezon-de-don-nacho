@@ -144,7 +144,7 @@ body::-webkit-scrollbar {
 
 p.don {
     font-size: 2lvw;
-    color: #000000;
+    color: #333;
     text-align: left;
     margin-left: 20%;
     margin-bottom: 5px;
@@ -155,7 +155,7 @@ p.don {
     position: absolute;
     top: 30%;
     left: 44%;
-    color: #000000;
+    color: #333;
     font-size: 1.5vw;
 }
 
@@ -163,7 +163,7 @@ p.don {
     position: absolute;
     top: 30%;
     left: 85%;
-    color: #000000;
+    color: #333;
     font-size: 1.5vw;
 }
 
@@ -171,19 +171,19 @@ p.don {
     position: absolute;
     top: 30%;
     left: 88%;
-    color: #000000;
+    color: #333;
     font-size: 1.5vw;
 }
 
 #mapa {
     position: absolute;
     left: 20%;
-    color: #000000;
+    color: #333;
     font-size: 1.5vw;
 }
 
 .barra {
-    background-color: #ffaf04;
+    background-color: #001F3F;
     overflow: hidden;
     text-align: center;
     margin-bottom: 1%;
@@ -200,7 +200,7 @@ p.don {
 }
 
 .barra a:hover {
-    background-color: #f7c251;
+    background-color: #01386e;
     color: white;
     transition: 0.3s;
 }
