@@ -1,32 +1,22 @@
     <!-- ventana de formulario -->
-    <?php 
-require_once 'funciones/conexion.php';
-require_once 'clases/MetPagos.php';
-
-$funcionesMetPagos = new MetPagos($pdo);
-$verMetPagos = $funcionesMetPagos->verMetPagos();
-?>
+    <?php
+    require_once 'funciones/conexion.php';
+    ?>
+    <!-- Modal 1 - Formulario -->
     <div id="modalServicio" class="modal">
         <div class="modal-contenido">
-            <span class="cerrarModalServicio" id="cerrar-modal">&times;</span>
+            <span class="cerrarModalServicio">&times;</span>
             <h2><i class="fa-solid fa-motorcycle"></i>Agrega Tu Domicilio</h2>
 
-            <form id="formulario-domicilio" action="funciones/guardar_datos_temporales.php" method="post">
-
+            <form action="carrito.php" method="post">
                 <div class="form-grupo">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required>
-                    <!-- <input type="hidden" id="tiposervicio" name="tiposervicio" value="domicilio"> -->
-                </div>
-                <div class="form-grupo">
-                    <label for="nombre">Apellido Paterno:</label>
-                    <input type="text" id="aPaterno" name="aPaterno" required>
-                    <!-- <input type="hidden" id="tiposervicio" name="tiposervicio" value="domicilio"> -->
                 </div>
 
                 <div class="form-grupo">
-                    <label for="telefono">Teléfono de contacto:</label>
-                    <input type="number" id="telefono" name="telefono"  maxlength="10" required>
+                    <label for="telefono">Teléfono:</label>
+                    <input type="number" id="telefono" name="telefono" maxlength="10" required>
                 </div>
 
                 <div class="form-grupo">
@@ -35,83 +25,82 @@ $verMetPagos = $funcionesMetPagos->verMetPagos();
                 </div>
 
                 <div class="form-grupo">
-                    <label for="colonia">Calle:</label>
+                    <label for="calle">Calle:</label>
                     <input type="text" id="calle" name="calle" required>
                 </div>
 
                 <div class="form-grupo">
-                    <label for="referencia">Referencias:</label>
-                    <textarea type="tel" id="referencias" name="referencias" required></textarea>
+                    <label for="referencias">Referencias:</label>
+                    <textarea id="referencias" name="referencias" required></textarea>
                 </div>
 
-                <div class="form-grupo">
-                     <label for="categoria">Método de Pago:</label>
-                    <select id="pk_metodo_pago" name="pk_metodo_pago" required>
-                        <option value="">Seleccione un método de pago:</option>
-                        <?php foreach($verMetPagos as $MetPago){
-                            if ($MetPago['estatus_met_pago'] == 1) {
-                                echo "<option value='".$MetPago['pk_metodo_pago']."'>".$MetPago['nom_met_pago']."</option>";  
-                            }
-                        }
-                        ?>  
-                    </select>
-                </div>
+                <!-- Campo oculto para indicar qué modal abrir -->
+                <input type="hidden" name="abrir_modal" value="subServicio">
 
-                
-
-                <button type="submit"  class="boton-confirmar">Confirmar Dirección</button>
-
+                <button type="submit" class="boton-confirmar">Confirmar Dirección</button>
             </form>
         </div>
     </div>
 
-    <script src="js/formulario_carrito.js"></script>
+
+
+
+
 
 
 
     <!-- ventana de domicilio -->
     <div id="subServicio" class="modal">
         <div class="modal-contenido">
-            <span class="cerrarsubServicio" id="cerrar-modal">&times;</span>
-
+            <span class="cerrarsubServicio">&times;</span>
             <h2><i class="fa-solid fa-motorcycle"></i> Selecciona tu Dirección</h2>
 
             <div id="contenido-domicilio">
-
+                <!-- Sección de datos del usuario -->
                 <div class="seccion-datos-usuario">
                     <h3 class="titulo-seccion">Tus Datos de Contacto</h3>
-
                     <div class="info-item">
                         <label>Nombre:</label>
-                        <p>Lissa</p>
+                        <p><?= htmlspecialchars($_SESSION['datos_cliente']['nombre'] ?? '') ?></p>
                     </div>
-
                     <div class="info-item">
                         <label>Teléfono:</label>
-                        <p>694 116****</p>
+                        <p><?= htmlspecialchars($_SESSION['datos_cliente']['telefono'] ?? '') ?></p>
                     </div>
                 </div>
 
+                <!-- Sección de direcciones -->
                 <div class="seccion-direcciones">
-                    <h3 class="titulo-seccion">Direcciones de Entrega</h3>
+                    <h3 class="titulo-seccion">Dirección de Entrega</h3>
 
                     <div class="direccion-item seleccionable activo">
-                        <p><i class="bi bi-geo-alt-fill"></i> 21 de Diciembre #11 - Cerca de la tortillería.</p>
+                        <p><i class="bi bi-geo-alt-fill"></i>
+                            <?= htmlspecialchars($_SESSION['datos_cliente']['colonia'] ?? '') ?> <?= htmlspecialchars($_SESSION['datos_cliente']['calle'] ?? '') ?>
+                        </p>
+                        <p><?= htmlspecialchars($_SESSION['datos_cliente']['referencias'] ?? '') ?></p>
                     </div>
 
                     <div class="form-grupo">
-                        <button class="button-direccion" id="btnAgregarNuevaDireccion">
-                            <i class="bi bi-file-plus-fill"></i> Agregar Nueva Dirección
+                        <button type="button" class="button-direccion" id="btnAgregarNuevaDireccion">
+                            <i class="bi bi-file-plus-fill"></i> Cambiar Dirección
                         </button>
                     </div>
                 </div>
 
-                <button type="button" class="boton-confirmar" id="BtnCuenta">Confirmar Dirección</button>
+                <!-- Formulario para pasar al siguiente modal -->
+                <form>
+                    <!-- Pasar todos los datos ocultos -->
+                    <input type="hidden" name="nombre" value="<?= htmlspecialchars($_SESSION['datos_cliente']['nombre'] ?? '') ?>">
+                    <input type="hidden" name="telefono" value="<?= htmlspecialchars($_SESSION['datos_cliente']['telefono'] ?? '') ?>">
+                    <input type="hidden" name="colonia" value="<?= htmlspecialchars($_SESSION['datos_cliente']['colonia'] ?? '') ?>">
+                    <input type="hidden" name="calle" value="<?= htmlspecialchars($_SESSION['datos_cliente']['calle'] ?? '') ?>">
+                    <input type="hidden" name="referencias" value="<?= htmlspecialchars($_SESSION['datos_cliente']['referencias'] ?? '') ?>">
 
+                    <button type="submit" class="boton-confirmar" id="BtnCuenta">Confirmar Dirección</button>
+                </form>
             </div>
         </div>
     </div>
-    <script src="js/domicilio_carrito.js"></script>
 
 
 
@@ -119,18 +108,27 @@ $verMetPagos = $funcionesMetPagos->verMetPagos();
 
 
     <!-- ventana de confirmar pedido carrito -->
-
     <div class="modal" id="modalP">
         <div class="modal-contenido">
             <span class="cerrar-cuenta" id="cerrar-modal">&times;</span>
             <h2><i class="fa-solid fa-motorcycle"></i> Confirma Tu Pedido</h2>
 
             <div class="cuenta">
-
                 <div class="general" id="resumen">
                     <p>Resumen de Cuenta</p>
                     <div>
-                        <p>1 Producto(s) Total $30.00MX</p>
+                        <?php
+                        $total_productos = 0;
+                        $total_precio = 0;
+
+                        if (!empty($_SESSION['carrito'])) {
+                            foreach ($_SESSION['carrito'] as $item) {
+                                $total_productos += $item['cantidad'];
+                                $total_precio += $item['precio'] * $item['cantidad'];
+                            }
+                        }
+                        ?>
+                        <p><?= $total_productos ?> Producto(s) Total $<?= number_format($total_precio, 2) ?>MX</p>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                 </div>
@@ -144,60 +142,57 @@ $verMetPagos = $funcionesMetPagos->verMetPagos();
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Producto (1)</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Indicile nature de fissure</td>
-                                <td>$100.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Total $100.00</td>
-                            </tr>
+                            <?php if (!empty($_SESSION['carrito'])): ?>
+                                <?php foreach ($_SESSION['carrito'] as $item): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($item['nombre']) ?> x<?= $item['cantidad'] ?></td>
+                                        <td>$<?= number_format($item['precio'] * $item['cantidad'], 2) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                <tr>
+                                    <td colspan="2"><strong>Total $<?= number_format($total_precio, 2) ?></strong></td>
+                                </tr>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="2">No hay productos en el carrito</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="coment">
                     <label>Agregar Comentario</label>
-                    <textarea placeholder="Puedes agregar o quitar ingredientes" rows="4"></textarea>
+                    <textarea placeholder="Puedes agregar o quitar ingredientes" rows="4" name="comentario"></textarea>
                 </div>
 
                 <div class="pago">
                     <p>Método de Pago</p>
-                    <select class="metodo-pago">
+                    <select class="metodo-pago" name="metodo_pago">
                         <option value="efectivo"><i class="fa-solid fa-wallet"></i> Efectivo</option>
                         <option value="transferencia"><i class="fa-solid fa-credit-card"></i> Transferencia</option>
                     </select>
                     <p id="alert">* Al seleccionar transferencia ocupara poner normbre del restaurante y motivo de trasferencia</p>
                 </div>
 
-                <!-- Spinner de procesando -->
-                <div id="proces" style="display: none;">
-                    <div class="spinner-border text-success mb-3"></div>
-                    <h5>Procesando tu orden...</h5>
-                </div>
+                <div class="total">
+                    <form action="funciones/confirmar_pedido.php" method="POST">
+                        <!-- Pasar datos del cliente ocultos -->
+                        <input type="hidden" name="nombre" value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>">
+                        <input type="hidden" name="telefono" value="<?= htmlspecialchars($_POST['telefono'] ?? '') ?>">
+                        <input type="hidden" name="colonia" value="<?= htmlspecialchars($_POST['colonia'] ?? '') ?>">
+                        <input type="hidden" name="calle" value="<?= htmlspecialchars($_POST['calle'] ?? '') ?>">
+                        <input type="hidden" name="referencias" value="<?= htmlspecialchars($_POST['referencias'] ?? '') ?>">
+                        <input type="hidden" name="metodo_pago" id="inputMetodoPagoDomicilio">
+                        <input type="hidden" name="comentario" id="inputComentarioDomicilio">
 
-                <!-- Confirmación -->
-                <div id="confir" style="display: none;">
-                    <div class="text-success mb-3">
-                        <i class="fas fa-check-circle" style="font-size: 3rem;"></i>
-                    </div>
-                    <h5>¡Orden Confirmada!</h5>
-                    <p class="text-muted">Tu pedido ha sido procesado</p>
+                        <button type="submit" class="button" id="btn-pedir-domicilio">Pedir $<?= number_format($total_precio, 2) ?>MX</button>
+                    </form>
                 </div>
-
-                <div class="total" id="cont">
-                    <button type="submit" class="button" id="btn-pedir-domicilio">Pedir $30MX</button>
-                </div>
-
             </div>
-
         </div>
     </div>
 
-    <script src="js/cuenta_carrito.js"></script>
 
 
 
@@ -210,15 +205,24 @@ $verMetPagos = $funcionesMetPagos->verMetPagos();
             <h2><i class="bi bi-fork-knife"></i> Confirma Tu Pedido</h2>
 
             <div class="cuenta">
-
+                <!-- f_modal_c.php -->
                 <div class="general" id="flecha-resumen">
                     <p>Resumen de Cuenta</p>
                     <div>
-                        <p>1 Producto(s) Total $30.00MX</p>
+                        <?php
+                        $total_productos = 0;
+                        $total_precio = 0;
+                        if (!empty($_SESSION['carrito'])) {
+                            foreach ($_SESSION['carrito'] as $item) {
+                                $total_productos += $item['cantidad'];
+                                $total_precio += $item['precio'] * $item['cantidad'];
+                            }
+                        }
+                        ?>
+                        <p><?= $total_productos ?> Producto(s) Total $<?= number_format($total_precio, 2) ?>MX</p>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                 </div>
-
 
                 <div class="detalle-productos" id="detalle-productos">
                     <table>
@@ -229,107 +233,45 @@ $verMetPagos = $funcionesMetPagos->verMetPagos();
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Producto (1)</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Indicile nature de fissure</td>
-                                <td>$100.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Total $100.00</td>
-                            </tr>
+                            <?php if (!empty($_SESSION['carrito'])): ?>
+                                <?php foreach ($_SESSION['carrito'] as $item): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($item['nombre']) ?> x<?= $item['cantidad'] ?></td>
+                                        <td>$<?= number_format($item['precio'] * $item['cantidad'], 2) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                <tr>
+                                    <td colspan="2"><strong>Total $<?= number_format($total_precio, 2) ?></strong></td>
+                                </tr>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="2">No hay productos en el carrito</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
 
-
                 <div class="coment">
                     <label>Agregar Comentario</label>
-                    <textarea placeholder="Puedes agregar o quitar ingredientes" rows="4"></textarea>
+                    <textarea placeholder="Puedes agregar o quitar ingredientes" rows="4" name="comentario_local"></textarea>
                 </div>
 
                 <div class="pago">
                     <p>Método de Pago</p>
-                    <select class="metodo-pago">
+                    <select class="metodo-pago" name="metodo_pago_local">
                         <option value="efectivo"><i class="fa-solid fa-wallet"></i> Efectivo</option>
                     </select>
                 </div>
 
-                <!-- Spinner de procesando -->
-                <div id="procesando" style="display: none;">
-                    <div class="spinner-border text-success mb-3"></div>
-                    <h5>Procesando tu orden...</h5>
-                </div>
-
-                <!-- Confirmación -->
-                <div id="confirmado" style="display: none;">
-                    <div class="text-success mb-3">
-                        <i class="fas fa-check-circle" style="font-size: 3rem;"></i>
-                    </div>
-                    <h5>¡Orden Confirmada!</h5>
-                    <p class="text-muted">Tu pedido ha sido procesado</p>
-                </div>
-
                 <div class="total" id="contenido">
-                    <button type="submit" class="button" id="btn-pedir-local">Pedir $30MX</button>
+                    <form action="funciones/confirmar_pedidoLocal.php" method="POST">
+                        <input type="hidden" name="metodo_pago" id="inputMetodoPagoLocal">
+                        <input type="hidden" name="comentario" id="inputComentarioLocal">
+
+                        <button type="submit" class="button" id="btn-pedir-local">Pedir $<?= number_format($total_precio, 2) ?>MX</button>
+                    </form>
                 </div>
-
-
             </div>
-
-        </div>
-        <!-- Font Awesome para el ícono -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-
-
-    </div>
-
-    <script src="js/cuenta_local.js"></script>
-
-    <div id="modalServicioLocal" class="modal">
-        <div class="modal-contenido">
-            <span class="cerrarModalServicioLocal" id="cerrar-modal">&times;</span>
-            <h2>Agregar Datos Personales</h2>
-
-            <form id="formulario-domicilio" action="funciones/guardar_datos_temporalesLocal.php" method="post">
-
-                <div class="form-grupo">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                    <!-- <input type="hidden" id="tiposervicio" name="tiposervicio" value="domicilio"> -->
-                </div>
-                <div class="form-grupo">
-                    <label for="nombre">Apellido Paterno:</label>
-                    <input type="text" id="aPaterno" name="aPaterno" required>
-                    <!-- <input type="hidden" id="tiposervicio" name="tiposervicio" value="domicilio"> -->
-                </div>
-
-                <div class="form-grupo">
-                    <label for="telefono">Teléfono de contacto:</label>
-                    <input type="number" id="telefono" name="telefono"  maxlength="10" required>
-                </div>
-
-                <div class="form-grupo">
-                     <label for="categoria">Método de Pago:</label>
-                    <select id="pk_metodo_pago" name="pk_metodo_pago" required>
-                        <option value="">Seleccione un método de pago:</option>
-                        <?php foreach($verMetPagos as $MetPago){
-                            if ($MetPago['estatus_met_pago'] == 1) {
-                                echo "<option value='".$MetPago['pk_metodo_pago']."'>".$MetPago['nom_met_pago']."</option>";  
-                            }
-                        }
-                        ?>  
-                    </select>
-                </div>
-
-                
-
-                <button type="submit"  class="boton-confirmar">Confirmar Dirección</button>
-
-            </form>
         </div>
     </div>
-
-    <script src="js/formulario_carritoLocal.js"></script>

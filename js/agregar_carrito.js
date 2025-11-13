@@ -1,33 +1,31 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const botones = document.querySelectorAll('.agregarCarrito');
+// document.addEventListener('DOMContentLoaded', function() {
+//     const botonesAgregar = document.querySelectorAll('.agregarCarrito');
+    
+//     botonesAgregar.forEach(boton => {
+//         boton.addEventListener('click', function() {
+//             const id = this.getAttribute('data-id');
+//             const nombre = this.getAttribute('data-nombre');
+//             const precio = parseFloat(this.getAttribute('data-precio'));
+            
+//             agregarAlCarrito(id, nombre, precio);
+//         });
+//     });
+// });
 
-    botones.forEach(boton => {
-        boton.addEventListener('click', async () => {
-            const id = boton.dataset.id;
-            const nombre = boton.dataset.nombre;
-            const precio = boton.dataset.precio;
-
-            // Puedes pedir cantidad si la manejas aparte, aquí lo dejamos en 1 por defecto
-            const cantidad = 1;
-            // Enviar por POST al backend
-            const response = await fetch('funciones/agregar_carrito.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({
-                    id,
-                    nombre,
-                    precio,
-                    cantidad
-                })
-            });
-
-            const data = await response.json();
-            if (data.success) {
-                alert(`Se agregó "${nombre}" al carrito.`);
-                console.log(data.carrito); // ver en consola el contenido de la sesión
-            } else {
-                alert("Ocurrió un error al agregar el platillo.");
-            }
-        });
-    });
-});
+// function agregarAlCarrito(id, nombre, precio) {
+//     // Enviar directamente al PHP para guardar en sesión
+//     fetch('funciones/agregar_carrito.php', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ 
+//             id: id,
+//             nombre: nombre,
+//             precio: precio
+//         })
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//     });
+// }

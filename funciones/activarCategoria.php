@@ -9,7 +9,7 @@ if($pk_categoria) {
     $resultado = $funcionesCategoria->activarCategoria( $pk_categoria);
     if ($resultado){
         
-    echo "<script> alert('Categoria activada con éxito');
+    echo "<script>('Categoria activada con éxito');
     location.href='../Lista_categoria.php';</script>"; 
     } else {
         

@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 const modalSubServicio = document.getElementById("subServicio");
 const btnAbrirSubServicio = document.getElementById("BtnsubServicio");
 const btnCerrarSubServicio = document.querySelector(".cerrarsubServicio");
+
 const modalSeleccion = document.getElementById("subServicio"); // Modal 2
 const modalFormulario = document.getElementById("modalServicio"); // Modal 1
 const btnAgregar = document.getElementById("btnAgregarNuevaDireccion"); // El nuevo botón

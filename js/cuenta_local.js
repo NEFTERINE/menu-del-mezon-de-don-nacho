@@ -1,66 +1,248 @@
-// // En cuenta_local.js - TODO el código aquí
-// const modalLocal = document.getElementById("LocalCuenta");
-// const btnAbrirLocal = document.getElementById("BtnLocal");
-// const btnCerrarLocal = document.querySelector(".cerrar-local");
-// const flechaResumen = document.getElementById("flecha-resumen");
-// const detalleProductos = document.getElementById("detalle-productos");
-// const btnPedirLocal = document.getElementById("btn-pedir-local");
+// js/cuenta_local.js - VERSIÓN SILENCIOSA
+(function () {
+    'use strict';
+    
+    const modalServicio = document.getElementById("modalServicio");
+    const modalSubServicio = document.getElementById("subServicio");
+    const modalP = document.getElementById("modalP");
+    const modalLocalCuenta = document.getElementById("LocalCuenta");
 
+    function abrirModal(modal) {
+        if (modal) {
+            modal.style.display = "flex";
+            document.body.style.overflow = 'hidden';
+        }
+    }
 
+    function cerrarModal(modal) {
+        if (modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = 'auto';
+        }
+    }
 
-// // 1. Abrir modal
-// if (btnAbrirLocal && modalLocal) {
-//     btnAbrirLocal.addEventListener('click', function(e) {
-//         e.preventDefault(); 
-//         modalLocal.style.display = "flex"; 
-//     });
-// }
+    // 1. CONFIGURACIÓN MODAL SERVICIO
+    const btnAbrirServicio = document.getElementById("abrirModalBtnServicio");
+    const btnCerrarServicio = document.querySelector(".cerrarModalServicio");
 
-// // 2. Toggle del detalle de productos
-// if (flechaResumen && detalleProductos) {
-//     flechaResumen.addEventListener('click', function() {
-//         this.classList.toggle('activo');
-//         detalleProductos.classList.toggle('activo');
-//     });
-// }
+    if (btnAbrirServicio) {
+        btnAbrirServicio.addEventListener('click', function (e) {
+            e.preventDefault();
+            abrirModal(modalServicio);
+        });
+    }
 
-// // 3. Procesar pedido - CON EVENT LISTENER
-// if (btnPedirLocal) {
-//     btnPedirLocal.addEventListener('click', function() {
-//         procesarPedidoLocal();
-//     });
-// }
+    if (btnCerrarServicio) {
+        btnCerrarServicio.addEventListener('click', function (e) {
+            e.preventDefault();
+            cerrarModal(modalServicio);
+        });
+    }
 
-// function procesarPedidoLocal() {
-//     // Ocultar botón y mostrar spinner
-//     document.getElementById('contenido').style.display = 'none';
-//     document.getElementById('procesando').style.display = 'block';
+    // 3. CONFIGURACIÓN MODAL SUBSERVICIO
+    const btnCerrarSubServicio = document.querySelector(".cerrarsubServicio");
+    const btnAgregarDireccion = document.getElementById("btnAgregarNuevaDireccion");
+    const formSubServicio = document.querySelector('#subServicio form');
 
-//     setTimeout(() => {
-//         document.getElementById('procesando').style.display = 'none';
-//         document.getElementById('confirmado').style.display = 'block';
+    if (btnCerrarSubServicio) {
+        btnCerrarSubServicio.addEventListener('click', function (e) {
+            e.preventDefault();
+            cerrarModal(modalSubServicio);
+        });
+    }
 
-//         setTimeout(() => {
-//             window.location.href = "index.php";
-//         }, 1500);
-//     }, 2000);
-// }
+    if (btnAgregarDireccion) {
+        btnAgregarDireccion.addEventListener('click', function (e) {
+            e.preventDefault();
+            cerrarModal(modalSubServicio);
+            abrirModal(modalServicio);
+        });
+    }
 
-// // 4. Cerrar modal
-// if (btnCerrarLocal && modalLocal) {
-//     btnCerrarLocal.addEventListener('click', function(e) {
-//         e.preventDefault();
-//         console.log("Cerrando modal local");
-//         modalLocal.style.display = "none";
-//     });
-// }
+    if (formSubServicio) {
+        formSubServicio.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-// // 5. Cerrar modal al hacer clic fuera
-// if (modalLocal) {
-//     window.addEventListener('click', function(event) {
-//         if (event.target === modalLocal) {
-//             console.log("Clic fuera del modal local - cerrando");
-//             modalLocal.style.display = "none";
-//         }
-//     });
-// }
+            // Cerrar modal actual y abrir siguiente
+            cerrarModal(modalSubServicio);
+            abrirModal(modalP);
+
+            // Enviar datos al servidor
+            const formData = new FormData(this);
+            fetch('guardar_direccion.php', {
+                method: 'POST',
+                body: formData
+            });
+        });
+    }
+
+    // 4. CONFIGURACIÓN MODAL LOCAL
+    const btnAbrirLocal = document.getElementById("BtnModalLocal");
+    const btnCerrarLocalCuenta = document.querySelector(".cerrar-local");
+
+    if (btnAbrirLocal) {
+        btnAbrirLocal.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            // Actualizar carrito antes de abrir
+            if (typeof actualizarCarritoUI === 'function') {
+                actualizarCarritoUI();
+            }
+            
+            abrirModal(modalLocalCuenta);
+        });
+    }
+
+    if (btnCerrarLocalCuenta) {
+        btnCerrarLocalCuenta.addEventListener('click', function (e) {
+            e.preventDefault();
+            cerrarModal(modalLocalCuenta);
+        });
+    }
+
+    // 5. CONFIGURACIÓN INTERACCIÓN DETALLES
+    
+    // Para domicilio
+    const flechaResumenDom = document.getElementById("resumen");
+    const detalleProductosDom = document.getElementById("detalle");
+    if (flechaResumenDom && detalleProductosDom) {
+        flechaResumenDom.addEventListener('click', function () {
+            this.classList.toggle('activo');
+            detalleProductosDom.classList.toggle('activo');
+        });
+    }
+
+    // Para local
+    const flechaResumenLocal = document.getElementById("flecha-resumen");
+    const detalleProductosLocal = document.getElementById("detalle-productos");
+    if (flechaResumenLocal && detalleProductosLocal) {
+        flechaResumenLocal.addEventListener('click', function () {
+            this.classList.toggle('activo');
+            detalleProductosLocal.classList.toggle('activo');
+        });
+    }
+
+    // 6. CONFIGURACIÓN FORMULARIOS FINALES
+
+    // Formulario pedido DOMICILIO
+    const formPedidoDomicilio = document.querySelector('#modalP form[action="funciones/confirmar_pedido.php"]');
+    if (formPedidoDomicilio) {
+        formPedidoDomicilio.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btnPedir = document.getElementById('btn-pedir-domicilio');
+            const textoOriginal = btnPedir.textContent;
+            btnPedir.textContent = 'Procesando...';
+            btnPedir.disabled = true;
+
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this)
+            })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else {
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    alert('Error al procesar el pedido');
+                    btnPedir.textContent = textoOriginal;
+                    btnPedir.disabled = false;
+                });
+        });
+    }
+
+    // Formulario pedido LOCAL
+    const formPedidoLocal = document.querySelector('#LocalCuenta form[action="funciones/confirmar_pedidoLocal.php"]');
+    if (formPedidoLocal) {
+        formPedidoLocal.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btnPedir = document.getElementById('btn-pedir-local');
+            const textoOriginal = btnPedir.textContent;
+            btnPedir.textContent = 'Procesando...';
+            btnPedir.disabled = true;
+
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this)
+            })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else {
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    alert('Error al procesar el pedido');
+                    btnPedir.textContent = textoOriginal;
+                    btnPedir.disabled = false;
+                });
+        });
+    }
+
+    // 7. CONFIGURACIÓN CAMPOS OCULTOS
+    function configurarCamposOcultos() {
+        // Para domicilio
+        const selectPagoDomicilio = document.querySelector('#modalP .metodo-pago');
+        const textareaComentarioDomicilio = document.querySelector('#modalP textarea[name="comentario"]');
+        const inputMetodoPagoDom = document.getElementById('inputMetodoPagoDomicilio');
+        const inputComentarioDom = document.getElementById('inputComentarioDomicilio');
+
+        if (selectPagoDomicilio && inputMetodoPagoDom) {
+            inputMetodoPagoDom.value = selectPagoDomicilio.value;
+            selectPagoDomicilio.addEventListener('change', function () {
+                inputMetodoPagoDom.value = this.value;
+            });
+        }
+
+        if (textareaComentarioDomicilio && inputComentarioDom) {
+            textareaComentarioDomicilio.addEventListener('input', function () {
+                inputComentarioDom.value = this.value;
+            });
+        }
+
+        // Para local
+        const selectPagoLocal = document.querySelector('#LocalCuenta .metodo-pago');
+        const textareaComentarioLocal = document.querySelector('#LocalCuenta textarea[name="comentario_local"]');
+        const inputMetodoPagoLocal = document.getElementById('inputMetodoPagoLocal');
+        const inputComentarioLocal = document.getElementById('inputComentarioLocal');
+
+        if (selectPagoLocal && inputMetodoPagoLocal) {
+            inputMetodoPagoLocal.value = selectPagoLocal.value;
+            selectPagoLocal.addEventListener('change', function () {
+                inputMetodoPagoLocal.value = this.value;
+            });
+        }
+
+        if (textareaComentarioLocal && inputComentarioLocal) {
+            textareaComentarioLocal.addEventListener('input', function () {
+                inputComentarioLocal.value = this.value;
+            });
+        }
+    }
+
+    // 8. CERRAR MODALES AL HACER CLIC FUERA
+    function configurarClicFuera() {
+        const modales = [modalServicio, modalSubServicio, modalP, modalLocalCuenta];
+
+        modales.forEach(modal => {
+            if (modal) {
+                window.addEventListener('click', function (event) {
+                    if (event.target === modal) {
+                        cerrarModal(modal);
+                    }
+                });
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        configurarCamposOcultos();
+        configurarClicFuera();
+    });
+
+})();

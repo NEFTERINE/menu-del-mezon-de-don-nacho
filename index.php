@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/footer.css">
+
+
 </head>
 
 <body>
@@ -14,10 +16,10 @@
         require_once 'funciones/conexion.php';
         require_once 'clases/Platillos.php';
         require_once 'clases/Categorias.php'; // Asegúrate de incluir la clase Categorias
-        
+
         $funcionesPlatillos = new Platillos($pdo);
         $todosPlatillos = $funcionesPlatillos->obtenerPlatillos();
-        
+
         // Agrupar platillos por categoría
         $platillosPorCategoria = [];
         foreach ($todosPlatillos as $platillo) {
@@ -40,7 +42,7 @@
     foreach ($categoriasActivas as $categoria) {
         $id_html = strtolower(str_replace(' ', '-', $categoria['nombreCategoria']));
         $categoriaId = $categoria['pk_categoria']; // O el nombre correcto de tu columna ID
-        
+
         // Verificar si hay platillos para esta categoría
         if (isset($platillosPorCategoria[$categoriaId]) && count($platillosPorCategoria[$categoriaId]) > 0) {
     ?>
@@ -56,37 +58,44 @@
                         <div class="row g-0">
                             <!-- IMAGEN A LA IZQUIERDA -->
                             <div class="col-md-4">
-                                <img class="img-platillo abrir-modal-option" 
-                                     src="imagenes/<?= $platillo['foto_platillo'] ?>" 
-                                     class="img-fluid rounded-start" 
-                                     alt="<?= htmlspecialchars($platillo['nom_platillo']) ?>">
+                                <img class="img-platillo abrir-modal-option"
+                                    src="imagenes/<?= $platillo['foto_platillo'] ?>"
+                                    data-id="<?= $platillo['pk_platillo'] ?>"
+                                    class="img-fluid rounded-start"
+                                    alt="<?= htmlspecialchars($platillo['nom_platillo']) ?>">
                             </div>
-                            
+
                             <!-- CONTENIDO A LA DERECHA -->
-                            <div class="col-md-8">
+                            <div class="col-md-7" id="info-text">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= htmlspecialchars($platillo['nom_platillo']) ?></h5>
                                     <p class="card-text"><?= htmlspecialchars($platillo['descripcion_platillo']) ?></p>
                                     <p class="card-text">
-                                        <small class="text-body-secondary"><?= "$" . $platillo['precio_platillo'] ?></small>
+                                        <p class="precio"><?= "$" . $platillo['precio_platillo'] ?></p>
                                     </p>
                                     <div class="card-actions">
-                                        <i class="bi bi-pencil-square editar" 
-                                           data-id="<?= $platillo['pk_platillo'] ?>" 
-                                           title="Editar platillo"></i>
+                                        <?php
+                                        // Mostrar iconos de administración solo si el usuario es admin
+                                        if (isset($_SESSION['usuario']) && $_SESSION['usuario']['rol'] == 1):
+                                        ?>
+                                            <i class="bi bi-pencil-square editar"
+                                                data-id="<?= $platillo['pk_platillo'] ?>"
+                                                title="Editar platillo"></i>
 
-                                        <a href="funciones/bajaPlatillos.php?pk_platillo=<?= $platillo['pk_platillo'] ?>" 
-                                           title="Dar de Baja"
-                                           onclick="return confirm('¿Estás seguro de dar de baja este platillo?')">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                        
-                                       <i class="bi bi-plus-lg agregarCarrito" 
-                                        data-id="<?= $platillo['pk_platillo'] ?>"
-                                        data-nombre="<?= htmlspecialchars($platillo['nom_platillo']) ?>"
-                                        data-precio="<?= $platillo['precio_platillo'] ?>"
-                                        title="Agregar al carrito">
-                                       </i>
+                                            <a href="funciones/bajaPlatillos.php?pk_platillo=<?= $platillo['pk_platillo'] ?>"
+                                                title="Dar de Baja"
+                                                onclick="return confirm('¿Estás seguro de dar de baja este platillo?')">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        <?php endif; ?>
+
+                                        <!-- El icono de agregar al carrito se muestra para todos -->
+                                        <i class="bi bi-plus-lg agregarCarrito"
+                                            data-id="<?= $platillo['pk_platillo'] ?>"
+                                            data-nombre="<?= htmlspecialchars($platillo['nom_platillo']) ?>"
+                                            data-precio="<?= $platillo['precio_platillo'] ?>"
+                                            title="Agregar al carrito">
+                                        </i>
 
                                     </div>
                                 </div>
@@ -102,33 +111,55 @@
     }
     ?>
 
-    <?php
 
-if (!empty($_SESSION['carrito'])) {
-   foreach ($_SESSION['carrito'] as $item) {
-         $subtotal = $item['precio'] * $item['cantidad'];
-         $total += $subtotal;                // Sumar precios totales
-         $totalCantidad += $item['cantidad']; // Sumar cantidades totales
-     }
-    ?>
-    <div class="list-container">
-        <ul class="list">
-            <li class="list-group-item">
-                <div class="product-info">
-                    <div class="product-name"><?= $_SESSION['totalCantidad'] . ($_SESSION['totalCantidad'] > 1 ? " Productos" : " Producto") ?></div>
-                    <span class="bidge"><?= "$".$_SESSION['total'] ?></span>
-                    <a href="carrito.php" class="action-button"> Ver pedido </a>
-                </div>
-            </li>
-        </ul>
+
+
+
+
+
+
+
+    <!-- CONTENEDOR DINÁMICO - siempre visible pero con contenido condicional -->
+    <div id="carrito-dinamico">
+        <?php
+        $total = 0;
+        $totalCantidad = 0;
+
+        if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+            foreach ($_SESSION['carrito'] as $item) {
+                $subtotal = $item['precio'] * $item['cantidad'];
+                $total += $subtotal;
+                $totalCantidad += $item['cantidad'];
+            }
+        ?>
+            <div class="list-container">
+                <ul class="list">
+                    <li class="list-group-item">
+                        <div class="product-info">
+                            <div class="product-name"><?= $totalCantidad . ($totalCantidad > 1 ? " Productos" : " Producto") ?></div>
+                            <span class="bidge"><?= "$" . number_format($total, 2) ?></span>
+                            <a href="carrito.php" class="action-button">Ver pedido</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        <?php } else { ?>
+            <!-- Mostrar vacío inicialmente -->
+            <div class="list-container" style="display: none;">
+                <ul class="list">
+                    <li class="list-group-item">
+                        <div class="product-info">
+                            <div class="product-name">0 Productos</div>
+                            <span class="bidge">$0.00</span>
+                            <a href="carrito.php" class="action-button">Ver pedido</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        <?php } ?>
     </div>
-    <?php
-}
-// Asegúrate de que el resto de tu página continúe aquí si es necesario
-?>
 
 
-    <?php require_once('I-modal_I.php'); ?>
 
     <footer>
         <div class="footer-contenido">
@@ -153,11 +184,18 @@ if (!empty($_SESSION['carrito'])) {
         </div>
     </footer>
 
-    <script src="js/info.js"></script>
-    <script src="js/option.js"></script>
-    <script src="js/sesion.js"></script>
+
+    <!-- En index.php - carga solo estos -->
     <script src="js/agregar_carrito.js"></script>
     <script src="js/editar_platillo.js"></script>
+    <script src="js/carrito.js"></script>
+
+    <!-- NO cargues estos en index.php -->
+    <!--
+<script src="js/carrito-main.js"></script>
+<script src="js/cuenta_local.js"></script>
+-->
+
 </body>
 
 </html>

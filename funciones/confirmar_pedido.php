@@ -1,57 +1,68 @@
 <?php
 session_start();
 require_once 'conexion.php';
-require_once '../clases/Direcciones.php';
-require_once '../clases/Pedidos.php'; // Necesitarás crear esta clase
+require_once '../clases/Pedidos.php';
+
+// DEBUG: Ver qué datos llegan
+error_log("=== CONFIRMAR PEDIDO DOMICILIO ===");
+error_log("Datos POST: " . print_r($_POST, true));
+error_log("Datos sesión: " . print_r($_SESSION['datos_cliente'] ?? 'NO HAY', true));
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SESSION['carrito'])) {
     
-    $funcionesDireccion = new Direcciones($pdo);
-    
-    // 1. Guardar dirección del cliente
-    $idDireccion = $funcionesDireccion->insertarDireccion(
-        $_POST['nombre'],
-        $_POST['telefono'],
-        $_POST['colonia'],
-        $_POST['calle'],
-        $_POST['referencias']
-    );
-    
-    if ($idDireccion) {
-        // 2. Guardar el pedido con los productos del carrito
-        $funcionesPedido = new Pedidos($pdo);
-        $pedidoGuardado = $funcionesPedido->guardarPedidoCompleto(
-            $idDireccion,
-            $_SESSION['carrito'],
-            $_POST['metodo_pago'] ?? 'efectivo' ?? 'transferencia',
+    try {
+        // 1. PRIMERO guardar la dirección en la base de datos
+        $idDireccion = guardarDireccionEnBD($pdo, $_POST);
+        error_log("Dirección guardada con ID: " . $idDireccion);
+        
+        // 2. LUEGO guardar el pedido
+        $pedidosV = new Pedidos($pdo);
+        $pedidoGuardado = $pedidosV->guardarPedidoCompleto(
+            $idDireccion,           // ID de la dirección
+            $_SESSION['carrito'],   // Productos
+            $_POST['metodo_pago'] ?? 'efectivo',
             $_POST['comentario'] ?? ''
         );
         
+        // 3. Limpiar todo
         if ($pedidoGuardado) {
-            // Limpiar carrito
             unset($_SESSION['carrito']);
-            
-            echo "<script>
-                alert('Pedido confirmado con éxito');
-                location.href='../index.php';
-            </script>";
+            unset($_SESSION['datos_cliente']);
+            error_log("✅ Pedido guardado exitosamente");
+            header('Location: ../carrito.php?pedido=exito');
+            exit;
         } else {
-            echo "<script>
-                alert('Error al guardar el pedido');
-                location.href='../carrito.php';
-            </script>";
+            throw new Exception("Error al guardar el pedido");
         }
-    } else {
-        echo "<script>
-            alert('Error al guardar la dirección');
-            location.href='../carrito.php';
-        </script>";
+
+    } catch (Exception $e) {
+        error_log("❌ Error: " . $e->getMessage());
+        header('Location: ../carrito.php?error=' . urlencode($e->getMessage()));
+        exit;
     }
-    exit;
+    
 } else {
-    echo "<script>
-        alert('No hay productos en el carrito');
-        location.href='../carrito.php';
-    </script>";
+    header('Location: ../carrito.php?error=Carrito vacío o método incorrecto');
+    exit;
+}
+
+// FUNCIÓN PARA GUARDAR DIRECCIÓN (¡ESTO SÍ DEBES IMPLEMENTARLO!)
+function guardarDireccionEnBD($pdo, $datos) {
+    try {
+        $sql = "INSERT INTO direccion (nombre, telefono, col, calle, referencia) 
+                VALUES (?, ?, ?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            $datos['nombre'],
+            $datos['telefono'], 
+            $datos['colonia'],
+            $datos['calle'],
+            $datos['referencias']
+        ]);
+        return $pdo->lastInsertId();
+    } catch (Exception $e) {
+        error_log("Error al guardar dirección: " . $e->getMessage());
+        throw new Exception("No se pudo guardar la dirección");
+    }
 }
 ?>

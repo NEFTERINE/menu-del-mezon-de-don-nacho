@@ -1,46 +1,46 @@
 <?php
 session_start();
 
-$id = $_POST['id'] ?? null;
-$nombre = $_POST['nombre'] ?? '';
-$precio = $_POST['precio'] ?? 0;
-$cantidad = $_POST['cantidad'] ?? 1;
-
-// Validación rápida
-if (!$id) {
-    echo json_encode(['success' => false, 'message' => 'Falta el id del platillo']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Leer los datos JSON
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    // Inicializar carrito si no existe
+    if (!isset($_SESSION['carrito'])) {
+        $_SESSION['carrito'] = [];
+    }
+    
+    if (isset($input['id']) && isset($input['nombre']) && isset($input['precio'])) {
+        $id = $input['id'];
+        $nombre = $input['nombre'];
+        $precio = floatval($input['precio']);
+        
+        // Verificar si el producto ya está en el carrito
+        $productoExistente = false;
+        foreach ($_SESSION['carrito'] as &$item) {
+            if ($item['id'] == $id) {
+                $item['cantidad'] += 1;
+                $productoExistente = true;
+                break;
+            }
+        }
+        
+        // Si no existe, agregarlo
+        if (!$productoExistente) {
+            $_SESSION['carrito'][] = [
+                'id' => $id,
+                'nombre' => $nombre,
+                'precio' => $precio,
+                'cantidad' => 1
+            ];
+        }
+        
+        echo json_encode(['success' => true, 'message' => 'Producto agregado']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
+    }
     exit;
 }
 
-// Si no existe el carrito, lo creamos
-if (!isset($_SESSION['carrito'])) {
-    $_SESSION['carrito'] = [];
-}
-
-// Si el producto ya está en el carrito, aumenta la cantidad
-if (isset($_SESSION['carrito'][$id])) {
-    $_SESSION['carrito'][$id]['cantidad'] += $cantidad;
-} else {
-    // Si no está, lo agregamos
-    $_SESSION['carrito'][$id] = [
-        'nombre' => $nombre,
-        'precio' => $precio,
-        'cantidad' => $cantidad,
-        'id' => $id
-    ];
-}
-
-$total = 0;
-$totalCantidad = 0;
-if (!empty($_SESSION['carrito'])) {
-  foreach ($_SESSION['carrito'] as $item) {
-        $subtotal = $item['precio'] * $item['cantidad'];
-        $total += $subtotal;                // Sumar precios totales
-        $totalCantidad += $item['cantidad']; // Sumar cantidades totales
-    }
-    $_SESSION['total'] = $total;
-    $_SESSION['totalCantidad'] = $totalCantidad;
-}
-
-echo json_encode(['success' => true, 'carrito' => $_SESSION['carrito']]);
+echo json_encode(['success' => false, 'message' => 'Método no permitido']);
 ?>

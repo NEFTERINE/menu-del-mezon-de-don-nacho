@@ -16,6 +16,6 @@ $_SESSION['datos_cliente'] = [
 
 // 2. Después de guardar con éxito, redirige a la página del carrito.
 // Redirección: La página 'carrito.php' debe incluir el modal #subServicio
-header('Location: carrito.php?modal_abrir=subServicio'); 
+header('Location: ../carrito.php?modal_abrir=subServicio'); 
 exit;
 ?>
